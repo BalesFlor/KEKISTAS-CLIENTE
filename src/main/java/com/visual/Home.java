@@ -629,40 +629,23 @@ public class Home extends javax.swing.JFrame {
         if (respuesta == JOptionPane.YES_OPTION) {
             if (usuarioExterno.getRol().getIdRol() == idAnalista) {
                 AnalistaBean analistaBean = new AnalistaBean();
-                
+
                 try {
                     analistaBean.eliminarAnalista(usuarioExterno.getIdUsuario());
-                    if(!analistaBean.existeAnalista(usuarioExterno.getIdUsuario() ) ){
                     userBean.eliminarUser(usuarioExterno.getIdUsuario());
-                    } else{
-                         JOptionPane.showMessageDialog(null, "No se ha eliminado el Usuario Analista dado un Error");
-                    }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "No se ha eliminado el Analista dado un Error");
                 }
-            } else if (usuarioExterno.getRol().getIdRol()  == idDocente) {
-                DocenteBean docenteBean = new DocenteBean();
-                
+            } else if (usuarioExterno.getRol().getIdRol() == idDocente) {
                 try {
-                    docenteBean.eliminarDocente(usuarioExterno.getIdUsuario());
-                    if(!docenteBean.existeTutor(usuarioExterno.getIdUsuario() ) ){
                     userBean.eliminarUser(usuarioExterno.getIdUsuario());
-                    } else{
-                         JOptionPane.showMessageDialog(null, "No se ha eliminado el Usuario Docente dado un Error");
-                    }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "No se ha eliminado el Docente dado un Error");
                 }
-            } else if (usuarioExterno.getRol().getIdRol()  == idEstudiante) {
-                EstudianteBean estudianteBean = new EstudianteBean();
-                
+
+            } else if (usuarioExterno.getRol().getIdRol() == idEstudiante) {
                 try {
-                    estudianteBean.eliminarEstudiante(usuarioExterno.getIdUsuario());
-                     if(!estudianteBean.existeEstudiante(usuarioExterno.getIdUsuario() ) ){
                     userBean.eliminarUser(usuarioExterno.getIdUsuario());
-                    } else{
-                         JOptionPane.showMessageDialog(null, "No se ha eliminado el Usuario Estudiante dado un Error");
-                    }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "No se ha eliminado el Estudiante dado un Error");
                 }
