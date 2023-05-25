@@ -622,34 +622,14 @@ public class Home extends javax.swing.JFrame {
                 + "?", "Eliminar usuario", JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
-        BigInteger idAnalista = BigInteger.valueOf(1L);
-        BigInteger idDocente = BigInteger.valueOf(2L);
-        BigInteger idEstudiante = BigInteger.valueOf(3L);
-
+        //Eliminar según el rol
         if (respuesta == JOptionPane.YES_OPTION) {
-            if (usuarioExterno.getRol().getIdRol() == idAnalista) {
-                AnalistaBean analistaBean = new AnalistaBean();
 
                 try {
-                    analistaBean.eliminarAnalista(usuarioExterno.getIdUsuario());
                     userBean.eliminarUser(usuarioExterno.getIdUsuario());
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "No se ha eliminado el Analista dado un Error");
+                    JOptionPane.showMessageDialog(null, "No se ha eliminado el Usuario dado un Error");
                 }
-            } else if (usuarioExterno.getRol().getIdRol() == idDocente) {
-                try {
-                    userBean.eliminarUser(usuarioExterno.getIdUsuario());
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "No se ha eliminado el Docente dado un Error");
-                }
-
-            } else if (usuarioExterno.getRol().getIdRol() == idEstudiante) {
-                try {
-                    userBean.eliminarUser(usuarioExterno.getIdUsuario());
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "No se ha eliminado el Estudiante dado un Error");
-                }
-            }
         } else {
             JOptionPane.showMessageDialog(null, "No se ha eliminado el usuario");
         }
