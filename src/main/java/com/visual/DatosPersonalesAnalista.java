@@ -1,5 +1,8 @@
+//sadasdasdasd
 package com.visual;
-
+//git
+//dfsdf
+//dsfsdf
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -249,7 +252,7 @@ public class DatosPersonalesAnalista extends JFrame {
 		lblPantallaEstudiante.setIcon(new ImageIcon(getClass().getResource("/datos personales.png")));
 		lblPantallaEstudiante.setBounds(0, 0, 1280, 720);
 		contentPane.add(lblPantallaEstudiante);
-		
+		//github
 		//sdsad
 	}
 
