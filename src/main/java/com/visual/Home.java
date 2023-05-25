@@ -633,6 +633,7 @@ public class Home extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No se ha eliminado el usuario");
         }
+        
     }//GEN-LAST:event_botonEliminarMouseClicked
 
     private void botonEliminarCliquear(java.awt.event.MouseEvent evt) {                                           
