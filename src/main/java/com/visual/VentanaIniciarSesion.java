@@ -56,6 +56,11 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         txtContrasenia.setText("Contraseña");
         txtContrasenia.setBordeColorFocus(new java.awt.Color(0, 173, 239));
         txtContrasenia.setBotonColor(new java.awt.Color(0, 173, 239));
+        txtContrasenia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContraseniaActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(13, 120, 161));
@@ -243,13 +248,17 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
             }
             
         } else {
-            JOptionPane.showInputDialog(rootPane, "Debe completar los campos obligatorios ", "Campos insuficientes!", HEIGHT);
+            JOptionPane.showMessageDialog(rootPane, "Debe completar los campos obligatorios ", "Campos insuficientes!", HEIGHT);
         }
     }//GEN-LAST:event_botonIngresarMouseClicked
 
     private void botonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCancelarMouseClicked
         this.dispose();
     }//GEN-LAST:event_botonCancelarMouseClicked
+
+    private void txtContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseniaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraseniaActionPerformed
 
     public static void main(String args[]) {
         try {

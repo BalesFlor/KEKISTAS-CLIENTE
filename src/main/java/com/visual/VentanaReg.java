@@ -203,6 +203,11 @@ public class VentanaReg extends javax.swing.JFrame {
                 txtDocumentoActionPerformed(evt);
             }
         });
+        txtDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDocumentoKeyTyped(evt);
+            }
+        });
 
         txtNombre1.setForeground(new java.awt.Color(0, 69, 95));
         txtNombre1.setBordeColorFocus(new java.awt.Color(0, 173, 239));
@@ -213,16 +218,31 @@ public class VentanaReg extends javax.swing.JFrame {
                 txtNombre1ActionPerformed(evt);
             }
         });
+        txtNombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombre1KeyTyped(evt);
+            }
+        });
 
         txtNombre2.setForeground(new java.awt.Color(0, 69, 95));
         txtNombre2.setBordeColorFocus(new java.awt.Color(0, 173, 239));
         txtNombre2.setBotonColor(new java.awt.Color(0, 173, 239));
         txtNombre2.setPlaceholder("Segundo Nombre");
+        txtNombre2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombre2KeyTyped(evt);
+            }
+        });
 
         txtApellido1.setForeground(new java.awt.Color(0, 69, 95));
         txtApellido1.setBordeColorFocus(new java.awt.Color(0, 173, 239));
         txtApellido1.setBotonColor(new java.awt.Color(0, 173, 239));
         txtApellido1.setPlaceholder("Primer Apellido*");
+        txtApellido1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellido1KeyTyped(evt);
+            }
+        });
 
         txtApellido2.setForeground(new java.awt.Color(0, 69, 95));
         txtApellido2.setBordeColorFocus(new java.awt.Color(0, 173, 239));
@@ -231,6 +251,11 @@ public class VentanaReg extends javax.swing.JFrame {
         txtApellido2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellido2ActionPerformed(evt);
+            }
+        });
+        txtApellido2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellido2KeyTyped(evt);
             }
         });
 
@@ -243,6 +268,11 @@ public class VentanaReg extends javax.swing.JFrame {
                 txtEmailConstiActionPerformed(evt);
             }
         });
+        txtEmailConsti.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEmailConstiKeyTyped(evt);
+            }
+        });
 
         txtEmailPers.setForeground(new java.awt.Color(0, 69, 95));
         txtEmailPers.setBordeColorFocus(new java.awt.Color(0, 173, 239));
@@ -251,6 +281,11 @@ public class VentanaReg extends javax.swing.JFrame {
         txtEmailPers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailPersActionPerformed(evt);
+            }
+        });
+        txtEmailPers.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEmailPersKeyTyped(evt);
             }
         });
 
@@ -332,6 +367,11 @@ public class VentanaReg extends javax.swing.JFrame {
         txtTelefono.setBordeColorFocus(new java.awt.Color(0, 173, 239));
         txtTelefono.setBotonColor(new java.awt.Color(0, 173, 239));
         txtTelefono.setPlaceholder("Celular* (ej:+598 99 123 456)");
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
 
         anioPicker.setVisible(false);
 
@@ -1003,11 +1043,11 @@ public class VentanaReg extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel1MouseExited
 
     private void txtDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDocumentoActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_txtDocumentoActionPerformed
 
     private void txtNombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombre1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtNombre1ActionPerformed
 
     private void txtEmailConstiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailConstiActionPerformed
@@ -1021,6 +1061,62 @@ public class VentanaReg extends javax.swing.JFrame {
     private void txtEmailPersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailPersActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailPersActionPerformed
+
+    private void txtNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre1KeyTyped
+       char c = evt.getKeyChar();
+    if (!Character.isLetter(c)) {
+        evt.consume();
+    }
+    }//GEN-LAST:event_txtNombre1KeyTyped
+
+    private void txtNombre2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre2KeyTyped
+        char c = evt.getKeyChar();
+    if (!Character.isLetter(c)) {
+        evt.consume();
+    }
+    }//GEN-LAST:event_txtNombre2KeyTyped
+
+    private void txtApellido1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellido1KeyTyped
+    char c = evt.getKeyChar();
+    if (!Character.isLetter(c)) {
+        evt.consume();
+    }
+    }//GEN-LAST:event_txtApellido1KeyTyped
+
+    private void txtApellido2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellido2KeyTyped
+        char c = evt.getKeyChar();
+    if (!Character.isLetter(c)) {
+        evt.consume();
+    }
+    }//GEN-LAST:event_txtApellido2KeyTyped
+
+    private void txtDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDocumentoKeyTyped
+      char c = evt.getKeyChar();
+    if (!Character.isDigit(c) && c != '.' && c != '-') {
+        evt.consume();
+    }
+    }//GEN-LAST:event_txtDocumentoKeyTyped
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        char c = evt.getKeyChar();
+    if (!Character.isDigit(c) && c != '+' && c != ' ') {
+        evt.consume();
+    }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtEmailConstiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailConstiKeyTyped
+        char c = evt.getKeyChar();
+    if (!(Character.isLetter(c) || Character.isDigit(c) || c == '.' || c == '@')) {
+        evt.consume();
+    }
+    }//GEN-LAST:event_txtEmailConstiKeyTyped
+
+    private void txtEmailPersKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailPersKeyTyped
+      char c = evt.getKeyChar();
+    if (!(Character.isLetter(c) || Character.isDigit(c) || c == '.' || c == '@')) {
+        evt.consume();
+    }
+    }//GEN-LAST:event_txtEmailPersKeyTyped
 
     public static void main(String args[]) {
         try {

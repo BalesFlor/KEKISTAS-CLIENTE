@@ -363,6 +363,7 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDocumentoActionPerformed"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDocumentoKeyTyped"/>
                   </Events>
                 </Component>
                 <Component class="rojeru_san.RSMTextFull" name="txtNombre1">
@@ -380,6 +381,7 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombre1ActionPerformed"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombre1KeyTyped"/>
                   </Events>
                 </Component>
                 <Component class="rojeru_san.RSMTextFull" name="txtNombre2">
@@ -395,6 +397,9 @@
                     </Property>
                     <Property name="placeholder" type="java.lang.String" value="Segundo Nombre"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombre2KeyTyped"/>
+                  </Events>
                 </Component>
                 <Component class="rojeru_san.RSMTextFull" name="txtApellido1">
                   <Properties>
@@ -409,6 +414,9 @@
                     </Property>
                     <Property name="placeholder" type="java.lang.String" value="Primer Apellido*"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtApellido1KeyTyped"/>
+                  </Events>
                 </Component>
                 <Component class="rojeru_san.RSMTextFull" name="txtApellido2">
                   <Properties>
@@ -425,6 +433,7 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtApellido2ActionPerformed"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtApellido2KeyTyped"/>
                   </Events>
                 </Component>
                 <Component class="rojeru_san.RSMTextFull" name="txtEmailConsti">
@@ -442,6 +451,7 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailConstiActionPerformed"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEmailConstiKeyTyped"/>
                   </Events>
                 </Component>
                 <Component class="rojeru_san.RSMTextFull" name="txtEmailPers">
@@ -459,6 +469,7 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmailPersActionPerformed"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEmailPersKeyTyped"/>
                   </Events>
                 </Component>
                 <Component class="rsbuttongradiente.RSButtonGradiente" name="botonConfirmar">
@@ -646,6 +657,9 @@
                     </Property>
                     <Property name="placeholder" type="java.lang.String" value="Celular* (ej:+598 99 123 456)"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTelefonoKeyTyped"/>
+                  </Events>
                 </Component>
                 <Component class="com.toedter.calendar.JYearChooser" name="anioPicker">
                   <AuxValues>
