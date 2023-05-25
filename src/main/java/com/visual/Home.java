@@ -613,26 +613,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarFiltro1MouseClicked
 
     private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
-        int row = jTable1.getSelectedRow();
-        String cell = jTable1.getModel().getValueAt(row, 2).toString();
-        Usuarios usuarioExterno = userBean.buscarUsuarioPorDocumento(cell);
-
-        Object[] options = {"ELIMINAR", "CANCELAR"};
-        int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar usuario " + usuarioExterno.getNomUsuario()
-                + "?", "Eliminar usuario", JOptionPane.YES_NO_OPTION,
-                JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-
-        //Eliminar según el rol holi
-        if (respuesta == JOptionPane.YES_OPTION) {
-
-                try {
-                    userBean.eliminarUser(usuarioExterno.getIdUsuario());
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "No se ha eliminado el Usuario dado un Error");
-                }
-        } else {
-            JOptionPane.showMessageDialog(null, "No se ha eliminado el usuario");
-        }
+        
     }//GEN-LAST:event_botonEliminarMouseClicked
 
     private void botonEliminarCliquear(java.awt.event.MouseEvent evt) {                                           
