@@ -134,9 +134,9 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                  <Component id="rSButtonGradiente2" min="-2" pref="135" max="-2" attributes="0"/>
+                                  <Component id="botonIngresar" min="-2" pref="135" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Component id="rSButtonGradiente3" min="-2" pref="135" max="-2" attributes="0"/>
+                                  <Component id="botonCancelar" min="-2" pref="135" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
@@ -162,8 +162,8 @@
                           <Component id="txtContrasenia" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="rSButtonGradiente2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rSButtonGradiente3" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="botonIngresar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="botonCancelar" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -186,9 +186,6 @@
                     </Property>
                     <Property name="placeholder" type="java.lang.String" value="Nombre de Usuario"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomUserActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="rojeru_san.rslabel.RSLabelSombra" name="rSLabelSombra2">
                   <Properties>
@@ -217,9 +214,6 @@
                       <Color blue="ef" green="ad" red="0" type="rgb"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtContraseniaActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel4">
                   <Properties>
@@ -232,7 +226,7 @@
                     <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
                   </Properties>
                 </Component>
-                <Component class="rsbuttongradiente.RSButtonGradiente" name="rSButtonGradiente2">
+                <Component class="rsbuttongradiente.RSButtonGradiente" name="botonIngresar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ingresar"/>
                     <Property name="colorPrimario" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -255,11 +249,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSButtonGradiente2MouseClicked"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonGradiente2ActionPerformed"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botonIngresarMouseClicked"/>
                   </Events>
                 </Component>
-                <Component class="rsbuttongradiente.RSButtonGradiente" name="rSButtonGradiente3">
+                <Component class="rsbuttongradiente.RSButtonGradiente" name="botonCancelar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cancelar"/>
                     <Property name="colorPrimario" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -282,7 +275,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonGradiente3ActionPerformed"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botonCancelarMouseClicked"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel5">

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.visual;
 
 import com.grsc.logica.ejb.UsuarioBean;
@@ -11,15 +7,8 @@ import java.awt.Color;
 import java.math.BigInteger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author fbale
- */
 public class VentanaIniciarSesion extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaIniciarSesion
-     */
     public VentanaIniciarSesion() {
         initComponents();
     }
@@ -36,8 +25,8 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         rSLabelSombra2 = new rojeru_san.rslabel.RSLabelSombra();
         txtContrasenia = new rojeru_san.RSMPassView();
         jLabel4 = new javax.swing.JLabel();
-        rSButtonGradiente2 = new rsbuttongradiente.RSButtonGradiente();
-        rSButtonGradiente3 = new rsbuttongradiente.RSButtonGradiente();
+        botonIngresar = new rsbuttongradiente.RSButtonGradiente();
+        botonCancelar = new rsbuttongradiente.RSButtonGradiente();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -56,11 +45,6 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         txtNomUser.setBordeColorFocus(new java.awt.Color(0, 173, 239));
         txtNomUser.setBotonColor(new java.awt.Color(0, 173, 239));
         txtNomUser.setPlaceholder("Nombre de Usuario");
-        txtNomUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomUserActionPerformed(evt);
-            }
-        });
 
         rSLabelSombra2.setForeground(new java.awt.Color(0, 173, 239));
         rSLabelSombra2.setText("Iniciar Sesión");
@@ -72,44 +56,34 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         txtContrasenia.setText("Contraseña");
         txtContrasenia.setBordeColorFocus(new java.awt.Color(0, 173, 239));
         txtContrasenia.setBotonColor(new java.awt.Color(0, 173, 239));
-        txtContrasenia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraseniaActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(13, 120, 161));
         jLabel4.setText("Contraseña");
 
-        rSButtonGradiente2.setText("Ingresar");
-        rSButtonGradiente2.setColorPrimario(new java.awt.Color(213, 240, 252));
-        rSButtonGradiente2.setColorPrimarioHover(new java.awt.Color(0, 173, 239));
-        rSButtonGradiente2.setColorSecundario(new java.awt.Color(0, 173, 239));
-        rSButtonGradiente2.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
-        rSButtonGradiente2.setFont(fuenteImport.fuente("Roboto-Bold.ttf",0,15));
-        rSButtonGradiente2.setGradiente(rsbuttongradiente.RSButtonGradiente.Gradiente.ESQUINA_2);
-        rSButtonGradiente2.addMouseListener(new java.awt.event.MouseAdapter() {
+        botonIngresar.setText("Ingresar");
+        botonIngresar.setColorPrimario(new java.awt.Color(213, 240, 252));
+        botonIngresar.setColorPrimarioHover(new java.awt.Color(0, 173, 239));
+        botonIngresar.setColorSecundario(new java.awt.Color(0, 173, 239));
+        botonIngresar.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
+        botonIngresar.setFont(fuenteImport.fuente("Roboto-Bold.ttf",0,15));
+        botonIngresar.setGradiente(rsbuttongradiente.RSButtonGradiente.Gradiente.ESQUINA_2);
+        botonIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rSButtonGradiente2MouseClicked(evt);
-            }
-        });
-        rSButtonGradiente2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonGradiente2ActionPerformed(evt);
+                botonIngresarMouseClicked(evt);
             }
         });
 
-        rSButtonGradiente3.setText("Cancelar");
-        rSButtonGradiente3.setColorPrimario(new java.awt.Color(213, 240, 252));
-        rSButtonGradiente3.setColorPrimarioHover(new java.awt.Color(0, 173, 239));
-        rSButtonGradiente3.setColorSecundario(new java.awt.Color(0, 173, 239));
-        rSButtonGradiente3.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
-        rSButtonGradiente3.setFont(fuenteImport.fuente("Roboto-Bold.ttf",0,15));
-        rSButtonGradiente3.setGradiente(rsbuttongradiente.RSButtonGradiente.Gradiente.ESQUINA_2);
-        rSButtonGradiente3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonGradiente3ActionPerformed(evt);
+        botonCancelar.setText("Cancelar");
+        botonCancelar.setColorPrimario(new java.awt.Color(213, 240, 252));
+        botonCancelar.setColorPrimarioHover(new java.awt.Color(0, 173, 239));
+        botonCancelar.setColorSecundario(new java.awt.Color(0, 173, 239));
+        botonCancelar.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
+        botonCancelar.setFont(fuenteImport.fuente("Roboto-Bold.ttf",0,15));
+        botonCancelar.setGradiente(rsbuttongradiente.RSButtonGradiente.Gradiente.ESQUINA_2);
+        botonCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonCancelarMouseClicked(evt);
             }
         });
 
@@ -152,9 +126,9 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(rSButtonGradiente2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
-                        .addComponent(rSButtonGradiente3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(86, 86, 86)
                         .addComponent(jLabel1)))
@@ -175,8 +149,8 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
                 .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rSButtonGradiente2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSButtonGradiente3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addGap(25, 25, 25))
@@ -225,22 +199,6 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNomUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomUserActionPerformed
-
-    private void txtContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseniaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraseniaActionPerformed
-
-    private void rSButtonGradiente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonGradiente2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonGradiente2ActionPerformed
-
-    private void rSButtonGradiente3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonGradiente3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonGradiente3ActionPerformed
-
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         dispose();
         VentanaReg VentanaReg= new VentanaReg();
@@ -257,7 +215,7 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
        jLabel1.setText("<HTML><u>¿No estás registrado aún? Haz click aquí</u></HTML>");
     }//GEN-LAST:event_jLabel1MouseEntered
 
-    private void rSButtonGradiente2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSButtonGradiente2MouseClicked
+    private void botonIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonIngresarMouseClicked
         UsuarioBean userBean= new UsuarioBean();
         String nomUser = txtNomUser.getText();
         char[] contrasenia = txtContrasenia.getPassword();
@@ -286,18 +244,14 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
             
         } else {
             JOptionPane.showInputDialog(rootPane, "Debe completar los campos obligatorios ", "Campos insuficientes!", HEIGHT);
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonGradiente2MouseClicked
+        }
+    }//GEN-LAST:event_botonIngresarMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+    private void botonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCancelarMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_botonCancelarMouseClicked
+
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -314,10 +268,6 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(VentanaIniciarSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VentanaIniciarSesion().setVisible(true);
@@ -326,12 +276,12 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private rsbuttongradiente.RSButtonGradiente botonCancelar;
+    private rsbuttongradiente.RSButtonGradiente botonIngresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
-    private rsbuttongradiente.RSButtonGradiente rSButtonGradiente2;
-    private rsbuttongradiente.RSButtonGradiente rSButtonGradiente3;
     private rojeru_san.rslabel.RSLabelImage rSLabelImage2;
     private rojeru_san.rslabel.RSLabelSombra rSLabelSombra2;
     private rspanelgradiente.RSPanelGradiente rSPanelGradiente1;
