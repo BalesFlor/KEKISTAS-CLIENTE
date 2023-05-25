@@ -622,7 +622,7 @@ public class Home extends javax.swing.JFrame {
                 + "?", "Eliminar usuario", JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
-        //Eliminar según el rol
+        //Eliminar según el rol holi
         if (respuesta == JOptionPane.YES_OPTION) {
 
                 try {
