@@ -467,18 +467,11 @@ public class Home extends javax.swing.JFrame {
         btnLimpiarFiltro.setVisible(false);
         panelUsuarios.add(btnLimpiarFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 60, 120, 30));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
-            }
+        jTable1.setModel(cargarTablaUsuarios(
         ));
-        jTable1 = cargarTablaUsuarios();
+        jTable1.setAutoscrolls(true);
+        jTable1.setRowSelectionAllowed(true);
+        jTable1.setSize(600, 600);
         jScrollPane2.setViewportView(jTable1);
 
         panelUsuarios.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 1000, 320));
@@ -614,28 +607,39 @@ public class Home extends javax.swing.JFrame {
 
     private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
         int row = jTable1.getSelectedRow();
-        String cell = jTable1.getModel().getValueAt(row, 2).toString();
-        Usuarios usuarioExterno = userBean.buscarUsuarioPorDocumento(cell);
+        
+        if (row==-1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un usuario para eliminar");
+        } else {
+            String cell = jTable1.getModel().getValueAt(row, 2).toString();
+            Usuarios usuarioExterno = userBean.buscarUsuarioPorDocumento(cell);
+            Object[] options = {"ELIMINAR", "CANCELAR"};
+            int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar usuario " + usuarioExterno.getNomUsuario()
+                    + "?", "Eliminar usuario", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
-        Object[] options = {"ELIMINAR", "CANCELAR"};
-        int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar usuario " + usuarioExterno.getNomUsuario()
-                + "?", "Eliminar usuario", JOptionPane.YES_NO_OPTION,
-                JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-
-        //Eliminar según el rol holi
-        if (respuesta == JOptionPane.YES_OPTION) {
+            if (respuesta == JOptionPane.YES_OPTION) {
 
                 try {
                     userBean.eliminarUser(usuarioExterno.getIdUsuario());
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "No se ha eliminado el Usuario dado un Error");
                 }
-        } else {
-            JOptionPane.showMessageDialog(null, "No se ha eliminado el usuario");
+                BigInteger estadoEliminado = BigInteger.valueOf(3L);
+                if (userBean.obtenerEstado(usuarioExterno.getIdUsuario()).getIdEstado().equals(estadoEliminado)) {
+                    jTable1.setModel(cargarTablaUsuarios());
+                    JOptionPane.showMessageDialog(null, "Usuario Eliminado correctamente");
+                    jTable1.clearSelection();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario Eliminado NO correctamente");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha eliminado el usuario");
+            }
         }
     }//GEN-LAST:event_botonEliminarMouseClicked
 
-    private JTable cargarTablaUsuarios() {
+    private DefaultTableModel cargarTablaUsuarios() {
 
         List<Usuarios> listaUsuarios = userBean.listarUsuarios();
 
@@ -684,12 +688,7 @@ public class Home extends javax.swing.JFrame {
             }
         };
 
-        JTable table = new JTable(model);
-        table.setAutoscrolls(true);
-        table.setRowSelectionAllowed(true);
-        table.setSize(600, 600);
-
-        return table;
+        return model;
 
     }
 
