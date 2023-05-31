@@ -7,12 +7,14 @@ import com.grsc.logica.ejb.EstadoUsuarioBean;
 import com.grsc.logica.ejb.EstudianteBean;
 import com.grsc.logica.ejb.GeneracionBean;
 import com.grsc.logica.ejb.ItrBean;
+import com.grsc.logica.ejb.ReclamoBean;
 import com.grsc.logica.ejb.RoleBean;
 import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.EstadoPeticion;
 import com.grsc.modelo.entities.EstadoUsuario;
 import com.grsc.modelo.entities.Generacion;
 import com.grsc.modelo.entities.Itr;
+import com.grsc.modelo.entities.Reclamo;
 import com.grsc.modelo.entities.Roles;
 import com.grsc.modelo.entities.Usuarios;
 import java.awt.Color;
@@ -22,7 +24,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.event.ListSelectionEvent;
@@ -54,8 +58,8 @@ public class Home extends javax.swing.JFrame {
         lblBtnConstancias3 = new javax.swing.JLabel();
         comboboxUsuarioReclamo = new RSMaterialComponent.RSComboBoxMaterial();
         comboboxEstadoReclamo = new RSMaterialComponent.RSComboBoxMaterial();
-        btnFiltrar1 = new rsbuttongradiente.RSButtonGradiente();
-        btnLimpiarFiltro1 = new rsbuttongradiente.RSButtonGradiente();
+        btnFiltrarReclamos = new rsbuttongradiente.RSButtonGradiente();
+        btnLimpiarFiltroReclamos = new rsbuttongradiente.RSButtonGradiente();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaReclamos = new javax.swing.JTable();
         botonReclamar = new rsbuttongradiente.RSButtonGradiente();
@@ -75,7 +79,7 @@ public class Home extends javax.swing.JFrame {
         background = new javax.swing.JPanel();
         sidepanel = new rspanelgradiente.RSPanelGradiente();
         imgUTECLogo = new javax.swing.JLabel();
-        btnReclamos1 = new javax.swing.JPanel();
+        btnListasMantenimiento = new javax.swing.JPanel();
         lblBtnReclamos1 = new javax.swing.JLabel();
         imgBtnReclamos1 = new javax.swing.JLabel();
         btnUsuario = new javax.swing.JPanel();
@@ -166,32 +170,32 @@ public class Home extends javax.swing.JFrame {
         comboboxEstadoReclamo.setModel(modeloEstadoReclamo);
         panelReclamos.add(comboboxEstadoReclamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 190, 30));
 
-        btnFiltrar1.setText("Filtrar");
-        btnFiltrar1.setColorPrimario(new java.awt.Color(213, 240, 252));
-        btnFiltrar1.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
-        btnFiltrar1.setColorSecundario(new java.awt.Color(105, 190, 228));
-        btnFiltrar1.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
-        btnFiltrar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnFiltrarReclamos.setText("Filtrar");
+        btnFiltrarReclamos.setColorPrimario(new java.awt.Color(213, 240, 252));
+        btnFiltrarReclamos.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
+        btnFiltrarReclamos.setColorSecundario(new java.awt.Color(105, 190, 228));
+        btnFiltrarReclamos.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
+        btnFiltrarReclamos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnFiltrar1MouseClicked(evt);
+                btnFiltrarReclamosMouseClicked(evt);
             }
         });
-        panelReclamos.add(btnFiltrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, 120, 30));
+        panelReclamos.add(btnFiltrarReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, 120, 30));
 
-        btnLimpiarFiltro1.setText("Limpiar Filtro");
-        btnLimpiarFiltro1.setColorPrimario(new java.awt.Color(213, 240, 252));
-        btnLimpiarFiltro1.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
-        btnLimpiarFiltro1.setColorSecundario(new java.awt.Color(105, 190, 228));
-        btnLimpiarFiltro1.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
-        btnLimpiarFiltro1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLimpiarFiltroReclamos.setText("Limpiar Filtro");
+        btnLimpiarFiltroReclamos.setColorPrimario(new java.awt.Color(213, 240, 252));
+        btnLimpiarFiltroReclamos.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
+        btnLimpiarFiltroReclamos.setColorSecundario(new java.awt.Color(105, 190, 228));
+        btnLimpiarFiltroReclamos.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
+        btnLimpiarFiltroReclamos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLimpiarFiltro1MouseClicked(evt);
+                btnLimpiarFiltroReclamosMouseClicked(evt);
             }
         });
         btnLimpiarFiltro.setVisible(false);
-        panelReclamos.add(btnLimpiarFiltro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 50, 120, 30));
+        panelReclamos.add(btnLimpiarFiltroReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 50, 120, 30));
 
-        tablaReclamos.setModel(cargarTablaUsuarios(
+        tablaReclamos.setModel(cargarTablaReclamos(
         ));
         jTable1.setAutoscrolls(true);
         jTable1.setRowSelectionAllowed(true);
@@ -372,14 +376,14 @@ public class Home extends javax.swing.JFrame {
 
         imgUTECLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_1utec_logo.png"))); // NOI18N
 
-        btnReclamos1.setBackground(new java.awt.Color(105, 190, 228));
-        btnReclamos1.setForeground(new java.awt.Color(105, 190, 228));
-        btnReclamos1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnListasMantenimiento.setBackground(new java.awt.Color(105, 190, 228));
+        btnListasMantenimiento.setForeground(new java.awt.Color(105, 190, 228));
+        btnListasMantenimiento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnReclamos1MouseEntered(evt);
+                btnListasMantenimientoMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnReclamos1MouseExited(evt);
+                btnListasMantenimientoMouseExited(evt);
             }
         });
 
@@ -389,23 +393,27 @@ public class Home extends javax.swing.JFrame {
 
         imgBtnReclamos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_1rsz_1reclamos-icon.png"))); // NOI18N
 
-        javax.swing.GroupLayout btnReclamos1Layout = new javax.swing.GroupLayout(btnReclamos1);
-        btnReclamos1.setLayout(btnReclamos1Layout);
-        btnReclamos1Layout.setHorizontalGroup(
-            btnReclamos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnReclamos1Layout.createSequentialGroup()
+        javax.swing.GroupLayout btnListasMantenimientoLayout = new javax.swing.GroupLayout(btnListasMantenimiento);
+        btnListasMantenimiento.setLayout(btnListasMantenimientoLayout);
+        btnListasMantenimientoLayout.setHorizontalGroup(
+            btnListasMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnListasMantenimientoLayout.createSequentialGroup()
                 .addContainerGap(30, Short.MAX_VALUE)
                 .addComponent(imgBtnReclamos1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblBtnReclamos1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblBtnReclamos1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67))
         );
-        btnReclamos1Layout.setVerticalGroup(
-            btnReclamos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnReclamos1Layout.createSequentialGroup()
+        btnListasMantenimientoLayout.setVerticalGroup(
+            btnListasMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnListasMantenimientoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(imgBtnReclamos1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(lblBtnReclamos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(btnListasMantenimientoLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(lblBtnReclamos1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnUsuario.setBackground(new java.awt.Color(105, 190, 228));
@@ -443,8 +451,8 @@ public class Home extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(imgBtnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblBtnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+                .addComponent(lblBtnUsuario)
+                .addGap(216, 216, 216))
         );
         btnUsuarioLayout.setVerticalGroup(
             btnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,7 +460,10 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(imgBtnUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                 .addContainerGap(12, Short.MAX_VALUE))
-            .addComponent(lblBtnUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(btnUsuarioLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(lblBtnUsuario)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnEventos.setBackground(new java.awt.Color(105, 190, 228));
@@ -477,16 +488,22 @@ public class Home extends javax.swing.JFrame {
         btnEventosLayout.setHorizontalGroup(
             btnEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnEventosLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(26, 26, 26)
                 .addComponent(imgBtnEvento)
-                .addGap(18, 18, 18)
-                .addComponent(lblBtnEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblBtnEventos)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnEventosLayout.setVerticalGroup(
             btnEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblBtnEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-            .addComponent(imgBtnEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEventosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(imgBtnEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEventosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblBtnEventos)
+                .addGap(21, 21, 21))
         );
 
         btnConstancias.setBackground(new java.awt.Color(105, 190, 228));
@@ -514,7 +531,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(imgBtnConstancias)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblBtnConstancias1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblBtnConstancias1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnConstanciasLayout.setVerticalGroup(
@@ -523,12 +540,18 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(imgBtnConstancias, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(lblBtnConstancias1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(btnConstanciasLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(lblBtnConstancias1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnReclamos.setBackground(new java.awt.Color(105, 190, 228));
         btnReclamos.setForeground(new java.awt.Color(105, 190, 228));
         btnReclamos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReclamosMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnReclamosMouseEntered(evt);
             }
@@ -538,20 +561,31 @@ public class Home extends javax.swing.JFrame {
         });
 
         imgBtnReclamos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_1rsz_1reclamos-icon.png"))); // NOI18N
+        imgBtnReclamos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgBtnReclamosMouseClicked(evt);
+            }
+        });
 
         lblBtnReclamos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         lblBtnReclamos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBtnReclamos.setText("Reclamos");
+        lblBtnReclamos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBtnReclamosMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnReclamosLayout = new javax.swing.GroupLayout(btnReclamos);
         btnReclamos.setLayout(btnReclamosLayout);
         btnReclamosLayout.setHorizontalGroup(
             btnReclamosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnReclamosLayout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addComponent(imgBtnReclamos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblBtnReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblBtnReclamos)
+                .addGap(156, 156, 156))
         );
         btnReclamosLayout.setVerticalGroup(
             btnReclamosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -559,7 +593,10 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(imgBtnReclamos, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(lblBtnReclamos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnReclamosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblBtnReclamos)
+                .addGap(27, 27, 27))
         );
 
         btnJustificaciones.setBackground(new java.awt.Color(105, 190, 228));
@@ -587,7 +624,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(imgBtnJustificaciones)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblBtnJustificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblBtnJustificaciones)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnJustificacionesLayout.setVerticalGroup(
@@ -596,7 +633,10 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(imgBtnJustificaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(lblBtnJustificaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnJustificacionesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblBtnJustificaciones)
+                .addGap(17, 17, 17))
         );
 
         btnReportes.setBackground(new java.awt.Color(105, 190, 228));
@@ -624,8 +664,8 @@ public class Home extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(imgBtnReportes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblBtnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblBtnReportes)
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         btnReportesLayout.setVerticalGroup(
             btnReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -633,27 +673,27 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(imgBtnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(lblBtnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnReportesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblBtnReportes)
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout sidepanelLayout = new javax.swing.GroupLayout(sidepanel);
         sidepanel.setLayout(sidepanelLayout);
         sidepanelLayout.setHorizontalGroup(
             sidepanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnConstancias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnEventos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnJustificaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(sidepanelLayout.createSequentialGroup()
-                .addGroup(sidepanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(imgUTECLogo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnReclamos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReportes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(sidepanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imgUTECLogo)
+                    .addComponent(btnReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnListasMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(sidepanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnReclamos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         sidepanelLayout.setVerticalGroup(
             sidepanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -673,8 +713,8 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReclamos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(btnListasMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         background.add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 660));
@@ -936,8 +976,11 @@ public class Home extends javax.swing.JFrame {
 
     private void lblNombreUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNombreUsuarioMouseClicked
         dispose();
-        VentanaIniciarSesion VentanaInicioSesion= new VentanaIniciarSesion();
-        VentanaInicioSesion.setVisible(true);
+        /*
+        VentanaModificarUsuario VentanaModUsuario= new VentanaModificarUsuario();
+        
+        VentanaModUsuario.setVisible(true);
+        */
     }//GEN-LAST:event_lblNombreUsuarioMouseClicked
 
     private void lblNombreUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNombreUsuarioMouseEntered
@@ -951,65 +994,63 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_lblNombreUsuarioMouseExited
 
     private void btnConstanciasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConstanciasMouseEntered
-        Color color= new Color(47,165,217);
-        btnConstancias.setBackground(color);
+        arribaDeBoton(btnConstancias);
     }//GEN-LAST:event_btnConstanciasMouseEntered
 
     private void btnConstanciasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConstanciasMouseExited
-        Color color= new Color(105,190,228);
-        btnConstancias.setBackground(color);
+        fueraDeBoton(btnConstancias);
     }//GEN-LAST:event_btnConstanciasMouseExited
 
     private void btnEventosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEventosMouseEntered
-        Color color= new Color(47,165,217);
-        btnEventos.setBackground(color);
+        arribaDeBoton(btnEventos);
     }//GEN-LAST:event_btnEventosMouseEntered
 
     private void btnEventosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEventosMouseExited
-        Color color= new Color(105,190,228);
-        btnEventos.setBackground(color);
+        fueraDeBoton(btnEventos);
     }//GEN-LAST:event_btnEventosMouseExited
 
     private void btnJustificacionesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnJustificacionesMouseEntered
-        Color color= new Color(47,165,217);
-        btnJustificaciones.setBackground(color);
+        arribaDeBoton(btnJustificaciones);
     }//GEN-LAST:event_btnJustificacionesMouseEntered
 
     private void btnJustificacionesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnJustificacionesMouseExited
-        Color color= new Color(105,190,228);
-        btnJustificaciones.setBackground(color);
+        fueraDeBoton(btnJustificaciones);
     }//GEN-LAST:event_btnJustificacionesMouseExited
 
     private void btnReportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseExited
-        Color color= new Color(105,190,228);
-        btnReportes.setBackground(color);
+        fueraDeBoton(btnReportes);
     }//GEN-LAST:event_btnReportesMouseExited
 
     private void btnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseEntered
-        Color color= new Color(47,165,217);
-        btnReportes.setBackground(color);
+        arribaDeBoton(btnReportes);
     }//GEN-LAST:event_btnReportesMouseEntered
 
     private void btnReclamosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReclamosMouseEntered
-        Color color= new Color(47,165,217);
-        btnReclamos.setBackground(color);
+        arribaDeBoton(btnReclamos);
     }//GEN-LAST:event_btnReclamosMouseEntered
 
     private void btnReclamosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReclamosMouseExited
-        Color color= new Color(105,190,228);
-        btnReclamos.setBackground(color);
+        fueraDeBoton(btnReclamos);
     }//GEN-LAST:event_btnReclamosMouseExited
 
     private void btnUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuarioMouseEntered
-        Color color= new Color(47,165,217);
-        btnUsuario.setBackground(color);
+        arribaDeBoton(btnUsuario);
     }//GEN-LAST:event_btnUsuarioMouseEntered
 
     private void btnUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuarioMouseExited
-        Color color= new Color(105,190,228);
-        btnUsuario.setBackground(color);
+       fueraDeBoton(btnUsuario);        
     }//GEN-LAST:event_btnUsuarioMouseExited
 
+    private void arribaDeBoton(JPanel boton){
+        Color color= new Color(47,165,217);
+        boton.setBackground(color);
+    }
+    
+    private void fueraDeBoton(JPanel boton){
+        Color color= new Color(105,190,228);
+        boton.setBackground(color);
+    }
+    
     private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
         int row = jTable1.getSelectedRow();
 
@@ -1069,28 +1110,28 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSolicitudesConstanciasActionPerformed
 
     private void lblBtnUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnUsuarioMouseClicked
-        try {
-            mostrarVentanaUsuarios();
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        if(ventanaITRs.isVisible()|| ventanaReclamos.isVisible() ){
+                ventanaITRs.dispose();
+                ventanaReclamos.dispose();
         }
+        mostrarVentanaInterna(ventanaUsuarios);
     }//GEN-LAST:event_lblBtnUsuarioMouseClicked
 
     private void imgBtnUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBtnUsuarioMouseClicked
-        try {
-            mostrarVentanaUsuarios();
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        if(ventanaITRs.isVisible()|| ventanaReclamos.isVisible() ){
+                ventanaITRs.dispose();
+                ventanaReclamos.dispose();
         }
+        mostrarVentanaInterna(ventanaUsuarios);
     }//GEN-LAST:event_imgBtnUsuarioMouseClicked
 
-    private void btnFiltrar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrar1MouseClicked
+    private void btnFiltrarReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarReclamosMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnFiltrar1MouseClicked
+    }//GEN-LAST:event_btnFiltrarReclamosMouseClicked
 
-    private void btnLimpiarFiltro1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFiltro1MouseClicked
+    private void btnLimpiarFiltroReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFiltroReclamosMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnLimpiarFiltro1MouseClicked
+    }//GEN-LAST:event_btnLimpiarFiltroReclamosMouseClicked
 
     private void botonReclamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReclamarActionPerformed
         // TODO add your handling code here:
@@ -1116,13 +1157,37 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEliminar2MouseClicked
 
-    private void btnReclamos1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReclamos1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReclamos1MouseEntered
+    private void btnListasMantenimientoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListasMantenimientoMouseEntered
+        arribaDeBoton(btnListasMantenimiento);
+    }//GEN-LAST:event_btnListasMantenimientoMouseEntered
 
-    private void btnReclamos1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReclamos1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReclamos1MouseExited
+    private void btnListasMantenimientoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListasMantenimientoMouseExited
+        fueraDeBoton(btnListasMantenimiento);
+    }//GEN-LAST:event_btnListasMantenimientoMouseExited
+
+    private void lblBtnReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnReclamosMouseClicked
+        if(ventanaITRs.isVisible()|| ventanaUsuarios.isVisible() ){
+                ventanaITRs.dispose();
+                ventanaUsuarios.dispose();
+        }
+        mostrarVentanaInterna(ventanaReclamos);
+    }//GEN-LAST:event_lblBtnReclamosMouseClicked
+
+    private void btnReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReclamosMouseClicked
+        if(ventanaITRs.isVisible()|| ventanaUsuarios.isVisible() ){
+                ventanaITRs.dispose();
+                ventanaUsuarios.dispose();
+        }
+        mostrarVentanaInterna(ventanaReclamos);
+    }//GEN-LAST:event_btnReclamosMouseClicked
+
+    private void imgBtnReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBtnReclamosMouseClicked
+        if(ventanaITRs.isVisible()|| ventanaUsuarios.isVisible() ){
+                ventanaITRs.dispose();
+                ventanaUsuarios.dispose();
+        }
+        mostrarVentanaInterna(ventanaReclamos);
+    }//GEN-LAST:event_imgBtnReclamosMouseClicked
 
     private DefaultTableModel cargarTablaUsuarios() {
 
@@ -1221,45 +1286,46 @@ public class Home extends javax.swing.JFrame {
 
     }
     
+    private DefaultTableModel cargarTablaReclamos() {
     
-    /*
-    * private DefaultTableModel cargarTablaReclamos() {
-    *
-    *   Reclamo 
-    *    
-    *    List<Usuarios> listaUsuarios = userBean.listarUsuarios();
-    *
-    *    String[] nombreColumnas = {"Estado", "Rol", "Documento", "nomUsuario", "ITR", "Generación"};
-    *
-        *
-		 * El tamaño de la tabla es, 4 columnas (cantidad de datos a mostrar) y
-		 * la cantidad de filas depende de la cantida de listaUsuarios
-         *
-        Object[][] datos = new Object[listaUsuarios.size()][6];
+       ReclamoBean reclamoBean = new ReclamoBean();
+        
+        List<Reclamo> listaReclamos = reclamoBean.listaTodosReclamos();
+    
+        String[] nombreColumnas = {"Fecha/Hora", "Usuario", "Titulo", "Detalle", "Estado", "Semestre", "Créditos"};
+    
+        Object[][] datos = new Object[listaReclamos.size()][7];
 
-         Cargamos la matriz con todos los datos 
         int fila = 0;
 
-        for (Usuarios u:listaUsuarios) {
+        for (Reclamo u:listaReclamos) {
 
-            datos[fila][0] = u.getIdEstadoUsuario().getEstadoUsuario();
-            datos[fila][1] = u.getRol().getNombre();
-            datos[fila][2] = u.getDocumento();
-            datos[fila][3] = u.getNomUsuario();
-            datos[fila][4] = u.getItr().getNomItr();
+            if(u.getFecha().toString()!=null){
+                datos[fila][0] = u.getFecha().toString()+"/"+u.getFechaHora().toString();
+            }else{
+                datos[fila][0] = u.getFechaHora().toString();
+            }
             
-            if(u.getEstudiante()!=null){
-                datos[fila][5] = u.getEstudiante().getAnioGen().getAnio().toString();
+            datos[fila][1] = userBean.buscarUsuario(u.getIdUsuario().getIdUsuario()).getNomUsuario();
+            datos[fila][2] = u.getTitulo();
+            datos[fila][3] = u.getDetalle();
+            datos[fila][4] = u.getIdEstadoPeticion().getNomEstado();
+            
+            if(u.getSemestre()!=null){
+                 datos[fila][5] = u.getSemestre();
             }else{
                 datos[fila][5] = null;
+            }
+            
+            if(u.getCreditos()!=null){
+                 datos[fila][6] = u.getCreditos();
+            }else{
+                datos[fila][6] = null;
             }
             
             fila++;
 
         }
-        /*
-		 * Este codigo indica que las celdas no son editables y que son todas
-		 * del tipos String
     
         DefaultTableModel model = new DefaultTableModel(datos, nombreColumnas) {
 
@@ -1276,8 +1342,7 @@ public class Home extends javax.swing.JFrame {
 
         return model;
    
-   * }
-*/
+   }
 
     private void accionLimpiarFiltro() {
 
@@ -1352,14 +1417,14 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel btnConstancias;
     private javax.swing.JPanel btnEventos;
     private rsbuttongradiente.RSButtonGradiente btnFiltrar;
-    private rsbuttongradiente.RSButtonGradiente btnFiltrar1;
     private rsbuttongradiente.RSButtonGradiente btnFiltrar2;
+    private rsbuttongradiente.RSButtonGradiente btnFiltrarReclamos;
     private javax.swing.JPanel btnJustificaciones;
     private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltro;
-    private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltro1;
     private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltro2;
+    private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltroReclamos;
+    private javax.swing.JPanel btnListasMantenimiento;
     private javax.swing.JPanel btnReclamos;
-    private javax.swing.JPanel btnReclamos1;
     private javax.swing.JPanel btnReportes;
     private javax.swing.JPanel btnUsuario;
     private RSMaterialComponent.RSComboBoxMaterial comboboxEstado;
@@ -1497,12 +1562,10 @@ public class Home extends javax.swing.JFrame {
         return gen;
     }
 
-    public void mostrarVentanaUsuarios() throws PropertyVetoException{
-        if(ventanaUsuarios.isClosed()){
-           ventanaUsuarios.setVisible(true);
-           background.add(ventanaUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
-
+    public void mostrarVentanaInterna(JInternalFrame ventana){
+        if (ventana.isVisible()) {
+            background.add(ventana, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
+            ventana.setVisible(true);
         }
-        
     }
 }
