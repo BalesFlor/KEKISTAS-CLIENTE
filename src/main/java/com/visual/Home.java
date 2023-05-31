@@ -1,39 +1,19 @@
 package com.visual;
 
-import com.grsc.logica.ejb.AnalistaBean;
-import com.grsc.logica.ejb.DocenteBean;
 import com.grsc.logica.ejb.EstadoPeticionBean;
-import com.grsc.logica.ejb.EstadoUsuarioBean;
-import com.grsc.logica.ejb.EstudianteBean;
-import com.grsc.logica.ejb.GeneracionBean;
 import com.grsc.logica.ejb.ItrBean;
 import com.grsc.logica.ejb.ReclamoBean;
-import com.grsc.logica.ejb.RoleBean;
 import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.EstadoPeticion;
-import com.grsc.modelo.entities.EstadoUsuario;
-import com.grsc.modelo.entities.Generacion;
 import com.grsc.modelo.entities.Itr;
 import com.grsc.modelo.entities.Reclamo;
-import com.grsc.modelo.entities.Roles;
 import com.grsc.modelo.entities.Usuarios;
 import java.awt.Color;
-import java.beans.PropertyVetoException;
 import java.math.BigInteger;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.RowFilter;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 public class Home extends javax.swing.JFrame {
     
@@ -65,17 +45,6 @@ public class Home extends javax.swing.JFrame {
         botonReclamar = new rsbuttongradiente.RSButtonGradiente();
         botonEliminar1 = new rsbuttongradiente.RSButtonGradiente();
         botonModificar1 = new rsbuttongradiente.RSButtonGradiente();
-        ventanaITRs = new javax.swing.JInternalFrame();
-        panelReclamos1 = new javax.swing.JPanel();
-        lblBtnConstancias4 = new javax.swing.JLabel();
-        comboboxEstadoITRs = new RSMaterialComponent.RSComboBoxMaterial();
-        btnFiltrar2 = new rsbuttongradiente.RSButtonGradiente();
-        btnLimpiarFiltro2 = new rsbuttongradiente.RSButtonGradiente();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tablaITRs = new javax.swing.JTable();
-        botonAltaITR = new rsbuttongradiente.RSButtonGradiente();
-        botonEliminar2 = new rsbuttongradiente.RSButtonGradiente();
-        botonModificar2 = new rsbuttongradiente.RSButtonGradiente();
         background = new javax.swing.JPanel();
         sidepanel = new rspanelgradiente.RSPanelGradiente();
         imgUTECLogo = new javax.swing.JLabel();
@@ -105,21 +74,6 @@ public class Home extends javax.swing.JFrame {
         lblRuta = new javax.swing.JLabel();
         lblNombreUsuario = new javax.swing.JLabel();
         imgBtnUsuario1 = new javax.swing.JLabel();
-        ventanaUsuarios = new javax.swing.JInternalFrame();
-        panelUsuarios = new javax.swing.JPanel();
-        lblBtnConstancias2 = new javax.swing.JLabel();
-        comboboxGeneracion = new RSMaterialComponent.RSComboBoxMaterial();
-        comboboxTipoUser1 = new RSMaterialComponent.RSComboBoxMaterial();
-        comboboxEstado = new RSMaterialComponent.RSComboBoxMaterial();
-        comboboxItr = new RSMaterialComponent.RSComboBoxMaterial();
-        btnFiltrar = new rsbuttongradiente.RSButtonGradiente();
-        btnLimpiarFiltro = new rsbuttongradiente.RSButtonGradiente();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        botonSolicitudesConstancias = new rsbuttongradiente.RSButtonGradiente();
-        botonEliminar = new rsbuttongradiente.RSButtonGradiente();
-        botonReclamos = new rsbuttongradiente.RSButtonGradiente();
-        botonModificar = new rsbuttongradiente.RSButtonGradiente();
 
         ventanaReclamos.setVisible(true);
 
@@ -187,19 +141,19 @@ public class Home extends javax.swing.JFrame {
         btnLimpiarFiltroReclamos.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
         btnLimpiarFiltroReclamos.setColorSecundario(new java.awt.Color(105, 190, 228));
         btnLimpiarFiltroReclamos.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
+        btnLimpiarFiltroReclamos.setVisible(false);
         btnLimpiarFiltroReclamos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLimpiarFiltroReclamosMouseClicked(evt);
             }
         });
-        btnLimpiarFiltro.setVisible(false);
         panelReclamos.add(btnLimpiarFiltroReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 50, 120, 30));
 
         tablaReclamos.setModel(cargarTablaReclamos(
         ));
-        jTable1.setAutoscrolls(true);
-        jTable1.setRowSelectionAllowed(true);
-        jTable1.setSize(600, 600);
+        tablaReclamos.setAutoscrolls(true);
+        tablaReclamos.setRowSelectionAllowed(true);
+        tablaReclamos.setSize(600, 600);
         jScrollPane3.setViewportView(tablaReclamos);
 
         panelReclamos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 980, 290));
@@ -250,115 +204,6 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        ventanaITRs.setVisible(true);
-
-        panelReclamos1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblBtnConstancias4.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        lblBtnConstancias4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBtnConstancias4.setText("ITRs");
-        panelReclamos1.add(lblBtnConstancias4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 130, 20));
-
-        /*comboboxEstadoITRs.setForeground(new java.awt.Color(13, 120, 161));
-
-        EstadoPeticionBean estadoPeticionBean= new EstadoPeticionBean();
-
-        DefaultComboBoxModel modeloEstadoITRs=new DefaultComboBoxModel();
-
-        List<EstadoPeticion> listaEstadoReclamo=estadoPeticionBean.listarEstados();
-
-        modeloEstadoReclamo.addElement(" ESTADO RECLAMO");
-
-        for(int i = 0 ; i<listaEstadoITRs.size(); i++){
-            modeloEstadoITRs.addElement(listaEstadoITRs.get(i).getNomEstado());
-        }
-
-        comboboxEstadoITRs.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
-
-        comboboxEstadoITRs.setModel(modeloEstadoITRs);
-        */
-        panelReclamos1.add(comboboxEstadoITRs, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 190, 30));
-
-        btnFiltrar2.setText("Filtrar");
-        btnFiltrar2.setColorPrimario(new java.awt.Color(213, 240, 252));
-        btnFiltrar2.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
-        btnFiltrar2.setColorSecundario(new java.awt.Color(105, 190, 228));
-        btnFiltrar2.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
-        btnFiltrar2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnFiltrar2MouseClicked(evt);
-            }
-        });
-        panelReclamos1.add(btnFiltrar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, 120, 30));
-
-        btnLimpiarFiltro2.setText("Limpiar Filtro");
-        btnLimpiarFiltro2.setColorPrimario(new java.awt.Color(213, 240, 252));
-        btnLimpiarFiltro2.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
-        btnLimpiarFiltro2.setColorSecundario(new java.awt.Color(105, 190, 228));
-        btnLimpiarFiltro2.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
-        btnLimpiarFiltro2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLimpiarFiltro2MouseClicked(evt);
-            }
-        });
-        btnLimpiarFiltro.setVisible(false);
-        panelReclamos1.add(btnLimpiarFiltro2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 50, 120, 30));
-
-        tablaITRs.setModel(cargarTablaITRs(
-        ));
-        jTable1.setAutoscrolls(true);
-        jTable1.setRowSelectionAllowed(true);
-        jTable1.setSize(600, 600);
-        jScrollPane4.setViewportView(tablaITRs);
-
-        panelReclamos1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 980, 290));
-
-        botonAltaITR.setText("Alta");
-        botonAltaITR.setColorPrimario(new java.awt.Color(105, 190, 228));
-        botonAltaITR.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
-        botonAltaITR.setColorSecundario(new java.awt.Color(213, 240, 252));
-        botonAltaITR.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
-        botonAltaITR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAltaITRActionPerformed(evt);
-            }
-        });
-        panelReclamos1.add(botonAltaITR, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, 120, 40));
-
-        botonEliminar2.setText("Eliminar");
-        botonEliminar2.setColorPrimario(new java.awt.Color(105, 190, 228));
-        botonEliminar2.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
-        botonEliminar2.setColorSecundario(new java.awt.Color(213, 240, 252));
-        botonEliminar2.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
-        botonEliminar2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botonEliminar2MouseClicked(evt);
-            }
-        });
-        panelReclamos1.add(botonEliminar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 130, 40));
-
-        botonModificar2.setText("Modificar");
-        botonModificar2.setColorPrimario(new java.awt.Color(105, 190, 228));
-        botonModificar2.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
-        botonModificar2.setColorSecundario(new java.awt.Color(213, 240, 252));
-        botonModificar2.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
-        panelReclamos1.add(botonModificar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 130, 40));
-
-        javax.swing.GroupLayout ventanaITRsLayout = new javax.swing.GroupLayout(ventanaITRs.getContentPane());
-        ventanaITRs.getContentPane().setLayout(ventanaITRsLayout);
-        ventanaITRsLayout.setHorizontalGroup(
-            ventanaITRsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ventanaITRsLayout.createSequentialGroup()
-                .addComponent(panelReclamos1, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        ventanaITRsLayout.setVerticalGroup(
-            ventanaITRsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ventanaITRsLayout.createSequentialGroup()
-                .addComponent(panelReclamos1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -379,6 +224,9 @@ public class Home extends javax.swing.JFrame {
         btnListasMantenimiento.setBackground(new java.awt.Color(105, 190, 228));
         btnListasMantenimiento.setForeground(new java.awt.Color(105, 190, 228));
         btnListasMantenimiento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnListasMantenimientoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnListasMantenimientoMouseEntered(evt);
             }
@@ -419,6 +267,9 @@ public class Home extends javax.swing.JFrame {
         btnUsuario.setBackground(new java.awt.Color(105, 190, 228));
         btnUsuario.setForeground(new java.awt.Color(105, 190, 228));
         btnUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUsuarioMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnUsuarioMouseEntered(evt);
             }
@@ -698,9 +549,8 @@ public class Home extends javax.swing.JFrame {
         sidepanelLayout.setVerticalGroup(
             sidepanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidepanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(imgUTECLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(37, 37, 37)
                 .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnConstancias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -770,186 +620,6 @@ public class Home extends javax.swing.JFrame {
 
         imgBtnUsuario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_2user-icon.png"))); // NOI18N
         background.add(imgBtnUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 10, 30, 30));
-
-        ventanaUsuarios.setVisible(true);
-
-        panelUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblBtnConstancias2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        lblBtnConstancias2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBtnConstancias2.setText("Filtros");
-        panelUsuarios.add(lblBtnConstancias2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 130, 20));
-
-        comboboxGeneracion.setForeground(new java.awt.Color(13, 120, 161));
-
-        GeneracionBean genBean= new GeneracionBean();
-
-        DefaultComboBoxModel modeloGen=new DefaultComboBoxModel();
-
-        List<Generacion> listaGeneracion=genBean.listarGeneracion();
-
-        modeloGen.addElement(" GENERACIÓN");
-
-        for(int i = 0 ; i<listaGeneracion.size(); i++){
-            modeloGen.addElement(listaGeneracion.get(i).getAnio());
-        }
-
-        comboboxGeneracion.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
-
-        comboboxGeneracion.setModel(modeloGen);
-
-        comboboxGeneracion.setVisible(false);
-        panelUsuarios.add(comboboxGeneracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 190, 30));
-
-        comboboxTipoUser1.setForeground(new java.awt.Color(13, 120, 161));
-
-        RoleBean rolesBean= new RoleBean();
-
-        DefaultComboBoxModel modeloRoles=new DefaultComboBoxModel();
-
-        List<Roles> listaRoles=rolesBean.listarRoles();
-
-        modeloRoles.addElement(" ROL");
-
-        for(int i = 0 ; i<listaRoles.size(); i++){
-            modeloRoles.addElement(listaRoles.get(i).getNombre());
-        }
-
-        comboboxTipoUser1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
-
-        comboboxTipoUser1.setModel(modeloRoles);
-        comboboxTipoUser1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboboxTipoUser1ItemStateChanged(evt);
-            }
-        });
-        panelUsuarios.add(comboboxTipoUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 190, 30));
-
-        comboboxEstado.setForeground(new java.awt.Color(13, 120, 161));
-
-        EstadoUsuarioBean estadosBean= new EstadoUsuarioBean();
-
-        DefaultComboBoxModel modeloEstados=new DefaultComboBoxModel();
-
-        List<EstadoUsuario> listaEstados=estadosBean.listarEstadosUsuario();
-
-        modeloEstados.addElement(" ESTADO USUARIO");
-
-        for(int i = 0 ; i<listaEstados.size(); i++){
-            modeloEstados.addElement(listaEstados.get(i).getEstadoUsuario());
-        }
-
-        comboboxEstado.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
-
-        comboboxEstado.setModel(modeloEstados);
-        panelUsuarios.add(comboboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 190, 30));
-
-        comboboxItr.setForeground(new java.awt.Color(13, 120, 161));
-
-        ItrBean itrsBean= new ItrBean();
-
-        DefaultComboBoxModel modeloItrs=new DefaultComboBoxModel();
-
-        List<Itr> listaItrs=itrsBean.listarItrs();
-
-        modeloItrs.addElement(" ITR");
-
-        for(int i = 0 ; i<listaItrs.size(); i++){
-            modeloItrs.addElement(listaItrs.get(i).getNomItr());
-        }
-
-        comboboxItr.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
-
-        comboboxItr.setModel(modeloItrs);
-        panelUsuarios.add(comboboxItr, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 190, 30));
-
-        btnFiltrar.setText("Filtrar");
-        btnFiltrar.setFont(new java.awt.Font("Segoe UI Semilight", 0, 17));
-        btnFiltrar.setColorPrimario(new java.awt.Color(213, 240, 252));
-        btnFiltrar.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
-        btnFiltrar.setColorSecundario(new java.awt.Color(105, 190, 228));
-        btnFiltrar.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
-        btnFiltrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnFiltrarMouseClicked(evt);
-            }
-        });
-        panelUsuarios.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 120, 30));
-
-        btnLimpiarFiltro.setText("Limpiar Filtro");
-        btnLimpiarFiltro.setColorPrimario(new java.awt.Color(213, 240, 252));
-        btnLimpiarFiltro.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
-        btnLimpiarFiltro.setColorSecundario(new java.awt.Color(105, 190, 228));
-        btnLimpiarFiltro.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
-        btnLimpiarFiltro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLimpiarFiltroMouseClicked(evt);
-            }
-        });
-        btnLimpiarFiltro.setVisible(false);
-        panelUsuarios.add(btnLimpiarFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 50, 120, 30));
-
-        jTable1.setModel(cargarTablaUsuarios(
-        ));
-        jTable1.setAutoscrolls(true);
-        jTable1.setRowSelectionAllowed(true);
-        jTable1.setSize(600, 600);
-        jScrollPane2.setViewportView(jTable1);
-
-        panelUsuarios.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 1000, 300));
-
-        botonSolicitudesConstancias.setText("Solicitudes de Constancias");
-        botonSolicitudesConstancias.setColorPrimario(new java.awt.Color(105, 190, 228));
-        botonSolicitudesConstancias.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
-        botonSolicitudesConstancias.setColorSecundario(new java.awt.Color(213, 240, 252));
-        botonSolicitudesConstancias.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
-        botonSolicitudesConstancias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSolicitudesConstanciasActionPerformed(evt);
-            }
-        });
-        panelUsuarios.add(botonSolicitudesConstancias, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 250, 40));
-
-        botonEliminar.setText("Eliminar");
-        botonEliminar.setColorPrimario(new java.awt.Color(105, 190, 228));
-        botonEliminar.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
-        botonEliminar.setColorSecundario(new java.awt.Color(213, 240, 252));
-        botonEliminar.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
-        botonEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botonEliminarMouseClicked(evt);
-            }
-        });
-        panelUsuarios.add(botonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 130, 40));
-
-        botonReclamos.setText("Reclamos");
-        botonReclamos.setColorPrimario(new java.awt.Color(105, 190, 228));
-        botonReclamos.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
-        botonReclamos.setColorSecundario(new java.awt.Color(213, 240, 252));
-        botonReclamos.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
-        panelUsuarios.add(botonReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, 130, 40));
-
-        botonModificar.setText("Modificar");
-        botonModificar.setColorPrimario(new java.awt.Color(105, 190, 228));
-        botonModificar.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
-        botonModificar.setColorSecundario(new java.awt.Color(213, 240, 252));
-        botonModificar.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
-        panelUsuarios.add(botonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 130, 40));
-
-        javax.swing.GroupLayout ventanaUsuariosLayout = new javax.swing.GroupLayout(ventanaUsuarios.getContentPane());
-        ventanaUsuarios.getContentPane().setLayout(ventanaUsuariosLayout);
-        ventanaUsuariosLayout.setHorizontalGroup(
-            ventanaUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanaUsuariosLayout.createSequentialGroup()
-                .addComponent(panelUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        ventanaUsuariosLayout.setVerticalGroup(
-            ventanaUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-        );
-
-        background.add(ventanaUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1051,78 +721,12 @@ public class Home extends javax.swing.JFrame {
         boton.setBackground(color);
     }
     
-    private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
-        int row = jTable1.getSelectedRow();
-
-        if (row==-1) {
-            JOptionPane.showMessageDialog(null, "Seleccione un usuario para eliminar");
-        } else {
-            String cell = jTable1.getModel().getValueAt(row, 2).toString();
-            Usuarios usuarioExterno = userBean.buscarUsuarioPorDocumento(cell);
-            Object[] options = {"ELIMINAR", "CANCELAR"};
-            int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar usuario " + usuarioExterno.getNomUsuario()
-                + "?", "Eliminar usuario", JOptionPane.YES_NO_OPTION,
-                JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-
-            if (respuesta == JOptionPane.YES_OPTION) {
-
-                try {
-                    userBean.eliminarUser(usuarioExterno.getIdUsuario());
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "No se ha eliminado el Usuario dado un Error");
-                }
-                BigInteger estadoEliminado = BigInteger.valueOf(3L);
-                if (userBean.obtenerEstado(usuarioExterno.getIdUsuario()).getIdEstado().equals(estadoEliminado)) {
-                    jTable1.setModel(cargarTablaUsuarios());
-                    JOptionPane.showMessageDialog(null, "Usuario Eliminado correctamente");
-                    jTable1.clearSelection();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Usuario Eliminado NO correctamente");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "No se ha eliminado el usuario");
-            }
-        }
-    }//GEN-LAST:event_botonEliminarMouseClicked
-
-    private void btnLimpiarFiltroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFiltroMouseClicked
-        accionLimpiarFiltro();
-        this.btnLimpiarFiltro.setVisible(false);
-        this.comboboxGeneracion.setVisible(false);
-    }//GEN-LAST:event_btnLimpiarFiltroMouseClicked
-
-    private void btnFiltrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarMouseClicked
-        accionFiltrar();
-        this.btnLimpiarFiltro.setVisible(true);
-    }//GEN-LAST:event_btnFiltrarMouseClicked
-
-    private void comboboxTipoUser1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboboxTipoUser1ItemStateChanged
-        BigInteger bi= BigInteger.valueOf(3L);
-        if (tipoUserSeleccionado().getIdRol().equals(bi)) {
-            this.comboboxGeneracion.setVisible(true);
-        }else{
-            this.comboboxGeneracion.setVisible(false);
-        }
-    }//GEN-LAST:event_comboboxTipoUser1ItemStateChanged
-
-    private void botonSolicitudesConstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSolicitudesConstanciasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonSolicitudesConstanciasActionPerformed
-
     private void lblBtnUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnUsuarioMouseClicked
-        if(ventanaITRs.isVisible()|| ventanaReclamos.isVisible() ){
-                ventanaITRs.dispose();
-                ventanaReclamos.dispose();
-        }
-        mostrarVentanaInterna(ventanaUsuarios);
+        
     }//GEN-LAST:event_lblBtnUsuarioMouseClicked
 
     private void imgBtnUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBtnUsuarioMouseClicked
-        if(ventanaITRs.isVisible()|| ventanaReclamos.isVisible() ){
-                ventanaITRs.dispose();
-                ventanaReclamos.dispose();
-        }
-        mostrarVentanaInterna(ventanaUsuarios);
+      
     }//GEN-LAST:event_imgBtnUsuarioMouseClicked
 
     private void btnFiltrarReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarReclamosMouseClicked
@@ -1141,22 +745,6 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEliminar1MouseClicked
 
-    private void btnFiltrar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrar2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFiltrar2MouseClicked
-
-    private void btnLimpiarFiltro2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFiltro2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLimpiarFiltro2MouseClicked
-
-    private void botonAltaITRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAltaITRActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonAltaITRActionPerformed
-
-    private void botonEliminar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminar2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonEliminar2MouseClicked
-
     private void btnListasMantenimientoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListasMantenimientoMouseEntered
         arribaDeBoton(btnListasMantenimiento);
     }//GEN-LAST:event_btnListasMantenimientoMouseEntered
@@ -1166,125 +754,28 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnListasMantenimientoMouseExited
 
     private void lblBtnReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnReclamosMouseClicked
-        if(ventanaITRs.isVisible()|| ventanaUsuarios.isVisible() ){
-                ventanaITRs.dispose();
-                ventanaUsuarios.dispose();
-        }
-        mostrarVentanaInterna(ventanaReclamos);
+        
     }//GEN-LAST:event_lblBtnReclamosMouseClicked
 
     private void btnReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReclamosMouseClicked
-        if(ventanaITRs.isVisible()|| ventanaUsuarios.isVisible() ){
-                ventanaITRs.dispose();
-                ventanaUsuarios.dispose();
-        }
-        mostrarVentanaInterna(ventanaReclamos);
+   
     }//GEN-LAST:event_btnReclamosMouseClicked
 
     private void imgBtnReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBtnReclamosMouseClicked
-        if(ventanaITRs.isVisible()|| ventanaUsuarios.isVisible() ){
-                ventanaITRs.dispose();
-                ventanaUsuarios.dispose();
-        }
-        mostrarVentanaInterna(ventanaReclamos);
+        
     }//GEN-LAST:event_imgBtnReclamosMouseClicked
 
-    private DefaultTableModel cargarTablaUsuarios() {
+    private void btnUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuarioMouseClicked
+        VentanaInternaUsuarios ventanaUsers = new VentanaInternaUsuarios();
+        background.add(ventanaUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
+        ventanaUsers.setVisible(true);
+    }//GEN-LAST:event_btnUsuarioMouseClicked
 
-        List<Usuarios> listaUsuarios = userBean.listarUsuarios();
-
-        String[] nombreColumnas = {"Estado", "Rol", "Documento", "nomUsuario", "ITR", "Generación"};
-
-        /*
-		 * El tamaño de la tabla es, 4 columnas (cantidad de datos a mostrar) y
-		 * la cantidad de filas depende de la cantida de listaUsuarios
-         */
-        Object[][] datos = new Object[listaUsuarios.size()][6];
-
-        /* Cargamos la matriz con todos los datos */
-        int fila = 0;
-
-        for (Usuarios u:listaUsuarios) {
-
-            datos[fila][0] = u.getIdEstadoUsuario().getEstadoUsuario();
-            datos[fila][1] = u.getRol().getNombre();
-            datos[fila][2] = u.getDocumento();
-            datos[fila][3] = u.getNomUsuario();
-            datos[fila][4] = u.getItr().getNomItr();
-            
-            if(u.getEstudiante()!=null){
-                datos[fila][5] = u.getEstudiante().getAnioGen().getAnio().toString();
-            }else{
-                datos[fila][5] = null;
-            }
-            
-            fila++;
-
-        }
-        /*
-		 * Este codigo indica que las celdas no son editables y que son todas
-		 * del tipos String
-         */
-        DefaultTableModel model = new DefaultTableModel(datos, nombreColumnas) {
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-
-            @Override
-            public Class<?> getColumnClass(int columnIndex) {
-                return String.class;
-            }
-        };
-
-        return model;
-
-    }
-    
-    private DefaultTableModel cargarTablaITRs() {
-
-        ItrBean itrBean = new ItrBean();
-        
-        List<Itr> listaITRs = itrBean.listarItrs();
-
-        String[] nombreColumnas = {"Nombre de ITR"};
-
-        /*
-		 * El tamaño de la tabla es,  1 columna (cantidad de datos a mostrar) y
-		 * la cantidad de filas depende de la cantida de listaITRs
-         */
-        Object[][] datos = new Object[listaITRs.size()][1];
-
-        /* Cargamos la matriz con todos los datos */
-        int fila = 0;
-
-        for (Itr u: listaITRs) {
-
-            datos[fila][0] = u.getNomItr();
-            fila++;
-
-        }
-        /*
-		 * Este codigo indica que las celdas Son editables y que son todas
-		 * del tipos String
-         */
-        DefaultTableModel model = new DefaultTableModel(datos, nombreColumnas) {
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return true;
-            }
-
-            @Override
-            public Class<?> getColumnClass(int columnIndex) {
-                return String.class;
-            }
-        };
-
-        return model;
-
-    }
+    private void btnListasMantenimientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListasMantenimientoMouseClicked
+        InternalFrameListasMantenimiento ventanaListasM = new InternalFrameListasMantenimiento();
+        background.add(ventanaListasM, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
+        ventanaListasM.setVisible(true);
+    }//GEN-LAST:event_btnListasMantenimientoMouseClicked
     
     private DefaultTableModel cargarTablaReclamos() {
     
@@ -1344,95 +835,21 @@ public class Home extends javax.swing.JFrame {
    
    }
 
-    private void accionLimpiarFiltro() {
-
-        this.jTable1.setRowSorter(null);
-        this.comboboxEstado.setSelectedIndex(0);
-        this.comboboxGeneracion.setSelectedIndex(0);
-        this.comboboxItr.setSelectedIndex(0);
-        this.comboboxTipoUser1.setSelectedIndex(0);
-    }
-
-    private void accionFiltrar() {
-
-        TableRowSorter<TableModel> filtro1 = new TableRowSorter<>(this.jTable1.getModel());
-        TableRowSorter<TableModel> filtro2 = new TableRowSorter<>(this.jTable1.getModel());
-        TableRowSorter<TableModel> filtro3 = new TableRowSorter<>(this.jTable1.getModel());
-        TableRowSorter<TableModel> filtro4 = new TableRowSorter<>(this.jTable1.getModel());
-
-        Roles rol = tipoUserSeleccionado();
-        EstadoUsuario estado = estadoSeleccionado();
-        Itr itr = itrSeleccionado();
-        Generacion gen = genSeleccionada();
-
-        if (estado != null) {
-
-            String estadoString = estado.getEstadoUsuario();
-
-            filtro1.setRowFilter(RowFilter.regexFilter(estadoString, 0));
-
-            jTable1.setRowSorter(filtro1);
-        }
-        if (rol != null) {
-
-            String rolString = rol.getNombre();
-
-            filtro2.setRowFilter(RowFilter.regexFilter(rolString, 1));
-
-            jTable1.setRowSorter(filtro2);
-
-        }
-        if (itr != null) {
-
-            String itrString = itr.getNomItr();
-
-            filtro3.setRowFilter(RowFilter.regexFilter(itrString, 4));
-
-            jTable1.setRowSorter(filtro3);
-
-        }
-
-        if (gen != null) {
-
-            String genAnio = gen.getAnio().toString();
-
-            filtro4.setRowFilter(RowFilter.regexFilter(genAnio, 5));
-
-            jTable1.setRowSorter(filtro4);
-        }
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
-    private rsbuttongradiente.RSButtonGradiente botonAltaITR;
-    private rsbuttongradiente.RSButtonGradiente botonEliminar;
     private rsbuttongradiente.RSButtonGradiente botonEliminar1;
-    private rsbuttongradiente.RSButtonGradiente botonEliminar2;
-    private rsbuttongradiente.RSButtonGradiente botonModificar;
     private rsbuttongradiente.RSButtonGradiente botonModificar1;
-    private rsbuttongradiente.RSButtonGradiente botonModificar2;
     private rsbuttongradiente.RSButtonGradiente botonReclamar;
-    private rsbuttongradiente.RSButtonGradiente botonReclamos;
-    private rsbuttongradiente.RSButtonGradiente botonSolicitudesConstancias;
     private javax.swing.JPanel btnConstancias;
     private javax.swing.JPanel btnEventos;
-    private rsbuttongradiente.RSButtonGradiente btnFiltrar;
-    private rsbuttongradiente.RSButtonGradiente btnFiltrar2;
     private rsbuttongradiente.RSButtonGradiente btnFiltrarReclamos;
     private javax.swing.JPanel btnJustificaciones;
-    private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltro;
-    private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltro2;
     private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltroReclamos;
     private javax.swing.JPanel btnListasMantenimiento;
     private javax.swing.JPanel btnReclamos;
     private javax.swing.JPanel btnReportes;
     private javax.swing.JPanel btnUsuario;
-    private RSMaterialComponent.RSComboBoxMaterial comboboxEstado;
-    private RSMaterialComponent.RSComboBoxMaterial comboboxEstadoITRs;
     private RSMaterialComponent.RSComboBoxMaterial comboboxEstadoReclamo;
-    private RSMaterialComponent.RSComboBoxMaterial comboboxGeneracion;
-    private RSMaterialComponent.RSComboBoxMaterial comboboxItr;
-    private RSMaterialComponent.RSComboBoxMaterial comboboxTipoUser1;
     private RSMaterialComponent.RSComboBoxMaterial comboboxUsuarioReclamo;
     private javax.swing.JLabel imgBtnConstancias;
     private javax.swing.JLabel imgBtnEvento;
@@ -1443,14 +860,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel imgBtnUsuario;
     private javax.swing.JLabel imgBtnUsuario1;
     private javax.swing.JLabel imgUTECLogo;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBtnConstancias1;
-    private javax.swing.JLabel lblBtnConstancias2;
     private javax.swing.JLabel lblBtnConstancias3;
-    private javax.swing.JLabel lblBtnConstancias4;
     private javax.swing.JLabel lblBtnEventos;
     private javax.swing.JLabel lblBtnJustificaciones;
     private javax.swing.JLabel lblBtnReclamos;
@@ -1461,111 +873,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel lblRuta;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel panelReclamos;
-    private javax.swing.JPanel panelReclamos1;
-    private javax.swing.JPanel panelUsuarios;
     private rspanelgradiente.RSPanelGradiente sidepanel;
-    private javax.swing.JTable tablaITRs;
     private javax.swing.JTable tablaReclamos;
     private rspanelgradiente.RSPanelGradiente titlepanel;
-    private javax.swing.JInternalFrame ventanaITRs;
     private javax.swing.JInternalFrame ventanaReclamos;
-    private javax.swing.JInternalFrame ventanaUsuarios;
     // End of variables declaration//GEN-END:variables
-    
-      public EstadoUsuario estadoSeleccionado() {
-        /* Este método es para encontrar el localidad que ha sido seleccionado del comboBox de Localidades, ya que 
-        el combobox tiene cargados solo los nombres asique lo tenemos que buscar por el nombre al objeto*/
-        
-        //Invocamos al bean de Localidad
-        EstadoUsuarioBean estadoBean = new EstadoUsuarioBean();
-        
-        //Se carga una lista con todas las localidades
-        List<EstadoUsuario> listaEstados = estadoBean.listarEstadosUsuario();
-        EstadoUsuario estadoUsuario = null;
 
-        //En el siguiente for se pasa por todas las localidades de la lista
-        for (int i = 0; i < listaEstados.size(); i++) {
-            //Si el nombre de la localidad coincide con el seleccionado del combobox se carga en la variable a retornar
-            if (listaEstados.get(i).getEstadoUsuario().equals(this.comboboxEstado.getSelectedItem().toString())) {
-                estadoUsuario = listaEstados.get(i);
-            }
-
-        }
-
-        return estadoUsuario;
-    }
-
-    public Roles tipoUserSeleccionado() {
-        /* Este método es para encontrar el rol que ha sido seleccionado del comboBox de roles, ya que 
-        el combobox tiene cargados solo los nombres asique lo tenemos que buscar por el nombre al objeto*/
-
-        //Invocamos al bean de Rol
-        RoleBean rolBean = new RoleBean();
-
-        //Se carga una lista con todos los roles
-        List<Roles> listaRoles = rolBean.listarRoles();
-        Roles rol = null;
-
-        //En el siguiente for se pasa por todos los roles de la lista
-        for (int i = 0; i < listaRoles.size(); i++) {
-            //Si el nombre del rol coincide con el seleccionado del combobox se carga en la variable a retornar
-            if (listaRoles.get(i).getNombre().equals(this.comboboxTipoUser1.getSelectedItem().toString())) {
-                rol = listaRoles.get(i);
-            }
-        }
-
-        return rol;
-    }
-
-    public Itr itrSeleccionado() {
-        /* Este método es para encontrar el Itr que ha sido seleccionado del comboBox de Itrs, ya que 
-        el combobox tiene cargados solo los nombres asique lo tenemos que buscar por el nombre al objeto*/
-
-        //Invocamos al bean de Itr
-        ItrBean itrBean = new ItrBean();
-
-        //Se carga una lista con todos los Itrs
-        List<Itr> listaItr = itrBean.listarItrs();
-        Itr itr = null;
-
-        //En el siguiente for se pasa por todos los itrs de la lista
-        for (int i = 0; i < listaItr.size(); i++) {
-            //Si el nombre del itr coincide con el seleccionado del combobox se carga en la variable a retornar
-            if (listaItr.get(i).getNomItr().equals(this.comboboxItr.getSelectedItem().toString())) {
-                itr = listaItr.get(i);
-            }
-
-        }
-
-        return itr;
-    }
-
-    public Generacion genSeleccionada() {
-        /* Este método es para encontrar el Area que ha sido seleccionado del comboBox de Area, ya que 
-        el combobox tiene cargados solo los nombres asique lo tenemos que buscar por el nombre al objeto*/
-
-        //Invocamos al bean de Area
-        GeneracionBean genBean = new GeneracionBean();
-
-        //Se carga una lista con todas las Areas
-        List<Generacion> listaGeneracion = genBean.listarGeneracion();
-        Generacion gen = null;
-
-        //En el siguiente for se pasa por todas las areas de la lista
-        for (int i = 0; i < listaGeneracion.size(); i++) {
-            //Si el nombre de la Area coincide con el seleccionado del combobox se carga en la variable a retornar
-            if (listaGeneracion.get(i).getAnio().equals(this.comboboxGeneracion.getSelectedItem().toString())) {
-                gen = listaGeneracion.get(i);
-            }
-        }
-
-        return gen;
-    }
-
-    public void mostrarVentanaInterna(JInternalFrame ventana){
-        if (ventana.isVisible()) {
-            background.add(ventana, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
-            ventana.setVisible(true);
-        }
-    }
 }
