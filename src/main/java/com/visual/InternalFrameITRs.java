@@ -5,12 +5,11 @@ import com.grsc.modelo.entities.Itr;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-public class ventanaInternaITRs extends javax.swing.JInternalFrame {
+public class InternalFrameITRs extends javax.swing.JInternalFrame {
 
-    public ventanaInternaITRs() {
+    public InternalFrameITRs() {
         initComponents();
     }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -21,9 +20,11 @@ public class ventanaInternaITRs extends javax.swing.JInternalFrame {
         comboboxEstadoITRs = new RSMaterialComponent.RSComboBoxMaterial();
         btnFiltrar2 = new rsbuttongradiente.RSButtonGradiente();
         btnLimpiarFiltro2 = new rsbuttongradiente.RSButtonGradiente();
-        botonEliminar2 = new rsbuttongradiente.RSButtonGradiente();
-        botonModificar2 = new rsbuttongradiente.RSButtonGradiente();
         botonAltaITR = new rsbuttongradiente.RSButtonGradiente();
+        botonModificar2 = new rsbuttongradiente.RSButtonGradiente();
+        botonEliminar2 = new rsbuttongradiente.RSButtonGradiente();
+
+        setPreferredSize(new java.awt.Dimension(1001, 100));
 
         lblBtnConstancias4.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         lblBtnConstancias4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -78,23 +79,6 @@ public class ventanaInternaITRs extends javax.swing.JInternalFrame {
         });
         btnLimpiarFiltro2.setVisible(false);
 
-        botonEliminar2.setText("Eliminar");
-        botonEliminar2.setColorPrimario(new java.awt.Color(105, 190, 228));
-        botonEliminar2.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
-        botonEliminar2.setColorSecundario(new java.awt.Color(213, 240, 252));
-        botonEliminar2.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
-        botonEliminar2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botonEliminar2MouseClicked(evt);
-            }
-        });
-
-        botonModificar2.setText("Modificar");
-        botonModificar2.setColorPrimario(new java.awt.Color(105, 190, 228));
-        botonModificar2.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
-        botonModificar2.setColorSecundario(new java.awt.Color(213, 240, 252));
-        botonModificar2.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
-
         botonAltaITR.setText("Alta");
         botonAltaITR.setColorPrimario(new java.awt.Color(105, 190, 228));
         botonAltaITR.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
@@ -106,69 +90,77 @@ public class ventanaInternaITRs extends javax.swing.JInternalFrame {
             }
         });
 
+        botonModificar2.setText("Modificar");
+        botonModificar2.setColorPrimario(new java.awt.Color(105, 190, 228));
+        botonModificar2.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
+        botonModificar2.setColorSecundario(new java.awt.Color(213, 240, 252));
+        botonModificar2.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
+
+        botonEliminar2.setText("Eliminar");
+        botonEliminar2.setColorPrimario(new java.awt.Color(105, 190, 228));
+        botonEliminar2.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
+        botonEliminar2.setColorSecundario(new java.awt.Color(213, 240, 252));
+        botonEliminar2.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
+        botonEliminar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonEliminar2MouseClicked(evt);
+            }
+        });
+        botonEliminar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminar2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(lblBtnConstancias4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(867, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(10, 21, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 977, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap())
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(comboboxEstadoITRs, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(30, 30, 30)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnFiltrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnLimpiarFiltro2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(botonEliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(20, 20, 20)
-                                    .addComponent(botonModificar2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(20, 20, 20)
-                                    .addComponent(botonAltaITR, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(560, 560, 560)))
-                            .addGap(0, 13, Short.MAX_VALUE)))))
+                .addGap(40, 40, 40)
+                .addComponent(botonEliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(botonModificar2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonAltaITR, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 12, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 977, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblBtnConstancias4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(353, 353, 353)
+                        .addComponent(comboboxEstadoITRs, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFiltrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimpiarFiltro2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(lblBtnConstancias4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(384, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 4, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addComponent(comboboxEstadoITRs, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnFiltrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(10, 10, 10)
-                            .addComponent(btnLimpiarFiltro2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(10, 10, 10)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(10, 10, 10)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(botonEliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonModificar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonAltaITR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 4, Short.MAX_VALUE)))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(comboboxEstadoITRs, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBtnConstancias4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnFiltrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLimpiarFiltro2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 42, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonEliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonModificar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonAltaITR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private DefaultTableModel cargarTablaITRs() {
+     private DefaultTableModel cargarTablaITRs() {
 
         ItrBean itrBean = new ItrBean();
         
@@ -212,6 +204,7 @@ public class ventanaInternaITRs extends javax.swing.JInternalFrame {
 
     }
     
+     
     private void btnFiltrar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrar2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFiltrar2MouseClicked
@@ -220,13 +213,17 @@ public class ventanaInternaITRs extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimpiarFiltro2MouseClicked
 
+    private void botonAltaITRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAltaITRActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonAltaITRActionPerformed
+
     private void botonEliminar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminar2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEliminar2MouseClicked
 
-    private void botonAltaITRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAltaITRActionPerformed
+    private void botonEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminar2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botonAltaITRActionPerformed
+    }//GEN-LAST:event_botonEliminar2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

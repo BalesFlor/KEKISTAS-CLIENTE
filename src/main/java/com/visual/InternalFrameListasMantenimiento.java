@@ -5,7 +5,7 @@ public class InternalFrameListasMantenimiento extends javax.swing.JInternalFrame
     public InternalFrameListasMantenimiento() {
         initComponents();
     }
-
+/*Holi*/
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -75,7 +75,7 @@ public class InternalFrameListasMantenimiento extends javax.swing.JInternalFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnListaITRsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListaITRsMouseClicked
-        VentanaInternaITRs ventanaITRs = new VentanaInternaITRs();
+        InternalFrameITRs ventanaITRs = new InternalFrameITRs();
         background.add(ventanaITRs, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
         ventanaITRs.setVisible(true);
     }//GEN-LAST:event_btnListaITRsMouseClicked
