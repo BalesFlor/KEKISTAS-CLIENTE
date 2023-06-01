@@ -1,24 +1,17 @@
 package com.visual;
 
-import com.grsc.logica.ejb.EstadoPeticionBean;
-import com.grsc.logica.ejb.ItrBean;
-import com.grsc.logica.ejb.ReclamoBean;
 import com.grsc.logica.ejb.UsuarioBean;
-import com.grsc.modelo.entities.EstadoPeticion;
-import com.grsc.modelo.entities.Itr;
-import com.grsc.modelo.entities.Reclamo;
 import com.grsc.modelo.entities.Usuarios;
 import java.awt.Color;
 import java.math.BigInteger;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
 public class Home extends javax.swing.JFrame {
     
     Usuarios usuario;
     UsuarioBean userBean= new UsuarioBean();
+    String[] ventanasInternas = new String[] {"Usuarios","Constancias","Eventos","Justificaciones","Reportes","Reclamos", "Listas Mantenimiento", "Usuario Propio"};
+    String ventanaAbierta = "";
     
     public Home(BigInteger idUser) {
         usuario=traerUserPorID(idUser);
@@ -33,18 +26,6 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ventanaReclamos = new javax.swing.JInternalFrame();
-        panelReclamos = new javax.swing.JPanel();
-        lblBtnConstancias3 = new javax.swing.JLabel();
-        comboboxUsuarioReclamo = new RSMaterialComponent.RSComboBoxMaterial();
-        comboboxEstadoReclamo = new RSMaterialComponent.RSComboBoxMaterial();
-        btnFiltrarReclamos = new rsbuttongradiente.RSButtonGradiente();
-        btnLimpiarFiltroReclamos = new rsbuttongradiente.RSButtonGradiente();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tablaReclamos = new javax.swing.JTable();
-        botonReclamar = new rsbuttongradiente.RSButtonGradiente();
-        botonEliminar1 = new rsbuttongradiente.RSButtonGradiente();
-        botonModificar1 = new rsbuttongradiente.RSButtonGradiente();
         background = new javax.swing.JPanel();
         sidepanel = new rspanelgradiente.RSPanelGradiente();
         imgUTECLogo = new javax.swing.JLabel();
@@ -74,135 +55,6 @@ public class Home extends javax.swing.JFrame {
         lblRuta = new javax.swing.JLabel();
         lblNombreUsuario = new javax.swing.JLabel();
         imgBtnUsuario1 = new javax.swing.JLabel();
-
-        ventanaReclamos.setVisible(true);
-
-        panelReclamos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblBtnConstancias3.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        lblBtnConstancias3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBtnConstancias3.setText("Reclamos");
-        panelReclamos.add(lblBtnConstancias3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 130, 20));
-
-        comboboxUsuarioReclamo.setForeground(new java.awt.Color(13, 120, 161));
-
-        UsuarioBean userBean= new UsuarioBean();
-
-        DefaultComboBoxModel modeloUsuarioReclamo=new DefaultComboBoxModel();
-
-        List<Usuarios> listaUsuarioReclamo=userBean.listarUsuarios();
-
-        modeloUsuarioReclamo.addElement(" USUARIOS");
-
-        for(int i = 0 ; i<listaUsuarioReclamo.size(); i++){
-            modeloUsuarioReclamo.addElement(listaUsuarioReclamo.get(i).getNomUsuario());
-        }
-
-        comboboxUsuarioReclamo.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
-
-        comboboxUsuarioReclamo.setModel(modeloUsuarioReclamo);
-
-        comboboxUsuarioReclamo.setVisible(false);
-        panelReclamos.add(comboboxUsuarioReclamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 190, 30));
-
-        comboboxEstadoReclamo.setForeground(new java.awt.Color(13, 120, 161));
-
-        EstadoPeticionBean estadoPeticionBean= new EstadoPeticionBean();
-
-        DefaultComboBoxModel modeloEstadoReclamo=new DefaultComboBoxModel();
-
-        List<EstadoPeticion> listaEstadoReclamo=estadoPeticionBean.listarEstados();
-
-        modeloEstadoReclamo.addElement(" ESTADO RECLAMO");
-
-        for(int i = 0 ; i<listaEstadoReclamo.size(); i++){
-            modeloEstadoReclamo.addElement(listaEstadoReclamo.get(i).getNomEstado());
-        }
-
-        comboboxEstadoReclamo.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
-
-        comboboxEstadoReclamo.setModel(modeloEstadoReclamo);
-        panelReclamos.add(comboboxEstadoReclamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 190, 30));
-
-        btnFiltrarReclamos.setText("Filtrar");
-        btnFiltrarReclamos.setColorPrimario(new java.awt.Color(213, 240, 252));
-        btnFiltrarReclamos.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
-        btnFiltrarReclamos.setColorSecundario(new java.awt.Color(105, 190, 228));
-        btnFiltrarReclamos.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
-        btnFiltrarReclamos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnFiltrarReclamosMouseClicked(evt);
-            }
-        });
-        panelReclamos.add(btnFiltrarReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, 120, 30));
-
-        btnLimpiarFiltroReclamos.setText("Limpiar Filtro");
-        btnLimpiarFiltroReclamos.setColorPrimario(new java.awt.Color(213, 240, 252));
-        btnLimpiarFiltroReclamos.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
-        btnLimpiarFiltroReclamos.setColorSecundario(new java.awt.Color(105, 190, 228));
-        btnLimpiarFiltroReclamos.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
-        btnLimpiarFiltroReclamos.setVisible(false);
-        btnLimpiarFiltroReclamos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLimpiarFiltroReclamosMouseClicked(evt);
-            }
-        });
-        panelReclamos.add(btnLimpiarFiltroReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 50, 120, 30));
-
-        tablaReclamos.setModel(cargarTablaReclamos(
-        ));
-        tablaReclamos.setAutoscrolls(true);
-        tablaReclamos.setRowSelectionAllowed(true);
-        tablaReclamos.setSize(600, 600);
-        jScrollPane3.setViewportView(tablaReclamos);
-
-        panelReclamos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 980, 290));
-
-        botonReclamar.setText("Hacer un Reclamo");
-        botonReclamar.setColorPrimario(new java.awt.Color(105, 190, 228));
-        botonReclamar.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
-        botonReclamar.setColorSecundario(new java.awt.Color(213, 240, 252));
-        botonReclamar.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
-        botonReclamar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonReclamarActionPerformed(evt);
-            }
-        });
-        panelReclamos.add(botonReclamar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, 190, 40));
-
-        botonEliminar1.setText("Eliminar");
-        botonEliminar1.setColorPrimario(new java.awt.Color(105, 190, 228));
-        botonEliminar1.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
-        botonEliminar1.setColorSecundario(new java.awt.Color(213, 240, 252));
-        botonEliminar1.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
-        botonEliminar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botonEliminar1MouseClicked(evt);
-            }
-        });
-        panelReclamos.add(botonEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 130, 40));
-
-        botonModificar1.setText("Modificar");
-        botonModificar1.setColorPrimario(new java.awt.Color(105, 190, 228));
-        botonModificar1.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
-        botonModificar1.setColorSecundario(new java.awt.Color(213, 240, 252));
-        botonModificar1.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
-        panelReclamos.add(botonModificar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 130, 40));
-
-        javax.swing.GroupLayout ventanaReclamosLayout = new javax.swing.GroupLayout(ventanaReclamos.getContentPane());
-        ventanaReclamos.getContentPane().setLayout(ventanaReclamosLayout);
-        ventanaReclamosLayout.setHorizontalGroup(
-            ventanaReclamosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ventanaReclamosLayout.createSequentialGroup()
-                .addComponent(panelReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        ventanaReclamosLayout.setVerticalGroup(
-            ventanaReclamosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ventanaReclamosLayout.createSequentialGroup()
-                .addComponent(panelReclamos, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
-                .addContainerGap())
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -279,20 +131,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         imgBtnUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_users-icon.png"))); // NOI18N
-        imgBtnUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imgBtnUsuarioMouseClicked(evt);
-            }
-        });
 
         lblBtnUsuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         lblBtnUsuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBtnUsuario.setText("Usuarios");
-        lblBtnUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBtnUsuarioMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout btnUsuarioLayout = new javax.swing.GroupLayout(btnUsuario);
         btnUsuario.setLayout(btnUsuarioLayout);
@@ -412,20 +254,10 @@ public class Home extends javax.swing.JFrame {
         });
 
         imgBtnReclamos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_1rsz_1reclamos-icon.png"))); // NOI18N
-        imgBtnReclamos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imgBtnReclamosMouseClicked(evt);
-            }
-        });
 
         lblBtnReclamos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         lblBtnReclamos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBtnReclamos.setText("Reclamos");
-        lblBtnReclamos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBtnReclamosMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout btnReclamosLayout = new javax.swing.GroupLayout(btnReclamos);
         btnReclamos.setLayout(btnReclamosLayout);
@@ -721,30 +553,6 @@ public class Home extends javax.swing.JFrame {
         boton.setBackground(color);
     }
     
-    private void lblBtnUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnUsuarioMouseClicked
-        
-    }//GEN-LAST:event_lblBtnUsuarioMouseClicked
-
-    private void imgBtnUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBtnUsuarioMouseClicked
-      
-    }//GEN-LAST:event_imgBtnUsuarioMouseClicked
-
-    private void btnFiltrarReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarReclamosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFiltrarReclamosMouseClicked
-
-    private void btnLimpiarFiltroReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFiltroReclamosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLimpiarFiltroReclamosMouseClicked
-
-    private void botonReclamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReclamarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonReclamarActionPerformed
-
-    private void botonEliminar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminar1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonEliminar1MouseClicked
-
     private void btnListasMantenimientoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListasMantenimientoMouseEntered
         arribaDeBoton(btnListasMantenimiento);
     }//GEN-LAST:event_btnListasMantenimientoMouseEntered
@@ -753,104 +561,36 @@ public class Home extends javax.swing.JFrame {
         fueraDeBoton(btnListasMantenimiento);
     }//GEN-LAST:event_btnListasMantenimientoMouseExited
 
-    private void lblBtnReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnReclamosMouseClicked
-        
-    }//GEN-LAST:event_lblBtnReclamosMouseClicked
-
     private void btnReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReclamosMouseClicked
-   
+        this.ventanaAbierta = ventanasInternas[5];
+        VentanaInternaReclamos ventanaReclamos = new VentanaInternaReclamos();
+        background.add(ventanaReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
+        ventanaReclamos.setVisible(true);
     }//GEN-LAST:event_btnReclamosMouseClicked
 
-    private void imgBtnReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBtnReclamosMouseClicked
-        
-    }//GEN-LAST:event_imgBtnReclamosMouseClicked
-
     private void btnUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuarioMouseClicked
+        this.ventanaAbierta = ventanasInternas[0];
         VentanaInternaUsuarios ventanaUsers = new VentanaInternaUsuarios();
         background.add(ventanaUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
         ventanaUsers.setVisible(true);
     }//GEN-LAST:event_btnUsuarioMouseClicked
 
     private void btnListasMantenimientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListasMantenimientoMouseClicked
+        this.ventanaAbierta = ventanasInternas[6];
         InternalFrameListasMantenimiento ventanaListasM = new InternalFrameListasMantenimiento();
         background.add(ventanaListasM, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
         ventanaListasM.setVisible(true);
     }//GEN-LAST:event_btnListasMantenimientoMouseClicked
     
-    private DefaultTableModel cargarTablaReclamos() {
-    
-       ReclamoBean reclamoBean = new ReclamoBean();
-        
-        List<Reclamo> listaReclamos = reclamoBean.listaTodosReclamos();
-    
-        String[] nombreColumnas = {"Fecha/Hora", "Usuario", "Titulo", "Detalle", "Estado", "Semestre", "Créditos"};
-    
-        Object[][] datos = new Object[listaReclamos.size()][7];
-
-        int fila = 0;
-
-        for (Reclamo u:listaReclamos) {
-
-            if(u.getFecha().toString()!=null){
-                datos[fila][0] = u.getFecha().toString()+"/"+u.getFechaHora().toString();
-            }else{
-                datos[fila][0] = u.getFechaHora().toString();
-            }
-            
-            datos[fila][1] = userBean.buscarUsuario(u.getIdUsuario().getIdUsuario()).getNomUsuario();
-            datos[fila][2] = u.getTitulo();
-            datos[fila][3] = u.getDetalle();
-            datos[fila][4] = u.getIdEstadoPeticion().getNomEstado();
-            
-            if(u.getSemestre()!=null){
-                 datos[fila][5] = u.getSemestre();
-            }else{
-                datos[fila][5] = null;
-            }
-            
-            if(u.getCreditos()!=null){
-                 datos[fila][6] = u.getCreditos();
-            }else{
-                datos[fila][6] = null;
-            }
-            
-            fila++;
-
-        }
-    
-        DefaultTableModel model = new DefaultTableModel(datos, nombreColumnas) {
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-
-            @Override
-            public Class<?> getColumnClass(int columnIndex) {
-                return String.class;
-            }
-        };
-
-        return model;
-   
-   }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
-    private rsbuttongradiente.RSButtonGradiente botonEliminar1;
-    private rsbuttongradiente.RSButtonGradiente botonModificar1;
-    private rsbuttongradiente.RSButtonGradiente botonReclamar;
     private javax.swing.JPanel btnConstancias;
     private javax.swing.JPanel btnEventos;
-    private rsbuttongradiente.RSButtonGradiente btnFiltrarReclamos;
     private javax.swing.JPanel btnJustificaciones;
-    private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltroReclamos;
     private javax.swing.JPanel btnListasMantenimiento;
     private javax.swing.JPanel btnReclamos;
     private javax.swing.JPanel btnReportes;
     private javax.swing.JPanel btnUsuario;
-    private RSMaterialComponent.RSComboBoxMaterial comboboxEstadoReclamo;
-    private RSMaterialComponent.RSComboBoxMaterial comboboxUsuarioReclamo;
     private javax.swing.JLabel imgBtnConstancias;
     private javax.swing.JLabel imgBtnEvento;
     private javax.swing.JLabel imgBtnJustificaciones;
@@ -860,9 +600,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel imgBtnUsuario;
     private javax.swing.JLabel imgBtnUsuario1;
     private javax.swing.JLabel imgUTECLogo;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblBtnConstancias1;
-    private javax.swing.JLabel lblBtnConstancias3;
     private javax.swing.JLabel lblBtnEventos;
     private javax.swing.JLabel lblBtnJustificaciones;
     private javax.swing.JLabel lblBtnReclamos;
@@ -872,11 +610,28 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombreUsuario;
     private javax.swing.JLabel lblRuta;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JPanel panelReclamos;
     private rspanelgradiente.RSPanelGradiente sidepanel;
-    private javax.swing.JTable tablaReclamos;
     private rspanelgradiente.RSPanelGradiente titlepanel;
-    private javax.swing.JInternalFrame ventanaReclamos;
     // End of variables declaration//GEN-END:variables
 
+    public void cerrarVentanas(String ventanaAbierta){
+        ventanaAbierta = this.ventanaAbierta;
+        
+        if(ventanaAbierta!=null){
+           if(ventanaAbierta.equals(this.ventanasInternas[0])){
+           
+           }else if(ventanaAbierta.equals(this.ventanasInternas[1])){
+           
+           }else if(ventanaAbierta.equals(this.ventanasInternas[2])){
+           
+           }else if(ventanaAbierta.equals(this.ventanasInternas[3])){
+           
+           }else if(ventanaAbierta.equals(this.ventanasInternas[4])){
+           
+           }else if(ventanaAbierta.equals(this.ventanasInternas[5])){
+           
+           }           
+        }
+    }
+    
 }
