@@ -8,12 +8,12 @@ package com.visual;
  *
  * @author fbale
  */
-public class ventanaInternaTiposUsuarios extends javax.swing.JInternalFrame {
+public class InternalFrameTiposUsuarios extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ventanaInternaTiposUsuarios
      */
-    public ventanaInternaTiposUsuarios() {
+    public InternalFrameTiposUsuarios() {
         initComponents();
     }
 

@@ -12,6 +12,9 @@ public class Home extends javax.swing.JFrame {
     UsuarioBean userBean= new UsuarioBean();
     String[] ventanasInternas = new String[] {"Usuarios","Constancias","Eventos","Justificaciones","Reportes","Reclamos", "Listas Mantenimiento", "Usuario Propio"};
     String ventanaAbierta = "";
+    VentanaInternaUsuarios ventanaUsers;
+    VentanaInternaReclamos ventanaReclamos;
+    InternalFrameListasMantenimiento ventanaListasM;
     
     public Home(BigInteger idUser) {
         usuario=traerUserPorID(idUser);
@@ -562,22 +565,25 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnListasMantenimientoMouseExited
 
     private void btnReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReclamosMouseClicked
+        cerrarVentanas(ventanaAbierta);
         this.ventanaAbierta = ventanasInternas[5];
-        VentanaInternaReclamos ventanaReclamos = new VentanaInternaReclamos();
+        ventanaReclamos = new VentanaInternaReclamos();
         background.add(ventanaReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
         ventanaReclamos.setVisible(true);
     }//GEN-LAST:event_btnReclamosMouseClicked
 
     private void btnUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuarioMouseClicked
+        cerrarVentanas(ventanaAbierta);
         this.ventanaAbierta = ventanasInternas[0];
-        VentanaInternaUsuarios ventanaUsers = new VentanaInternaUsuarios();
+        ventanaUsers = new VentanaInternaUsuarios();
         background.add(ventanaUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
         ventanaUsers.setVisible(true);
     }//GEN-LAST:event_btnUsuarioMouseClicked
 
     private void btnListasMantenimientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListasMantenimientoMouseClicked
+        cerrarVentanas(ventanaAbierta);
         this.ventanaAbierta = ventanasInternas[6];
-        InternalFrameListasMantenimiento ventanaListasM = new InternalFrameListasMantenimiento();
+        ventanaListasM = new InternalFrameListasMantenimiento();
         background.add(ventanaListasM, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
         ventanaListasM.setVisible(true);
     }//GEN-LAST:event_btnListasMantenimientoMouseClicked
@@ -619,7 +625,7 @@ public class Home extends javax.swing.JFrame {
         
         if(ventanaAbierta!=null){
            if(ventanaAbierta.equals(this.ventanasInternas[0])){
-           
+               ventanaUsers.dispose();
            }else if(ventanaAbierta.equals(this.ventanasInternas[1])){
            
            }else if(ventanaAbierta.equals(this.ventanasInternas[2])){
@@ -629,8 +635,12 @@ public class Home extends javax.swing.JFrame {
            }else if(ventanaAbierta.equals(this.ventanasInternas[4])){
            
            }else if(ventanaAbierta.equals(this.ventanasInternas[5])){
-           
-           }           
+               ventanaReclamos.dispose();
+           }else if(ventanaAbierta.equals(this.ventanasInternas[6])){
+               ventanaListasM.dispose();
+           }else if(ventanaAbierta.equals(this.ventanasInternas[7])){
+               
+           }             
         }
     }
     
