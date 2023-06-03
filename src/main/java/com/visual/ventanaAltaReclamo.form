@@ -57,11 +57,11 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="rSPanelShadow1" min="-2" pref="852" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="iconUtec" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="192" max="-2" attributes="0"/>
-                          <Component id="lblBtnReportes" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblReportesTitulo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="iconReclamos" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
@@ -74,13 +74,13 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="iconUtec" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lblBtnReportes" min="-2" pref="-11" max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblReportesTitulo" min="-2" max="-2" attributes="0"/>
+                              <Component id="iconReclamos" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -92,14 +92,14 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="iconUtec">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/utec_logo_chikito.png"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="iconReclamos">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/rsz_1rsz_1reclamos-icon.png"/>
@@ -125,20 +125,20 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="rSComboBoxMaterial1" min="-2" pref="286" max="-2" attributes="0"/>
-                                      <Component id="rSMTextFull1" min="-2" pref="590" max="-2" attributes="0"/>
+                                      <Component id="cmbEvento" min="-2" pref="286" max="-2" attributes="0"/>
+                                      <Component id="txtTitulo" min="-2" pref="590" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jScrollPane1" min="-2" pref="529" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="lblAnioIngreso" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lblCreditos" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="jSpinner1" min="-2" pref="110" max="-2" attributes="0"/>
+                                                  <Component id="spinnerCreditos" min="-2" pref="110" max="-2" attributes="0"/>
                                               </Group>
-                                              <Component id="rSDateChooser1" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                              <Component id="rSComboBoxMaterial3" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
-                                              <Component id="rSComboBoxMaterial2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="dateEvento" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                              <Component id="cmbDocente" alignment="0" min="-2" pref="242" max="-2" attributes="0"/>
+                                              <Component id="cmbSemestre" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -147,11 +147,11 @@
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Component id="rSButtonGradiente1" min="-2" pref="117" max="-2" attributes="0"/>
+                                          <Component id="btnCancelar" min="-2" pref="117" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="rSButtonGradiente2" min="-2" pref="113" max="-2" attributes="0"/>
+                                          <Component id="btnEnviar" min="-2" pref="113" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="rSMTextFull2" min="-2" pref="499" max="-2" attributes="0"/>
+                                      <Component id="txtNombreEvento" min="-2" pref="499" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -163,32 +163,32 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="rSMTextFull1" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTitulo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="rSMTextFull2" min="-2" max="-2" attributes="0"/>
-                              <Component id="rSComboBoxMaterial1" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNombreEvento" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbEvento" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="rSComboBoxMaterial2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbSemestre" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="rSDateChooser1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="dateEvento" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="rSComboBoxMaterial3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbDocente" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jSpinner1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblAnioIngreso" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="spinnerCreditos" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblCreditos" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="jScrollPane1" min="-2" pref="255" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="rSButtonGradiente1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rSButtonGradiente2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnEnviar" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="11" max="32767" attributes="0"/>
                       </Group>
@@ -196,17 +196,17 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="rojeru_san.RSMTextFull" name="rSMTextFull1">
+                <Component class="rojeru_san.RSMTextFull" name="txtTitulo">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Titulo"/>
                   </Properties>
                 </Component>
-                <Component class="rojeru_san.RSMTextFull" name="rSMTextFull2">
+                <Component class="rojeru_san.RSMTextFull" name="txtNombreEvento">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Nombre de Evento VME"/>
+                    <Property name="text" type="java.lang.String" value="Nombre de Evento "/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSMTextFull2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombreEventoActionPerformed"/>
                   </Events>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -216,7 +216,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTextArea" name="jTextArea1">
+                    <Component class="javax.swing.JTextArea" name="txtDescripcion">
                       <Properties>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -228,45 +228,51 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="RSMaterialComponent.RSComboBoxMaterial" name="rSComboBoxMaterial1">
+                <Component class="RSMaterialComponent.RSComboBoxMaterial" name="cmbEvento">
                   <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="TipoEventoBean tipoEventoBean= new TipoEventoBean();&#xa;&#xa;        DefaultComboBoxModel modeloTipoEvento=new DefaultComboBoxModel();&#xa;&#xa;        List&lt;TipoEvento&gt; listaTipoEvento = tipoEventoBean.listaTipos();&#xa;&#xa;        modeloTipoEvento.addElement(&quot;Seleccione un Tipo de Evento*&quot;);&#xa;&#xa;        for(int i = 0 ; i&lt;listaTipoEvento.size(); i++){&#xa;            modeloTipoEvento.addElement(listaTipoEvento.get(i).getNombreTipoEvento());&#xa;        }">
+                      <Color blue="c0" green="70" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="modeloTipoEvento" type="code"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbEventoItemStateChanged"/>
+                  </Events>
+                </Component>
+                <Component class="RSMaterialComponent.RSComboBoxMaterial" name="cmbSemestre">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="c0" green="70" red="0" type="rgb"/>
+                    </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="5">
-                        <StringItem index="0" value="Evento"/>
-                        <StringItem index="1" value="VME"/>
-                        <StringItem index="2" value="APE"/>
-                        <StringItem index="3" value="OPTATIVA"/>
-                        <StringItem index="4" value="Otros"/>
+                      <StringArray count="3">
+                        <StringItem index="0" value="Semestre*"/>
+                        <StringItem index="1" value="1"/>
+                        <StringItem index="2" value="2"/>
                       </StringArray>
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="RSMaterialComponent.RSComboBoxMaterial" name="rSComboBoxMaterial2">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="1">
-                        <StringItem index="0" value="Semestre"/>
-                      </StringArray>
-                    </Property>
-                  </Properties>
-                </Component>
-                <Component class="rojerusan.RSDateChooser" name="rSDateChooser1">
+                <Component class="rojerusan.RSDateChooser" name="dateEvento">
                   <Properties>
                     <Property name="placeholder" type="java.lang.String" value="Fecha Evento"/>
                   </Properties>
                 </Component>
-                <Component class="RSMaterialComponent.RSComboBoxMaterial" name="rSComboBoxMaterial3">
+                <Component class="RSMaterialComponent.RSComboBoxMaterial" name="cmbDocente">
                   <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="1">
-                        <StringItem index="0" value="Docente Encargado"/>
-                      </StringArray>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="DocenteBean docenteBean= new DocenteBean();&#xa;&#xa;        DefaultComboBoxModel modeloDocente = new DefaultComboBoxModel();&#xa;&#xa;        List&lt;Tutor&gt; listaDocentes = docenteBean.listarDocentes();&#xa;&#xa;        modeloDocente.addElement(&quot;Seleccione un Docente Encargado*&quot;);&#xa;&#xa;        for(int i = 0 ; i&lt;listaDocentes.size(); i++){&#xa;            modeloDocente.addElement(listaDocentes.get(i).getUsuarios().getNombre1()+&quot; &quot;&#xa;+listaDocentes.get(i).getUsuarios().getApellido1());&#xa;        }">
+                      <Color blue="c0" green="70" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="modeloDocente" type="code"/>
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinner1">
+                <Component class="javax.swing.JSpinner" name="spinnerCreditos">
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblAnioIngreso">
+                <Component class="javax.swing.JLabel" name="lblCreditos">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="1"/>
@@ -277,10 +283,10 @@
                     <Property name="text" type="java.lang.String" value="Cr&#xe9;ditos"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="lblAnioIngreso.setVisible(false);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="lblCreditos.setVisible(false);"/>
                   </AuxValues>
                 </Component>
-                <Component class="rsbuttongradiente.RSButtonGradiente" name="rSButtonGradiente1">
+                <Component class="rsbuttongradiente.RSButtonGradiente" name="btnCancelar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cancelar"/>
                     <Property name="colorPrimario" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -300,7 +306,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="rsbuttongradiente.RSButtonGradiente" name="rSButtonGradiente2">
+                <Component class="rsbuttongradiente.RSButtonGradiente" name="btnEnviar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Enviar"/>
                     <Property name="colorPrimario" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -320,14 +326,14 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonGradiente2ActionPerformed"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnEnviarMouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>
             </Container>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="lblBtnReportes">
+        <Component class="javax.swing.JLabel" name="lblReportesTitulo">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="24" style="0"/>
