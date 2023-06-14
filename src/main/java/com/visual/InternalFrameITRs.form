@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1001, 100]"/>
@@ -24,30 +24,33 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="botonEliminar2" min="-2" pref="130" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="botonModificar2" min="-2" pref="130" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="botonAltaITR" min="-2" pref="120" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane4" min="-2" pref="977" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblBtnConstancias4" min="-2" pref="130" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="353" max="-2" attributes="0"/>
-                      <Component id="comboboxEstadoITRs" min="-2" pref="190" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnFiltrar2" min="-2" pref="120" max="-2" attributes="0"/>
+              <Component id="lblBtnConstancias4" min="-2" pref="130" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="350" max="-2" attributes="0"/>
+              <Component id="comboboxEstadoITRs" min="-2" pref="190" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Component id="btnFiltrar2" min="-2" pref="120" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnLimpiarFiltro2" min="-2" pref="120" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="538" max="-2" attributes="0"/>
+                      <Component id="botonEliminar2" min="-2" pref="130" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnLimpiarFiltro2" min="-2" pref="120" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="botonModificar2" min="-2" pref="130" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="botonAltaITR" min="-2" pref="120" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="900" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -56,16 +59,16 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="comboboxEstadoITRs" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="lblBtnConstancias4" min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                       <Component id="btnFiltrar2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="btnLimpiarFiltro2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="comboboxEstadoITRs" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" pref="42" max="32767" attributes="0"/>
-              <Component id="jScrollPane4" min="-2" pref="290" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="398" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="botonEliminar2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="botonModificar2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -85,29 +88,6 @@
         <Property name="text" type="java.lang.String" value="ITRs"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane4">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTable" name="tablaITRs">
-          <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="cargarTablaITRs(&#xa;)" type="code"/>
-            </Property>
-            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tablaITRs.setAutoscrolls(true);&#xa;tablaITRs.setRowSelectionAllowed(true);&#xa;tablaITRs.setSize(600, 600);"/>
-          </AuxValues>
-        </Component>
-      </SubComponents>
-    </Container>
     <Component class="RSMaterialComponent.RSComboBoxMaterial" name="comboboxEstadoITRs">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*comboboxEstadoITRs.setForeground(new java.awt.Color(13, 120, 161));&#xa;&#xa;EstadoPeticionBean estadoPeticionBean= new EstadoPeticionBean();&#xa;&#xa;DefaultComboBoxModel modeloEstadoITRs=new DefaultComboBoxModel();&#xa;&#xa;        List&lt;EstadoPeticion&gt; listaEstadoReclamo=estadoPeticionBean.listarEstados();&#xa;&#xa;        modeloEstadoReclamo.addElement(&quot; ESTADO RECLAMO&quot;);&#xa;&#xa;        for(int i = 0 ; i&lt;listaEstadoITRs.size(); i++){&#xa;            modeloEstadoITRs.addElement(listaEstadoITRs.get(i).getNomEstado());&#xa;        }&#xa;&#xa;comboboxEstadoITRs.setFont(new java.awt.Font(&quot;Segoe UI Semilight&quot;, 0, 15));&#xa;&#xa;comboboxEstadoITRs.setModel(modeloEstadoITRs);&#xa;*/"/>
@@ -214,5 +194,24 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEliminar2ActionPerformed"/>
       </Events>
     </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="jTable1">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="this.cargarTablaITR()&#xa;&#xa;&#xa;" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

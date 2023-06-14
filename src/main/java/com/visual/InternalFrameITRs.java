@@ -4,6 +4,7 @@ import com.grsc.logica.ejb.ItrBean;
 import com.grsc.modelo.entities.Itr;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class InternalFrameITRs extends javax.swing.JInternalFrame {
 
@@ -15,27 +16,20 @@ public class InternalFrameITRs extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         lblBtnConstancias4 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tablaITRs = new javax.swing.JTable();
         comboboxEstadoITRs = new RSMaterialComponent.RSComboBoxMaterial();
         btnFiltrar2 = new rsbuttongradiente.RSButtonGradiente();
         btnLimpiarFiltro2 = new rsbuttongradiente.RSButtonGradiente();
         botonAltaITR = new rsbuttongradiente.RSButtonGradiente();
         botonModificar2 = new rsbuttongradiente.RSButtonGradiente();
         botonEliminar2 = new rsbuttongradiente.RSButtonGradiente();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setPreferredSize(new java.awt.Dimension(1001, 100));
 
         lblBtnConstancias4.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         lblBtnConstancias4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBtnConstancias4.setText("ITRs");
-
-        tablaITRs.setModel(cargarTablaITRs(
-        ));
-        tablaITRs.setAutoscrolls(true);
-        tablaITRs.setRowSelectionAllowed(true);
-        tablaITRs.setSize(600, 600);
-        jScrollPane4.setViewportView(tablaITRs);
 
         /*comboboxEstadoITRs.setForeground(new java.awt.Color(13, 120, 161));
 
@@ -112,45 +106,52 @@ public class InternalFrameITRs extends javax.swing.JInternalFrame {
             }
         });
 
+        jTable1.setModel(this.cargarTablaITR()
+
+        );
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(botonEliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(botonModificar2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botonAltaITR, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 12, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 977, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblBtnConstancias4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(350, 350, 350)
+                .addComponent(comboboxEstadoITRs, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(btnFiltrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnLimpiarFiltro2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblBtnConstancias4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(353, 353, 353)
-                        .addComponent(comboboxEstadoITRs, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnFiltrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(538, 538, 538)
+                        .addComponent(botonEliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnLimpiarFiltro2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))))
+                        .addComponent(botonModificar2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonAltaITR, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(comboboxEstadoITRs, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblBtnConstancias4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnFiltrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnLimpiarFiltro2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 42, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLimpiarFiltro2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboboxEstadoITRs, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonEliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonModificar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,50 +161,8 @@ public class InternalFrameITRs extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     private DefaultTableModel cargarTablaITRs() {
-
-        ItrBean itrBean = new ItrBean();
-        
-        List<Itr> listaITRs = itrBean.listarItrs();
-
-        String[] nombreColumnas = {"Nombre de ITR"};
-
-        /*
-		 * El tamaño de la tabla es,  1 columna (cantidad de datos a mostrar) y
-		 * la cantidad de filas depende de la cantida de listaITRs
-         */
-        Object[][] datos = new Object[listaITRs.size()][1];
-
-        /* Cargamos la matriz con todos los datos */
-        int fila = 0;
-
-        for (Itr u: listaITRs) {
-
-            datos[fila][0] = u.getNomItr();
-            fila++;
-
-        }
-        /*
-		 * Este codigo indica que las celdas Son editables y que son todas
-		 * del tipos String
-         */
-        DefaultTableModel model = new DefaultTableModel(datos, nombreColumnas) {
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return true;
-            }
-
-            @Override
-            public Class<?> getColumnClass(int columnIndex) {
-                return String.class;
-            }
-        };
-
-        return model;
-
-    }
     
+
      
     private void btnFiltrar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrar2MouseClicked
         // TODO add your handling code here:
@@ -225,6 +184,41 @@ public class InternalFrameITRs extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEliminar2ActionPerformed
 
+    private DefaultTableModel cargarTablaITR() {
+    
+      ItrBean itrBean = new ItrBean();
+      List<Itr> listaItr = itrBean.listarItrs();
+    
+        String[] nombreColumnas = {"Itr", "Departamento"};
+    
+       Object[][] datos = new Object[listaItr.size()][2];
+
+        int fila = 0;
+
+        for (Itr u:listaItr) {
+            datos[fila][0] = u.getNomItr();
+            datos[fila][1] = u.getIdDepartamento();
+            fila++;
+        }
+    
+        DefaultTableModel model = new DefaultTableModel(datos, nombreColumnas) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return String.class;
+            }
+        
+        };
+        return model;
+    }
+    
+    
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rsbuttongradiente.RSButtonGradiente botonAltaITR;
@@ -233,8 +227,11 @@ public class InternalFrameITRs extends javax.swing.JInternalFrame {
     private rsbuttongradiente.RSButtonGradiente btnFiltrar2;
     private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltro2;
     private RSMaterialComponent.RSComboBoxMaterial comboboxEstadoITRs;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBtnConstancias4;
-    private javax.swing.JTable tablaITRs;
     // End of variables declaration//GEN-END:variables
+
+
+
 }
