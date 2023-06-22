@@ -14,6 +14,7 @@ public class Home extends javax.swing.JFrame {
     String ventanaAbierta = "";
     VentanaInternaUsuarios ventanaUsers;
     VentanaInternaReclamos ventanaReclamos;
+    VentanaInternaJustificaciones ventanaJustificaciones;
     InternalFrameListasMantenimiento ventanaListasM;
     
     public Home(BigInteger idUser) {
@@ -288,6 +289,9 @@ public class Home extends javax.swing.JFrame {
         btnJustificaciones.setBackground(new java.awt.Color(105, 190, 228));
         btnJustificaciones.setForeground(new java.awt.Color(105, 190, 228));
         btnJustificaciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnJustificacionesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnJustificacionesMouseEntered(evt);
             }
@@ -374,12 +378,15 @@ public class Home extends javax.swing.JFrame {
             .addComponent(btnJustificaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(sidepanelLayout.createSequentialGroup()
                 .addGroup(sidepanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(imgUTECLogo)
                     .addComponent(btnReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnListasMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(sidepanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(imgUTECLogo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         sidepanelLayout.setVerticalGroup(
             sidepanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -402,7 +409,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        background.add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 660));
+        background.add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 270, 660));
         sidepanel.getAccessibleContext().setAccessibleDescription("");
 
         titlepanel.setColorPrimario(new java.awt.Color(213, 240, 252));
@@ -587,6 +594,14 @@ public class Home extends javax.swing.JFrame {
         background.add(ventanaListasM, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
         ventanaListasM.setVisible(true);
     }//GEN-LAST:event_btnListasMantenimientoMouseClicked
+
+    private void btnJustificacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnJustificacionesMouseClicked
+        cerrarVentanas(ventanaAbierta);
+        this.ventanaAbierta = ventanasInternas[5];
+        ventanaJustificaciones = new VentanaInternaJustificaciones();
+        background.add(ventanaJustificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
+        ventanaJustificaciones.setVisible(true);
+    }//GEN-LAST:event_btnJustificacionesMouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
