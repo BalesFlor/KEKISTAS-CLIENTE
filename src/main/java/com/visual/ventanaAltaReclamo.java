@@ -1,20 +1,41 @@
 package com.visual;
 
 import com.grsc.logica.ejb.DocenteBean;
+import com.grsc.logica.ejb.EstudianteBean;
+import com.grsc.logica.ejb.EventoBean;
 import com.grsc.logica.ejb.ReclamoBean;
 import com.grsc.logica.ejb.TipoEventoBean;
+import com.grsc.logica.ejb.UsuarioBean;
+import com.grsc.modelo.entities.Evento;
 import com.grsc.modelo.entities.TipoEvento;
 import com.grsc.modelo.entities.Tutor;
+import com.grsc.modelo.entities.Usuarios;
+import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class ventanaAltaReclamo extends javax.swing.JFrame {
 
-    public ventanaAltaReclamo() {
+    Usuarios usuario;
+    UsuarioBean userBean= new UsuarioBean();
+    
+    public ventanaAltaReclamo(BigInteger idUser) {
+        usuario=traerUserPorID(idUser);
         initComponents();
     }
-
+    
+    public Usuarios traerUserPorID(BigInteger idUser){
+        return userBean.buscarUsuario(idUser);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -25,10 +46,9 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         rSPanelShadow1 = new rojeru_san.rspanel.RSPanelShadow();
         jPanel1 = new javax.swing.JPanel();
         txtTitulo = new rojeru_san.RSMTextFull();
-        txtNombreEvento = new rojeru_san.RSMTextFull();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
-        cmbEvento = new RSMaterialComponent.RSComboBoxMaterial();
+        cmbTipoEvento = new RSMaterialComponent.RSComboBoxMaterial();
         cmbSemestre = new RSMaterialComponent.RSComboBoxMaterial();
         dateEvento = new rojerusan.RSDateChooser();
         cmbDocente = new RSMaterialComponent.RSComboBoxMaterial();
@@ -36,9 +56,15 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         lblCreditos = new javax.swing.JLabel();
         btnCancelar = new rsbuttongradiente.RSButtonGradiente();
         btnEnviar = new rsbuttongradiente.RSButtonGradiente();
+        cmbEvento = new RSMaterialComponent.RSComboBoxMaterial();
         lblReportesTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         rSPanelGradiente1.setColorPrimario(new java.awt.Color(213, 240, 252));
         rSPanelGradiente1.setColorSecundario(new java.awt.Color(105, 190, 228));
@@ -48,12 +74,10 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
 
         iconReclamos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_1rsz_1reclamos-icon.png"))); // NOI18N
 
-        txtTitulo.setText("Titulo");
-
-        txtNombreEvento.setPlaceholder("Nombre Evento");
-        txtNombreEvento.addActionListener(new java.awt.event.ActionListener() {
+        txtTitulo.setPlaceholder("Título");
+        txtTitulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreEventoActionPerformed(evt);
+                txtTituloActionPerformed(evt);
             }
         });
 
@@ -63,7 +87,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         txtDescripcion.setText("Descripción de Reclamo...");
         jScrollPane1.setViewportView(txtDescripcion);
 
-        cmbEvento.setForeground(new java.awt.Color(0, 112, 192));
+        cmbTipoEvento.setForeground(new java.awt.Color(0, 112, 192));
         TipoEventoBean tipoEventoBean= new TipoEventoBean();
 
         DefaultComboBoxModel modeloTipoEvento=new DefaultComboBoxModel();
@@ -75,15 +99,24 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         for(int i = 0 ; i<listaTipoEvento.size(); i++){
             modeloTipoEvento.addElement(listaTipoEvento.get(i).getNombreTipoEvento());
         }
-        cmbEvento.setModel(modeloTipoEvento);
-        cmbEvento.addItemListener(new java.awt.event.ItemListener() {
+        cmbTipoEvento.setModel(modeloTipoEvento);
+        cmbTipoEvento.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbEventoItemStateChanged(evt);
+                cmbTipoEventoItemStateChanged(evt);
             }
         });
 
         cmbSemestre.setForeground(new java.awt.Color(0, 112, 192));
-        cmbSemestre.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semestre*", "1", "2" }));
+        DefaultComboBoxModel modeloSemestre = new DefaultComboBoxModel();
+
+        modeloSemestre.addElement("Seleccione un Semestre*");
+
+        int contador = 1;
+        for(int i = 0 ; i < 9; i++){
+            modeloSemestre.addElement(contador);
+            contador++;
+        }
+        cmbSemestre.setModel(modeloSemestre);
 
         dateEvento.setPlaceholder("Fecha Evento");
 
@@ -131,18 +164,48 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
             }
         });
 
+        cmbEvento.setForeground(new java.awt.Color(0, 112, 192));
+        EventoBean eventoBean = new EventoBean();
+
+        DefaultComboBoxModel modeloEvento=new DefaultComboBoxModel();
+
+        List<Evento> listaEvento = eventoBean.listarEventos();
+
+        modeloEvento.addElement("Seleccione un Evento*");
+
+        for(int i = 0 ; i<listaEvento.size(); i++){
+            modeloEvento.addElement(listaEvento.get(i).getTitulo());
+        }
+        cmbEvento.setModel(modeloEvento);
+        cmbEvento.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTipoEventoItemStateChanged(evt);
+            }
+        });
+        cmbEvento.setModel(modeloEvento);
+        cmbEvento.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbEventoItemStateChanged(evt);
+            }
+        });
+        cmbEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEventoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cmbEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(txtNombreEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbTipoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
@@ -167,9 +230,9 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
                 .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombreEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(cmbTipoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,91 +309,102 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombreEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreEventoActionPerformed
-
-    }//GEN-LAST:event_txtNombreEventoActionPerformed
-
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
         ReclamoBean reclamoBean = new ReclamoBean();
         //validador validador = new validador();
-
-        String titulo = this.txtTitulo.getText();
-        TipoEvento tipoEvento = tipoEventoSeleccionado();
+        EstudianteBean estBean = new EstudianteBean();
         
-        if( tipoEvento == null ){
-            
-                JOptionPane.showMessageDialog(this, "Debe seleccionar un tipo de evento", "Datos incompletos!",
+            if(txtTitulo.getText().equals("")||txtDescripcion.getText().equals("")||cmbTipoEvento.getSelectedIndex()==0){
+                JOptionPane.showMessageDialog(this, "Recuerde que debe poner un titulo, /n"
+                        + "una descripción de su reclamo y debe seleccionar un tipo de evento", "Datos incompletos!",
                     JOptionPane.WARNING_MESSAGE);
-                
-            }
-        if(cmbEvento.getSelectedItem().equals("VME")
-                ||cmbEvento.getSelectedItem().equals("APE")
-                ||cmbEvento.getSelectedItem().equals("OPTATIVA")){
-               
-            Tutor tutor = docenteSeleccionado();
-            
-            if( tutor == null ){
-            
-                JOptionPane.showMessageDialog(this, "Debe seleccionar un tutor del evento", "Datos incompletos!",
-                    JOptionPane.WARNING_MESSAGE);
-                
-            }else if( cmbSemestre.getSelectedIndex()==0){
-                
-                JOptionPane.showMessageDialog(this, "Debe seleccionar un semestre", "Datos incompletos!",
-                    JOptionPane.WARNING_MESSAGE);
-            
             }else{
-            //Ahora que corroboramos que se llenaron todas las combobox, precisams corrbrar si están tds los textos completos
-            
+                if(cmbTipoEvento.getSelectedIndex()!=4){
+                    //En caso de que seleccione una VME, APE u OPTATIVA, se validarán todos estos datos antes de permitir que se envíe su reclamo
+                    
+                    if(cmbEvento.getSelectedIndex()==0){
+                        JOptionPane.showMessageDialog(this, "Recuerde que poner el nombre del Evento correspondiente a su reclamo",
+                        "Datos incompletos!",JOptionPane.WARNING_MESSAGE);
+                    }else{
+                        if(dateEvento.getFechaSeleccionada().equals("")){
+                            JOptionPane.showMessageDialog(this, "Recuerde que seleccionar la fecha correspondiente al evento correspondiente a su reclamo",
+                            "Datos incompletos!",JOptionPane.WARNING_MESSAGE);
+                        }else{
+                            if(cmbSemestre.getSelectedIndex()==0){
+                                JOptionPane.showMessageDialog(this, "Recuerde que seleccionar el semestre correspondiente al evento correspondiente a su reclamo",
+                                "Datos incompletos!",JOptionPane.WARNING_MESSAGE);
+                            }else{
+                                if(cmbDocente.getSelectedIndex()==0){
+                                    JOptionPane.showMessageDialog(this, "Recuerde que seleccionar el semestre correspondiente al evento correspondiente a su reclamo",
+                                    "Datos incompletos!",JOptionPane.WARNING_MESSAGE);
+                                }else{
+                                    Boolean seCreo;
+                                    try {
+                                        seCreo = reclamoBean.altaReclamo(txtTitulo.getText(), txtDescripcion.getText(),
+                                                eventoSeleccionado(), semestreSeleccionado(),
+                                                estBean.buscarEstudiante(usuario.getIdUsuario()), 
+                                                Calendar.getInstance().getTime(), fechaSeleccionada());
+                                    } catch (ParseException ex) {
+                                        Logger.getLogger(ventanaAltaReclamo.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                
+                }else{
+                    //En caso de que seleccione un evento como OTRO no se mostrarán y por lo tanto no será necesario que complete los demás datos
+                    
+                }
             }
-        }
-        if ( titulo.isBlank() ) {
-
-            JOptionPane.showMessageDialog(this, "Debe completar todos los datos solicitados.", "Datos incompletos!",
-                    JOptionPane.WARNING_MESSAGE);
-
-        } else {
-            if (cmbDocente.getSelectedItem().equals("Seleccione un Docente*") || cmbEvento.getSelectedItem().equals("Seleccione un Evento*")
-                    || cmbSemestre.getSelectedItem().equals("Seleccione un Semestre*")) {
-
-                JOptionPane.showMessageDialog(this, "Asegurese de seleccionar una localidad, un itr, un departamento!",
-                        "Datos Erroneos!", JOptionPane.WARNING_MESSAGE);
-
-            }
-        }
     }//GEN-LAST:event_btnEnviarMouseClicked
 
-    private void cmbEventoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEventoItemStateChanged
-        if(cmbEvento.getSelectedItem().equals("VME")){
-            txtNombreEvento.setVisible(true);
+    private void cmbTipoEventoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoEventoItemStateChanged
+        if(cmbTipoEvento.getSelectedItem().equals("VME")){
             cmbSemestre.setVisible(true);
             dateEvento.setVisible(true);
             cmbDocente.setVisible(true);
             spinnerCreditos.setVisible(true);
             lblCreditos.setVisible(true);
-            txtNombreEvento.setPlaceholder("Nombre VME");
             
-        }else if(cmbEvento.getSelectedItem().equals("APE")||cmbEvento.getSelectedItem().equals("OPTATIVA")){
-            txtNombreEvento.setVisible(true);
+        }else if(cmbTipoEvento.getSelectedItem().equals("APE")||cmbTipoEvento.getSelectedItem().equals("OPTATIVA")){
             cmbSemestre.setVisible(true);
             dateEvento.setVisible(true);
             cmbDocente.setVisible(true);
             spinnerCreditos.setVisible(true);
             lblCreditos.setVisible(true);
-            txtNombreEvento.setPlaceholder("Nombre APE u OPTATIVA");
         }else{
-            txtNombreEvento.setVisible(false);
             cmbSemestre.setVisible(false);
             dateEvento.setVisible(false);
             cmbDocente.setVisible(false);
             spinnerCreditos.setVisible(false);
             lblCreditos.setVisible(false);
         }
-    }//GEN-LAST:event_cmbEventoItemStateChanged
+    }//GEN-LAST:event_cmbTipoEventoItemStateChanged
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         this.dispose();
     }//GEN-LAST:event_btnCancelarMouseClicked
+
+    private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTituloActionPerformed
+
+    private void cmbEventoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEventoItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEventoItemStateChanged
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        cmbSemestre.setVisible(false);
+        dateEvento.setVisible(false);
+        cmbDocente.setVisible(false);
+        spinnerCreditos.setVisible(false);
+        lblCreditos.setVisible(false);
+    }//GEN-LAST:event_formWindowActivated
+
+    private void cmbEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEventoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEventoActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -339,6 +413,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
     private RSMaterialComponent.RSComboBoxMaterial cmbDocente;
     private RSMaterialComponent.RSComboBoxMaterial cmbEvento;
     private RSMaterialComponent.RSComboBoxMaterial cmbSemestre;
+    private RSMaterialComponent.RSComboBoxMaterial cmbTipoEvento;
     private rojerusan.RSDateChooser dateEvento;
     private javax.swing.JLabel iconReclamos;
     private javax.swing.JLabel iconUtec;
@@ -350,26 +425,25 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
     private rojeru_san.rspanel.RSPanelShadow rSPanelShadow1;
     private javax.swing.JSpinner spinnerCreditos;
     private javax.swing.JTextArea txtDescripcion;
-    private rojeru_san.RSMTextFull txtNombreEvento;
     private rojeru_san.RSMTextFull txtTitulo;
     // End of variables declaration//GEN-END:variables
 
     
     public Tutor docenteSeleccionado() {
-        /* Este método es para encontrar el Area que ha sido seleccionado del comboBox de Area, ya que 
+        /* Este método es para encontrar el docente que ha sido seleccionado del comboBox de docente, ya que 
         el combobox tiene cargados solo los nombres asique lo tenemos que buscar por el nombre al objeto*/
         
-        //Invocamos al bean de Area
+        //Invocamos al bean de docente
         DocenteBean docenteBean = new DocenteBean();
         
-        //Se carga una lista con todas las Areas
+        //Se carga una lista con todas los docentes
         List<Tutor> listaDocentes = docenteBean.listarDocentes();
         
         Tutor tutor = null;
 
-        //En el siguiente for se pasa por todas las areas de la lista
+        //En el siguiente for se pasa por todas los docente de la lista
         for (int i = 0; i < listaDocentes.size(); i++) {
-            //Si el nombre de la Area coincide con el seleccionado del combobox se carga en la variable a retornar
+            //Si el nombre del docente coincide con el seleccionado del combobox se carga en la variable a retornar
             String str = listaDocentes.get(i).getUsuarios().getNombre1()+" "
                 +listaDocentes.get(i).getUsuarios().getApellido1();
             if (str.equals(cmbDocente.getSelectedItem().toString())) {
@@ -380,34 +454,62 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         return tutor;
     }            
             
-    public int semestreSeleccionado() {
-        
-        int value = (Integer) spinnerCreditos.getValue();
-        
-        return value;
+    public BigInteger semestreSeleccionado() {
+        String semStr = cmbSemestre.getSelectedItem().toString();
+        int semInt = Integer.parseInt(semStr);
+        return BigInteger.valueOf(semInt);
     }      
             
     public TipoEvento tipoEventoSeleccionado() {
-        /* Este método es para encontrar el Area que ha sido seleccionado del comboBox de Area, ya que 
+        /* Este método es para encontrar el tipo Evento que ha sido seleccionado del comboBox de tipo Evento, ya que 
         el combobox tiene cargados solo los nombres asique lo tenemos que buscar por el nombre al objeto*/
         
-        //Invocamos al bean de Area
+        //Invocamos al bean de tipo Evento
         TipoEventoBean tipoEventoBean = new TipoEventoBean();
         
-        //Se carga una lista con todas las Areas
+        //Se carga una lista con todos los tipo Evento
         List<TipoEvento> listaTipoEvento = tipoEventoBean.listaTipos();
         TipoEvento tipoEvento = null;
 
-        //En el siguiente for se pasa por todas las areas de la lista
+        //En el siguiente for se pasa por todos los tipo Evento de la lista
         for (int i = 0; i < listaTipoEvento.size(); i++) {
-            //Si el nombre de la Area coincide con el seleccionado del combobox se carga en la variable a retornar
-            if (listaTipoEvento.get(i).getNombreTipoEvento().equals(cmbEvento.getSelectedItem().toString())) {
+            //Si el nombre de la tipo Evento coincide con el seleccionado del combobox se carga en la variable a retornar
+            if (listaTipoEvento.get(i).getNombreTipoEvento().equals(cmbTipoEvento.getSelectedItem().toString())) {
                 tipoEvento = listaTipoEvento.get(i);
             }
         }
 
-        System.out.println(tipoEvento.getNombreTipoEvento());
-
         return tipoEvento;
+    }
+    
+    public Evento eventoSeleccionado() {
+        /* Este método es para encontrar el Evento que ha sido seleccionado del comboBox de Evento, ya que 
+        el combobox tiene cargados solo los nombres asique lo tenemos que buscar por el nombre al objeto*/
+        
+        //Invocamos al bean de Evento
+        EventoBean eventoBean = new EventoBean();
+        
+        //Se carga una lista con todas las Evento
+        List<Evento> listaEvento = eventoBean.listarEventos();
+        Evento evento = null;
+
+        //En el siguiente for se pasa por todas las Evento de la lista
+        for (int i = 0; i < listaEvento.size(); i++) {
+            //Si el nombre de la Evento coincide con el seleccionado del combobox se carga en la variable a retornar
+            if (listaEvento.get(i).getTitulo().equals(cmbEvento.getSelectedItem().toString())) {
+                evento = listaEvento.get(i);
+            }
+        }
+        return evento;
+    }
+
+    public Date fechaSeleccionada() throws ParseException{
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+        String fechaStr = dateEvento.getTextoFecha();
+        return formatter.parse(fechaStr);
+    }
+
+    public BigInteger creditos(){
+        return BigInteger.valueOf((Integer) spinnerCreditos.getValue());
     }
 }

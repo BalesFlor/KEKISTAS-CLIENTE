@@ -8,6 +8,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowActivated" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowActivated"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -122,12 +125,12 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="txtTitulo" min="-2" pref="590" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="cmbEvento" min="-2" pref="286" max="-2" attributes="0"/>
-                                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                                  <Component id="txtNombreEvento" min="-2" pref="499" max="-2" attributes="0"/>
+                                  <Component id="cmbTipoEvento" min="-2" pref="286" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="cmbEvento" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jScrollPane1" min="-2" pref="529" max="-2" attributes="0"/>
@@ -161,10 +164,10 @@
                           <Component id="txtTitulo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cmbTipoEvento" min="-2" max="-2" attributes="0"/>
                               <Component id="cmbEvento" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNombreEvento" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jScrollPane1" min="-2" pref="255" max="-2" attributes="0"/>
@@ -196,15 +199,10 @@
               <SubComponents>
                 <Component class="rojeru_san.RSMTextFull" name="txtTitulo">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Titulo"/>
-                  </Properties>
-                </Component>
-                <Component class="rojeru_san.RSMTextFull" name="txtNombreEvento">
-                  <Properties>
-                    <Property name="placeholder" type="java.lang.String" value="Nombre Evento"/>
+                    <Property name="placeholder" type="java.lang.String" value="T&#xed;tulo"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombreEventoActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTituloActionPerformed"/>
                   </Events>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -226,7 +224,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="RSMaterialComponent.RSComboBoxMaterial" name="cmbEvento">
+                <Component class="RSMaterialComponent.RSComboBoxMaterial" name="cmbTipoEvento">
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="TipoEventoBean tipoEventoBean= new TipoEventoBean();&#xa;&#xa;        DefaultComboBoxModel modeloTipoEvento=new DefaultComboBoxModel();&#xa;&#xa;        List&lt;TipoEvento&gt; listaTipoEvento = tipoEventoBean.listaTipos();&#xa;&#xa;        modeloTipoEvento.addElement(&quot;Seleccione un Tipo de Evento*&quot;);&#xa;&#xa;        for(int i = 0 ; i&lt;listaTipoEvento.size(); i++){&#xa;            modeloTipoEvento.addElement(listaTipoEvento.get(i).getNombreTipoEvento());&#xa;        }">
                       <Color blue="c0" green="70" red="0" type="rgb"/>
@@ -236,20 +234,16 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbEventoItemStateChanged"/>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbTipoEventoItemStateChanged"/>
                   </Events>
                 </Component>
                 <Component class="RSMaterialComponent.RSComboBoxMaterial" name="cmbSemestre">
                   <Properties>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="DefaultComboBoxModel modeloSemestre = new DefaultComboBoxModel();&#xa;&#xa;        modeloSemestre.addElement(&quot;Seleccione un Semestre*&quot;);&#xa;&#xa;        int contador = 1;&#xa;        for(int i = 0 ; i &lt; 9; i++){&#xa;            modeloSemestre.addElement(contador);&#xa;            contador++;&#xa;        }">
                       <Color blue="c0" green="70" red="0" type="rgb"/>
                     </Property>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="3">
-                        <StringItem index="0" value="Semestre*"/>
-                        <StringItem index="1" value="1"/>
-                        <StringItem index="2" value="2"/>
-                      </StringArray>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="modeloSemestre" type="code"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -328,6 +322,20 @@
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnEnviarMouseClicked"/>
+                  </Events>
+                </Component>
+                <Component class="RSMaterialComponent.RSComboBoxMaterial" name="cmbEvento">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="EventoBean eventoBean = new EventoBean();&#xa;&#xa;DefaultComboBoxModel modeloEvento=new DefaultComboBoxModel();&#xa;&#xa;        List&lt;Evento&gt; listaEvento = eventoBean.listarEventos();&#xa;&#xa;        modeloEvento.addElement(&quot;Seleccione un Evento*&quot;);&#xa;&#xa;        for(int i = 0 ; i&lt;listaEvento.size(); i++){&#xa;            modeloEvento.addElement(listaEvento.get(i).getTitulo());&#xa;        }&#xa;        cmbEvento.setModel(modeloEvento);&#xa;        cmbEvento.addItemListener(new java.awt.event.ItemListener() {&#xa;            public void itemStateChanged(java.awt.event.ItemEvent evt) {&#xa;                cmbTipoEventoItemStateChanged(evt);&#xa;            }&#xa;        });">
+                      <Color blue="c0" green="70" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="modeloEvento" type="code"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbEventoItemStateChanged"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbEventoActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

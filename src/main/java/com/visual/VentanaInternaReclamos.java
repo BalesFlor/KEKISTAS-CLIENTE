@@ -9,15 +9,21 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultComboBoxModel;
 import com.grsc.modelo.entities.Usuarios;
 import com.grsc.modelo.entities.EstadoPeticion;
+import java.math.BigInteger;
 
 public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
-
-    public VentanaInternaReclamos() {
+    
+    UsuarioBean userBean= new UsuarioBean();
+    Usuarios usuario = new Usuarios();
+    
+    public VentanaInternaReclamos(BigInteger idUser) {
+        usuario = traerUserPorID(idUser);
         initComponents();
     }
-
-     UsuarioBean userBean= new UsuarioBean();
     
+    public Usuarios traerUserPorID(BigInteger idUser){
+        return userBean.buscarUsuario(idUser);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -217,7 +223,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFiltrarReclamosMouseClicked
 
     private void botonReclamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonReclamarMouseClicked
-        ventanaAltaReclamo ventanaReclamo = new ventanaAltaReclamo();
+        ventanaAltaReclamo ventanaReclamo = new ventanaAltaReclamo(usuario.getIdUsuario());
         ventanaReclamo.setVisible(true);
     }//GEN-LAST:event_botonReclamarMouseClicked
 

@@ -574,7 +574,7 @@ public class Home extends javax.swing.JFrame {
     private void btnReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReclamosMouseClicked
         cerrarVentanas(ventanaAbierta);
         this.ventanaAbierta = ventanasInternas[5];
-        ventanaReclamos = new VentanaInternaReclamos();
+        ventanaReclamos = new VentanaInternaReclamos(usuario.getIdUsuario());
         background.add(ventanaReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
         ventanaReclamos.setVisible(true);
     }//GEN-LAST:event_btnReclamosMouseClicked
