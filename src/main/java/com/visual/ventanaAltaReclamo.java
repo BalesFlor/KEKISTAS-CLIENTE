@@ -1,11 +1,14 @@
 package com.visual;
 
 import com.grsc.logica.ejb.DocenteBean;
+import com.grsc.logica.ejb.EstadoPeticionBean;
 import com.grsc.logica.ejb.EstudianteBean;
 import com.grsc.logica.ejb.EventoBean;
 import com.grsc.logica.ejb.ReclamoBean;
 import com.grsc.logica.ejb.TipoEventoBean;
 import com.grsc.logica.ejb.UsuarioBean;
+import com.grsc.modelo.entities.EstadoPeticion;
+import com.grsc.modelo.entities.Estudiante;
 import com.grsc.modelo.entities.Evento;
 import com.grsc.modelo.entities.TipoEvento;
 import com.grsc.modelo.entities.Tutor;
@@ -21,6 +24,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
 
 public class ventanaAltaReclamo extends javax.swing.JFrame {
 
@@ -28,7 +33,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
     UsuarioBean userBean= new UsuarioBean();
     
     public ventanaAltaReclamo(BigInteger idUser) {
-        usuario=traerUserPorID(idUser);
+        usuario = traerUserPorID(idUser);
         initComponents();
     }
     
@@ -57,6 +62,10 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         btnCancelar = new rsbuttongradiente.RSButtonGradiente();
         btnEnviar = new rsbuttongradiente.RSButtonGradiente();
         cmbEvento = new RSMaterialComponent.RSComboBoxMaterial();
+        lblHoraInicio = new javax.swing.JLabel();
+        Date initialTime = new Date();
+        SpinnerDateModel spinnerModel = new SpinnerDateModel(initialTime, null, null, Calendar.HOUR_OF_DAY);
+        spinnerTime =  new JSpinner( spinnerModel );
         lblReportesTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -163,6 +172,11 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
                 btnEnviarMouseClicked(evt);
             }
         });
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
 
         cmbEvento.setForeground(new java.awt.Color(0, 112, 192));
         EventoBean eventoBean = new EventoBean();
@@ -194,34 +208,52 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
             }
         });
 
+        lblHoraInicio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblHoraInicio.setForeground(new java.awt.Color(13, 120, 161));
+        lblHoraInicio.setText("Hora de inicio");
+        lblCreditos.setVisible(false);
+
+        JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerTime, "HH:mm:ss");
+        spinnerTime.setEditor(editor);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(dateEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(249, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cmbTipoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cmbEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cmbEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(32, 32, 32))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cmbSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(dateEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cmbDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(lblCreditos)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(spinnerCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCreditos, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblHoraInicio, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(spinnerCreditos, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .addComponent(spinnerTime))
+                        .addGap(41, 41, 41))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,29 +264,34 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cmbTipoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(cmbSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(28, 28, 28)
                         .addComponent(dateEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(27, 27, 27)
                         .addComponent(cmbDocente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCreditos)
-                            .addComponent(spinnerCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17))))
+                            .addComponent(lblHoraInicio)
+                            .addComponent(spinnerTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(spinnerCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCreditos))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
 
-        rSPanelShadow1.add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        rSPanelShadow1.add(jPanel1, java.awt.BorderLayout.CENTER);
 
         lblReportesTitulo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         lblReportesTitulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -267,14 +304,14 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
             .addGroup(rSPanelGradiente1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(rSPanelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rSPanelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, 852, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rSPanelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, 869, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(rSPanelGradiente1Layout.createSequentialGroup()
                         .addComponent(iconUtec)
                         .addGap(192, 192, 192)
                         .addComponent(lblReportesTitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(iconReclamos)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         rSPanelGradiente1Layout.setVerticalGroup(
             rSPanelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,21 +326,19 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
                             .addComponent(lblReportesTitulo)
                             .addComponent(iconReclamos))))
                 .addGap(18, 18, 18)
-                .addComponent(rSPanelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(rSPanelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(rSPanelGradiente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(rSPanelGradiente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(rSPanelGradiente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(rSPanelGradiente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -312,8 +347,12 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
         ReclamoBean reclamoBean = new ReclamoBean();
         //validador validador = new validador();
-        EstudianteBean estBean = new EstudianteBean();
         
+        EstadoPeticionBean estadoBean = new EstadoPeticionBean();
+        EstadoPeticion idEstado = estadoBean.buscar(BigInteger.valueOf(3L));
+        
+        EstudianteBean estBean = new EstudianteBean();
+        Estudiante est = estBean.buscarEstudiante(usuario.getIdUsuario());
             if(txtTitulo.getText().equals("")||txtDescripcion.getText().equals("")||cmbTipoEvento.getSelectedIndex()==0){
                 JOptionPane.showMessageDialog(this, "Recuerde que debe poner un titulo, /n"
                         + "una descripción de su reclamo y debe seleccionar un tipo de evento", "Datos incompletos!",
@@ -338,47 +377,59 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
                                     JOptionPane.showMessageDialog(this, "Recuerde que seleccionar el semestre correspondiente al evento correspondiente a su reclamo",
                                     "Datos incompletos!",JOptionPane.WARNING_MESSAGE);
                                 }else{
-                                    Boolean seCreo;
+                                    
+                                    Boolean seCreo = false;
                                     try {
                                         seCreo = reclamoBean.altaReclamo(txtTitulo.getText(), txtDescripcion.getText(),
                                                 eventoSeleccionado(), semestreSeleccionado(),
-                                                estBean.buscarEstudiante(usuario.getIdUsuario()), 
-                                                Calendar.getInstance().getTime(), fechaSeleccionada());
+                                                est,Calendar.getInstance().getTime(), fechaSeleccionada(), idEstado);
                                     } catch (ParseException ex) {
                                         Logger.getLogger(ventanaAltaReclamo.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                    if(seCreo){
+                                        JOptionPane.showMessageDialog(this, "Reclamo enviado con exito",
+                                "exito",JOptionPane.INFORMATION_MESSAGE);
+                                    }else{
+                                        JOptionPane.showMessageDialog(this, "Hubo un error en el envía de su reclamo",
+                                "Error",JOptionPane.WARNING_MESSAGE);
                                     }
                                 }
                             }
                         }
                     }
                 
-                }else{
-                    //En caso de que seleccione un evento como OTRO no se mostrarán y por lo tanto no será necesario que complete los demás datos
-                    
+               } else {
+                //En caso de que seleccione un evento como OTRO no se mostrarán y por lo tanto no será necesario que complete los demás datos
+                Boolean seCreo = reclamoBean.altaReclamoBasico(txtTitulo.getText(), txtDescripcion.getText(), Calendar.getInstance().getTime(), est, idEstado);
+               
+                if (seCreo) {
+                    JOptionPane.showMessageDialog(this, "Reclamo enviado con exito",
+                            "exito", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hubo un error en el envía de su reclamo",
+                            "Error", JOptionPane.WARNING_MESSAGE);
                 }
             }
+        }
     }//GEN-LAST:event_btnEnviarMouseClicked
 
     private void cmbTipoEventoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoEventoItemStateChanged
-        if(cmbTipoEvento.getSelectedItem().equals("VME")){
+        if(cmbTipoEvento.getSelectedItem().equals("VME")||cmbTipoEvento.getSelectedItem().equals("APE")||cmbTipoEvento.getSelectedItem().equals("OPTATIVA")){
             cmbSemestre.setVisible(true);
             dateEvento.setVisible(true);
             cmbDocente.setVisible(true);
             spinnerCreditos.setVisible(true);
             lblCreditos.setVisible(true);
-            
-        }else if(cmbTipoEvento.getSelectedItem().equals("APE")||cmbTipoEvento.getSelectedItem().equals("OPTATIVA")){
-            cmbSemestre.setVisible(true);
-            dateEvento.setVisible(true);
-            cmbDocente.setVisible(true);
-            spinnerCreditos.setVisible(true);
-            lblCreditos.setVisible(true);
+            spinnerTime.setVisible(true);
+            lblHoraInicio.setVisible(true);
         }else{
             cmbSemestre.setVisible(false);
             dateEvento.setVisible(false);
             cmbDocente.setVisible(false);
             spinnerCreditos.setVisible(false);
             lblCreditos.setVisible(false);
+            spinnerTime.setVisible(false);
+            lblHoraInicio.setVisible(false);
         }
     }//GEN-LAST:event_cmbTipoEventoItemStateChanged
 
@@ -391,7 +442,13 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTituloActionPerformed
 
     private void cmbEventoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEventoItemStateChanged
-        // TODO add your handling code here:
+        EventoBean eventoBean = new EventoBean();
+        String titulo = cmbEvento.getSelectedItem().toString();
+       /* Date fechaEvento = fechaSeleccionada();
+        LocalDate date = 
+        eventoBean.buscarEvento(fechaHoraInicio, fechaHoraFin, titulo)
+        dateEvento.set
+        */
     }//GEN-LAST:event_cmbEventoItemStateChanged
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -400,11 +457,17 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         cmbDocente.setVisible(false);
         spinnerCreditos.setVisible(false);
         lblCreditos.setVisible(false);
+        spinnerTime.setVisible(false);
+        lblHoraInicio.setVisible(false);
     }//GEN-LAST:event_formWindowActivated
 
     private void cmbEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEventoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbEventoActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -420,10 +483,12 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCreditos;
+    private javax.swing.JLabel lblHoraInicio;
     private javax.swing.JLabel lblReportesTitulo;
     private rspanelgradiente.RSPanelGradiente rSPanelGradiente1;
     private rojeru_san.rspanel.RSPanelShadow rSPanelShadow1;
     private javax.swing.JSpinner spinnerCreditos;
+    private javax.swing.JSpinner spinnerTime;
     private javax.swing.JTextArea txtDescripcion;
     private rojeru_san.RSMTextFull txtTitulo;
     // End of variables declaration//GEN-END:variables
@@ -502,11 +567,20 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         }
         return evento;
     }
-
     public Date fechaSeleccionada() throws ParseException{
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-        String fechaStr = dateEvento.getTextoFecha();
-        return formatter.parse(fechaStr);
+        
+        // Retrieve the selected time from the spinner
+        Date selectedTime = (Date) spinnerTime.getValue();
+        
+        // Set the selected time to a Date object
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, selectedTime.getHours());
+        calendar.set(Calendar.MINUTE, selectedTime.getMinutes());
+        calendar.set(Calendar.SECOND, selectedTime.getSeconds());
+        date.setTime(calendar.getTimeInMillis());
+        return date;
     }
 
     public BigInteger creditos(){
