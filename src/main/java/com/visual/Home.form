@@ -568,7 +568,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="270" y="50" width="1050" height="120"/>
+              <AbsoluteConstraints x="260" y="50" width="1060" height="120"/>
             </Constraint>
           </Constraints>
 
@@ -578,7 +578,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                       <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="901" max="32767" attributes="0"/>
+                      <EmptySpace pref="911" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

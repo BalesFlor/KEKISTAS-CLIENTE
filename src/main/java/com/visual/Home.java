@@ -427,7 +427,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(titlepanelLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addComponent(lblTitle)
-                .addContainerGap(901, Short.MAX_VALUE))
+                .addContainerGap(911, Short.MAX_VALUE))
         );
         titlepanelLayout.setVerticalGroup(
             titlepanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,7 +437,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        background.add(titlepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 1050, 120));
+        background.add(titlepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 1060, 120));
 
         lblRuta.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         lblRuta.setText("Home/");

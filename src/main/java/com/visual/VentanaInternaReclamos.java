@@ -1,6 +1,7 @@
 package com.visual;
 
 import com.grsc.logica.ejb.EstadoPeticionBean;
+import com.grsc.logica.ejb.EventoBean;
 import com.grsc.logica.ejb.ReclamoBean;
 import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.Reclamo;
@@ -231,38 +232,35 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     private DefaultTableModel cargarTablaReclamos() {
     
        ReclamoBean reclamoBean = new ReclamoBean();
-        
+        EventoBean eventoBean = new EventoBean();
+                
         List<Reclamo> listaReclamos = reclamoBean.listaTodosReclamos();
     
-        String[] nombreColumnas = {"Fecha/Hora", "Usuario", "Titulo", "Detalle", "Estado", "Semestre", "Créditos"};
+        String[] nombreColumnas = {"Fecha/Hora", "Usuario", "Titulo", "Detalle", "Estado", "Evento Relacionado", "Fecha Evento", "Semestre", "Créditos"};
     
-        Object[][] datos = new Object[listaReclamos.size()][7];
+        Object[][] datos = new Object[listaReclamos.size()][9];
 
         int fila = 0;
 
         for (Reclamo u:listaReclamos) {
 
-            if(u.getFecha().toString()!=null){
-                datos[fila][0] = u.getFecha().toString()+"/"+u.getFechaHora().toString();
-            }else{
-                datos[fila][0] = u.getFechaHora().toString();
-            }
             
+            datos[fila][0] = u.getFechaHora().toString();
             datos[fila][1] = userBean.buscarUsuario(u.getIdUsuario().getIdUsuario()).getNomUsuario();
             datos[fila][2] = u.getTitulo();
             datos[fila][3] = u.getDetalle();
             datos[fila][4] = u.getIdEstadoPeticion().getNomEstado();
             
-            if(u.getSemestre()!=null){
-                 datos[fila][5] = u.getSemestre();
+            if(u.getIdEvento()!=null){
+                 datos[fila][5] = eventoBean.buscarEventoPorId(u.getIdEvento().getIdEvento()).getTitulo();
+                 datos[fila][6] = u.getFecha().toString();
+                 datos[fila][7] = u.getSemestre();
+                 datos[fila][8] = u.getCreditos();
             }else{
-                datos[fila][5] = null;
-            }
-            
-            if(u.getCreditos()!=null){
-                 datos[fila][6] = u.getCreditos();
-            }else{
-                datos[fila][6] = null;
+                datos[fila][5] = "No tiene";
+                 datos[fila][6] = "-";
+                 datos[fila][7] = "-";
+                 datos[fila][8] = "-";
             }
             
             fila++;

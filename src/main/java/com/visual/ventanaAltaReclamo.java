@@ -348,9 +348,6 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         ReclamoBean reclamoBean = new ReclamoBean();
         //validador validador = new validador();
         
-        EstadoPeticionBean estadoBean = new EstadoPeticionBean();
-        EstadoPeticion idEstado = estadoBean.buscar(BigInteger.valueOf(3L));
-        
         EstudianteBean estBean = new EstudianteBean();
         Estudiante est = estBean.buscarEstudiante(usuario.getIdUsuario());
             if(txtTitulo.getText().equals("")||txtDescripcion.getText().equals("")||cmbTipoEvento.getSelectedIndex()==0){
@@ -382,7 +379,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
                                     try {
                                         seCreo = reclamoBean.altaReclamo(txtTitulo.getText(), txtDescripcion.getText(),
                                                 eventoSeleccionado(), semestreSeleccionado(),
-                                                est,Calendar.getInstance().getTime(), fechaSeleccionada(), idEstado);
+                                                est,Calendar.getInstance().getTime(), fechaSeleccionada());
                                     } catch (ParseException ex) {
                                         Logger.getLogger(ventanaAltaReclamo.class.getName()).log(Level.SEVERE, null, ex);
                                     }
@@ -400,7 +397,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
                 
                } else {
                 //En caso de que seleccione un evento como OTRO no se mostrarán y por lo tanto no será necesario que complete los demás datos
-                Boolean seCreo = reclamoBean.altaReclamoBasico(txtTitulo.getText(), txtDescripcion.getText(), Calendar.getInstance().getTime(), est, idEstado);
+                Boolean seCreo = reclamoBean.altaReclamoBasico(txtTitulo.getText(), txtDescripcion.getText(), Calendar.getInstance().getTime(), est);
                
                 if (seCreo) {
                     JOptionPane.showMessageDialog(this, "Reclamo enviado con exito",
@@ -422,6 +419,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
             lblCreditos.setVisible(true);
             spinnerTime.setVisible(true);
             lblHoraInicio.setVisible(true);
+            cmbEvento.setVisible(true);
         }else{
             cmbSemestre.setVisible(false);
             dateEvento.setVisible(false);
@@ -430,6 +428,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
             lblCreditos.setVisible(false);
             spinnerTime.setVisible(false);
             lblHoraInicio.setVisible(false);
+            cmbEvento.setVisible(false);
         }
     }//GEN-LAST:event_cmbTipoEventoItemStateChanged
 
@@ -443,12 +442,29 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
 
     private void cmbEventoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEventoItemStateChanged
         EventoBean eventoBean = new EventoBean();
-        String titulo = cmbEvento.getSelectedItem().toString();
-       /* Date fechaEvento = fechaSeleccionada();
-        LocalDate date = 
-        eventoBean.buscarEvento(fechaHoraInicio, fechaHoraFin, titulo)
-        dateEvento.set
-        */
+        String tit = cmbEvento.getSelectedItem().toString();
+
+        Evento evento = eventoBean.buscarEvento(tit);
+
+        String dateStr = new SimpleDateFormat("yyyy-MM-dd").format(evento.getFechaHoraInicio());
+        dateEvento.setTextoFecha(dateStr);
+
+        Date fechaHoraInicio = evento.getFechaHoraInicio();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaHoraInicio);
+
+        int hora = calendar.get(Calendar.HOUR_OF_DAY); // Obtener la hora del día (en formato de 24 horas)
+        int minuto = calendar.get(Calendar.MINUTE); // Obtener los minutos
+
+// Crear un nuevo objeto Date con la hora obtenida
+        Calendar calendarSpinner = Calendar.getInstance();
+        calendarSpinner.set(Calendar.HOUR_OF_DAY, hora);
+        calendarSpinner.set(Calendar.MINUTE, minuto);
+        Date horaSpinner = calendarSpinner.getTime();
+
+// Establecer el valor en el JSpinner
+        spinnerTime.setValue(horaSpinner);
+
     }//GEN-LAST:event_cmbEventoItemStateChanged
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -459,6 +475,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         lblCreditos.setVisible(false);
         spinnerTime.setVisible(false);
         lblHoraInicio.setVisible(false);
+        cmbEvento.setVisible(false);
     }//GEN-LAST:event_formWindowActivated
 
     private void cmbEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEventoActionPerformed
