@@ -212,7 +212,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
 
     private void botonEliminar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminar1MouseClicked
         int row = tablaReclamos.getSelectedRow();
-
+/*
         if (row==-1) {
             JOptionPane.showMessageDialog(null, "Seleccione un reclamo para eliminar");
         } else {
@@ -235,7 +235,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
             if (respuesta == JOptionPane.YES_OPTION) {
 
                 try {
-                    reclamoBean.
+                    //reclamoBean.
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "No se ha eliminado el Usuario dado un Error");
                 }
@@ -250,7 +250,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha eliminado el usuario");
             }
-        }
+        }*/
     }//GEN-LAST:event_botonEliminar1MouseClicked
 
     private void botonReclamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReclamarActionPerformed
