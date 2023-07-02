@@ -597,8 +597,8 @@ public class Home extends javax.swing.JFrame {
 
     private void btnJustificacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnJustificacionesMouseClicked
         cerrarVentanas(ventanaAbierta);
-        this.ventanaAbierta = ventanasInternas[5];
-        ventanaJustificaciones = new VentanaInternaJustificaciones();
+        this.ventanaAbierta = ventanasInternas[3];
+        ventanaJustificaciones = new VentanaInternaJustificaciones(usuario.getIdUsuario());
         background.add(ventanaJustificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
         ventanaJustificaciones.setVisible(true);
     }//GEN-LAST:event_btnJustificacionesMouseClicked
@@ -646,7 +646,7 @@ public class Home extends javax.swing.JFrame {
            }else if(ventanaAbierta.equals(this.ventanasInternas[2])){
            
            }else if(ventanaAbierta.equals(this.ventanasInternas[3])){
-           
+               ventanaJustificaciones.dispose();
            }else if(ventanaAbierta.equals(this.ventanasInternas[4])){
            
            }else if(ventanaAbierta.equals(this.ventanasInternas[5])){

@@ -1,6 +1,7 @@
 package com.visual;
 
 import com.grsc.logica.ejb.EstadoPeticionBean;
+import com.grsc.logica.ejb.EstudianteBean;
 import com.grsc.logica.ejb.EventoBean;
 import com.grsc.logica.ejb.ReclamoBean;
 import com.grsc.logica.ejb.UsuarioBean;
@@ -10,7 +11,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultComboBoxModel;
 import com.grsc.modelo.entities.Usuarios;
 import com.grsc.modelo.entities.EstadoPeticion;
+import com.grsc.modelo.entities.Estudiante;
 import java.math.BigInteger;
+import javax.swing.JOptionPane;
 
 public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     
@@ -208,7 +211,46 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEliminar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminar1MouseClicked
-        // TODO add your handling code here:
+        int row = tablaReclamos.getSelectedRow();
+
+        if (row==-1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un reclamo para eliminar");
+        } else {
+            String cellTitle = tablaReclamos.getModel().getValueAt(row, 2).toString();
+            String cellUsername = tablaReclamos.getModel().getValueAt(row, 1).toString();
+            
+            ReclamoBean reclamoBean = new ReclamoBean();
+            
+            Usuarios userSelected = userBean.buscarUserByNombre(cellUsername);
+            
+            EstudianteBean estBean = new EstudianteBean();
+            Estudiante est = estBean.buscarEstudiante(userSelected.getIdUsuario());
+            
+            Reclamo reclamo = reclamoBean.buscarReclamo(est, cellTitle);
+            Object[] options = {"ELIMINAR", "CANCELAR"};
+            int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar reclamo " + reclamo.getTitulo() +
+                    "del Estudiante "+ userSelected.getNomUsuario() + "?", "Eliminar Reclamo", JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+
+            if (respuesta == JOptionPane.YES_OPTION) {
+
+                try {
+                    reclamoBean.
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "No se ha eliminado el Usuario dado un Error");
+                }
+                BigInteger estadoEliminado = BigInteger.valueOf(3L);
+                if (userBean.obtenerEstado(usuarioExterno.getIdUsuario()).getIdEstado().equals(estadoEliminado)) {
+                    jTable1.setModel(cargarTablaUsuarios());
+                    JOptionPane.showMessageDialog(null, "Usuario Eliminado correctamente");
+                    jTable1.clearSelection();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario Eliminado NO correctamente");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha eliminado el usuario");
+            }
+        }
     }//GEN-LAST:event_botonEliminar1MouseClicked
 
     private void botonReclamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReclamarActionPerformed
@@ -224,14 +266,13 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFiltrarReclamosMouseClicked
 
     private void botonReclamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonReclamarMouseClicked
-        ventanaAltaReclamo ventanaReclamo = new ventanaAltaReclamo(usuario.getIdUsuario());
+        ventanaAltaReclamo ventanaReclamo = new ventanaAltaReclamo(usuario.getIdUsuario(), this);
         ventanaReclamo.setVisible(true);
     }//GEN-LAST:event_botonReclamarMouseClicked
-
     
     private DefaultTableModel cargarTablaReclamos() {
     
-       ReclamoBean reclamoBean = new ReclamoBean();
+        ReclamoBean reclamoBean = new ReclamoBean();
         EventoBean eventoBean = new EventoBean();
                 
         List<Reclamo> listaReclamos = reclamoBean.listaTodosReclamos();
@@ -297,4 +338,8 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblBtnConstancias3;
     private javax.swing.JTable tablaReclamos;
     // End of variables declaration//GEN-END:variables
+
+public void actualizar(){
+        tablaReclamos.setModel(cargarTablaReclamos());
+    }
 }

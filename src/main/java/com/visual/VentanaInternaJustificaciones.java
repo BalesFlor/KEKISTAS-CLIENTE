@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package com.visual;
 
 import com.grsc.logica.ejb.EstadoPeticionBean;
@@ -10,18 +6,24 @@ import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.EstadoPeticion;
 import com.grsc.modelo.entities.Justificacion;
 import com.grsc.modelo.entities.Usuarios;
+import java.math.BigInteger;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
 
+    Usuarios usuario;
+    UsuarioBean userBean= new UsuarioBean();
     
-    public VentanaInternaJustificaciones() {
+    public VentanaInternaJustificaciones(BigInteger idUser) {
+        usuario = traerUserPorID(idUser);
         initComponents();
     }
     
-    UsuarioBean userBean= new UsuarioBean();
+    public Usuarios traerUserPorID(BigInteger idUser){
+        return userBean.buscarUsuario(idUser);
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -206,7 +208,7 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonEliminarMouseClicked
 
     private void botonJustificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonJustificarMouseClicked
-        ventanaAltaJustificacion ventanaJustificacion = new ventanaAltaJustificacion();
+        ventanaAltaJustificacion ventanaJustificacion = new ventanaAltaJustificacion(usuario.getIdUsuario(), this);
         ventanaJustificacion.setVisible(true);
     }//GEN-LAST:event_botonJustificarMouseClicked
 
@@ -280,4 +282,8 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblBtnConstancias3;
     private javax.swing.JTable tablaJustificaciones;
     // End of variables declaration//GEN-END:variables
+
+public void actualizar(){
+        tablaJustificaciones.setModel(cargarTablaJustificaciones());
+    }
 }

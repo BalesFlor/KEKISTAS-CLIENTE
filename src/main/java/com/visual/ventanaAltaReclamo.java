@@ -1,13 +1,11 @@
 package com.visual;
 
 import com.grsc.logica.ejb.DocenteBean;
-import com.grsc.logica.ejb.EstadoPeticionBean;
 import com.grsc.logica.ejb.EstudianteBean;
 import com.grsc.logica.ejb.EventoBean;
 import com.grsc.logica.ejb.ReclamoBean;
 import com.grsc.logica.ejb.TipoEventoBean;
 import com.grsc.logica.ejb.UsuarioBean;
-import com.grsc.modelo.entities.EstadoPeticion;
 import com.grsc.modelo.entities.Estudiante;
 import com.grsc.modelo.entities.Evento;
 import com.grsc.modelo.entities.TipoEvento;
@@ -19,7 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -29,11 +26,14 @@ import javax.swing.SpinnerDateModel;
 
 public class ventanaAltaReclamo extends javax.swing.JFrame {
 
+    private VentanaInternaReclamos ventanaInternaReclamos;
     Usuarios usuario;
     UsuarioBean userBean= new UsuarioBean();
+    Boolean seCreo = false;
     
-    public ventanaAltaReclamo(BigInteger idUser) {
+    public ventanaAltaReclamo(BigInteger idUser, VentanaInternaReclamos ventanaInternaReclamos) {
         usuario = traerUserPorID(idUser);
+        this.ventanaInternaReclamos = ventanaInternaReclamos;
         initComponents();
     }
     
@@ -72,6 +72,9 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
         });
 
@@ -215,6 +218,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
 
         JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerTime, "HH:mm:ss");
         spinnerTime.setEditor(editor);
+        spinnerTime.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -295,7 +299,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
 
         lblReportesTitulo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         lblReportesTitulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblReportesTitulo.setText("Hacer un Reporte");
+        lblReportesTitulo.setText("Hacer un Reclamo");
 
         javax.swing.GroupLayout rSPanelGradiente1Layout = new javax.swing.GroupLayout(rSPanelGradiente1);
         rSPanelGradiente1.setLayout(rSPanelGradiente1Layout);
@@ -350,7 +354,8 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         
         EstudianteBean estBean = new EstudianteBean();
         Estudiante est = estBean.buscarEstudiante(usuario.getIdUsuario());
-            if(txtTitulo.getText().equals("")||txtDescripcion.getText().equals("")||cmbTipoEvento.getSelectedIndex()==0){
+            if(txtTitulo.getText().equals("") || txtDescripcion.getText().equals("") ||
+                    txtDescripcion.getText().equals("Descripción de Reclamo...") || cmbTipoEvento.getSelectedIndex()==0){
                 JOptionPane.showMessageDialog(this, "Recuerde que debe poner un titulo, /n"
                         + "una descripción de su reclamo y debe seleccionar un tipo de evento", "Datos incompletos!",
                     JOptionPane.WARNING_MESSAGE);
@@ -366,7 +371,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(this, "Recuerde que seleccionar la fecha correspondiente al evento correspondiente a su reclamo",
                             "Datos incompletos!",JOptionPane.WARNING_MESSAGE);
                         }else{
-                            if(cmbSemestre.getSelectedIndex()==0){
+                            if(cmbSemestre.getSelectedItem().equals("Seleccione un Semestre*")){
                                 JOptionPane.showMessageDialog(this, "Recuerde que seleccionar el semestre correspondiente al evento correspondiente a su reclamo",
                                 "Datos incompletos!",JOptionPane.WARNING_MESSAGE);
                             }else{
@@ -375,7 +380,6 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
                                     "Datos incompletos!",JOptionPane.WARNING_MESSAGE);
                                 }else{
                                     
-                                    Boolean seCreo = false;
                                     try {
                                         seCreo = reclamoBean.altaReclamo(txtTitulo.getText(), txtDescripcion.getText(),
                                                 eventoSeleccionado(), semestreSeleccionado(),
@@ -386,6 +390,8 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
                                     if(seCreo){
                                         JOptionPane.showMessageDialog(this, "Reclamo enviado con exito",
                                 "exito",JOptionPane.INFORMATION_MESSAGE);
+                                        clearObject();
+                                        ventanaInternaReclamos.actualizar();
                                     }else{
                                         JOptionPane.showMessageDialog(this, "Hubo un error en el envía de su reclamo",
                                 "Error",JOptionPane.WARNING_MESSAGE);
@@ -441,30 +447,33 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTituloActionPerformed
 
     private void cmbEventoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEventoItemStateChanged
-        EventoBean eventoBean = new EventoBean();
-        String tit = cmbEvento.getSelectedItem().toString();
+        
+        if (cmbEvento.getSelectedIndex() != 0) {
+            EventoBean eventoBean = new EventoBean();
+            String tit = cmbEvento.getSelectedItem().toString();
 
-        Evento evento = eventoBean.buscarEvento(tit);
+            Evento evento = eventoBean.buscarEvento(tit);
 
-        String dateStr = new SimpleDateFormat("yyyy-MM-dd").format(evento.getFechaHoraInicio());
-        dateEvento.setTextoFecha(dateStr);
+            String dateStr = new SimpleDateFormat("yyyy-MM-dd").format(evento.getFechaHoraInicio());
+            dateEvento.setTextoFecha(dateStr);
 
-        Date fechaHoraInicio = evento.getFechaHoraInicio();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(fechaHoraInicio);
+            Date fechaHoraInicio = evento.getFechaHoraInicio();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fechaHoraInicio);
 
-        int hora = calendar.get(Calendar.HOUR_OF_DAY); // Obtener la hora del día (en formato de 24 horas)
-        int minuto = calendar.get(Calendar.MINUTE); // Obtener los minutos
+            int hora = calendar.get(Calendar.HOUR_OF_DAY); // Obtener la hora del día (en formato de 24 horas)
+            int minuto = calendar.get(Calendar.MINUTE); // Obtener los minutos
 
 // Crear un nuevo objeto Date con la hora obtenida
-        Calendar calendarSpinner = Calendar.getInstance();
-        calendarSpinner.set(Calendar.HOUR_OF_DAY, hora);
-        calendarSpinner.set(Calendar.MINUTE, minuto);
-        Date horaSpinner = calendarSpinner.getTime();
+            Calendar calendarSpinner = Calendar.getInstance();
+            calendarSpinner.set(Calendar.HOUR_OF_DAY, hora);
+            calendarSpinner.set(Calendar.MINUTE, minuto);
+            Date horaSpinner = calendarSpinner.getTime();
 
 // Establecer el valor en el JSpinner
-        spinnerTime.setValue(horaSpinner);
+            spinnerTime.setValue(horaSpinner);
 
+        }
     }//GEN-LAST:event_cmbEventoItemStateChanged
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -476,6 +485,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         spinnerTime.setVisible(false);
         lblHoraInicio.setVisible(false);
         cmbEvento.setVisible(false);
+        cmbTipoEvento.setSelectedIndex(0);
     }//GEN-LAST:event_formWindowActivated
 
     private void cmbEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEventoActionPerformed
@@ -485,6 +495,10 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        ventanaInternaReclamos.actualizar();
+    }//GEN-LAST:event_formWindowClosed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -602,5 +616,17 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
 
     public BigInteger creditos(){
         return BigInteger.valueOf((Integer) spinnerCreditos.getValue());
+    }
+    
+    public void clearObject() {
+        txtDescripcion.setText("Descripción de Reclamo...");
+        txtTitulo.setText("");
+        cmbEvento.setSelectedIndex(0);
+        cmbSemestre.setSelectedIndex(0);
+        dateEvento.setLimpiarFecha(true);
+        cmbDocente.setSelectedIndex(0);
+        spinnerTime.setValue(0);
+        spinnerCreditos.setValue(0);
+        cmbTipoEvento.setSelectedIndex(0);
     }
 }
