@@ -1,14 +1,22 @@
 package com.visual;
 
 import com.grsc.logica.ejb.EstadoPeticionBean;
+import com.grsc.logica.ejb.EstudianteBean;
+import com.grsc.logica.ejb.EventoBean;
 import com.grsc.logica.ejb.JustificacionBean;
 import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.EstadoPeticion;
+import com.grsc.modelo.entities.Estudiante;
+import com.grsc.modelo.entities.Evento;
 import com.grsc.modelo.entities.Justificacion;
 import com.grsc.modelo.entities.Usuarios;
 import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
@@ -204,7 +212,56 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
-        // TODO add your handling code here:
+        int row = tablaJustificaciones.getSelectedRow();
+
+        if (row==-1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un reclamo para eliminar");
+        } else {
+            String cellFechaHora = tablaJustificaciones.getModel().getValueAt(row, 0).toString();
+            String cellUsername = tablaJustificaciones.getModel().getValueAt(row, 1).toString();
+            String cellEvento = tablaJustificaciones.getModel().getValueAt(row, 2).toString();
+
+            JustificacionBean jusBean = new JustificacionBean();
+            
+            Usuarios userSelected = userBean.buscarUserByNombre(cellUsername);
+            EstudianteBean estBean = new EstudianteBean();
+            Estudiante est = estBean.buscarEstudiante(userSelected.getIdUsuario());
+            
+            Date fechaHora = null;
+            SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            try {
+                fechaHora = formateador.parse(cellFechaHora);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            
+            EventoBean eventoBean = new EventoBean();
+            Evento evento = eventoBean.buscarEvento(cellEvento);
+            
+            Justificacion justificacion = jusBean.buscarJustificacion(fechaHora, evento, est);
+            Object[] options = {"ELIMINAR", "CANCELAR"};
+            int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar justificacion de inasistencia al evento " + cellEvento +
+                    " del Estudiante "+ userSelected.getNomUsuario() + "?", "Eliminar Reclamo", JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+
+            if (respuesta == JOptionPane.YES_OPTION) {
+                Boolean eliminado = false;
+                try {
+                    eliminado = jusBean.borrarJustificacion(justificacion.getIdJustificacion());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "No se ha eliminado la Justificación dado un Error");
+                }
+                if ( eliminado ) {
+                    actualizar();
+                    JOptionPane.showMessageDialog(null, "Justificacion Eliminada correctamente");
+                    tablaJustificaciones.clearSelection();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Justificacion Eliminado NO correctamente");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha eliminado la Justificacion");
+            }
+        }
     }//GEN-LAST:event_botonEliminarMouseClicked
 
     private void botonJustificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonJustificarMouseClicked

@@ -131,6 +131,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         cmbSemestre.setModel(modeloSemestre);
 
         dateEvento.setPlaceholder("Fecha Evento");
+        dateEvento.setEnabled(false);
 
         cmbDocente.setForeground(new java.awt.Color(0, 112, 192));
         DocenteBean docenteBean= new DocenteBean();
@@ -356,7 +357,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         Estudiante est = estBean.buscarEstudiante(usuario.getIdUsuario());
             if(txtTitulo.getText().equals("") || txtDescripcion.getText().equals("") ||
                     txtDescripcion.getText().equals("Descripción de Reclamo...") || cmbTipoEvento.getSelectedIndex()==0){
-                JOptionPane.showMessageDialog(this, "Recuerde que debe poner un titulo, /n"
+                JOptionPane.showMessageDialog(this, "Recuerde que debe poner un titulo, \n"
                         + "una descripción de su reclamo y debe seleccionar un tipo de evento", "Datos incompletos!",
                     JOptionPane.WARNING_MESSAGE);
             }else{

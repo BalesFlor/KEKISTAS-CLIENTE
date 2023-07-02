@@ -212,7 +212,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
 
     private void botonEliminar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminar1MouseClicked
         int row = tablaReclamos.getSelectedRow();
-/*
+
         if (row==-1) {
             JOptionPane.showMessageDialog(null, "Seleccione un reclamo para eliminar");
         } else {
@@ -229,28 +229,27 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
             Reclamo reclamo = reclamoBean.buscarReclamo(est, cellTitle);
             Object[] options = {"ELIMINAR", "CANCELAR"};
             int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar reclamo " + reclamo.getTitulo() +
-                    "del Estudiante "+ userSelected.getNomUsuario() + "?", "Eliminar Reclamo", JOptionPane.YES_NO_OPTION,
+                    " del Estudiante "+ userSelected.getNomUsuario() + "?", "Eliminar Reclamo", JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
             if (respuesta == JOptionPane.YES_OPTION) {
-
+                Boolean eliminado = false;
                 try {
-                    //reclamoBean.
+                    eliminado = reclamoBean.borrarReclamo(reclamo.getIdReclamo());
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "No se ha eliminado el Usuario dado un Error");
+                    JOptionPane.showMessageDialog(null, "No se ha eliminado el Reclamo dado un Error");
                 }
-                BigInteger estadoEliminado = BigInteger.valueOf(3L);
-                if (userBean.obtenerEstado(usuarioExterno.getIdUsuario()).getIdEstado().equals(estadoEliminado)) {
-                    jTable1.setModel(cargarTablaUsuarios());
-                    JOptionPane.showMessageDialog(null, "Usuario Eliminado correctamente");
-                    jTable1.clearSelection();
+                if ( eliminado ) {
+                    actualizar();
+                    JOptionPane.showMessageDialog(null, "Reclamo Eliminado correctamente");
+                    tablaReclamos.clearSelection();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Usuario Eliminado NO correctamente");
+                    JOptionPane.showMessageDialog(null, "Reclamo Eliminado NO correctamente");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "No se ha eliminado el usuario");
+                JOptionPane.showMessageDialog(null, "No se ha eliminado el reclamo");
             }
-        }*/
+        }
     }//GEN-LAST:event_botonEliminar1MouseClicked
 
     private void botonReclamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReclamarActionPerformed
