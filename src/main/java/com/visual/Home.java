@@ -16,6 +16,7 @@ public class Home extends javax.swing.JFrame {
     VentanaInternaReclamos ventanaReclamos;
     VentanaInternaJustificaciones ventanaJustificaciones;
     InternalFrameListasMantenimiento ventanaListasM;
+    VentanaInternaReportes ventanaReportes;
     
     public Home(BigInteger idUser) {
         usuario=traerUserPorID(idUser);
@@ -332,6 +333,9 @@ public class Home extends javax.swing.JFrame {
         btnReportes.setBackground(new java.awt.Color(105, 190, 228));
         btnReportes.setForeground(new java.awt.Color(105, 190, 228));
         btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReportesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnReportesMouseEntered(evt);
             }
@@ -602,6 +606,14 @@ public class Home extends javax.swing.JFrame {
         background.add(ventanaJustificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
         ventanaJustificaciones.setVisible(true);
     }//GEN-LAST:event_btnJustificacionesMouseClicked
+
+    private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
+        cerrarVentanas(ventanaAbierta);
+        this.ventanaAbierta = ventanasInternas[4];
+        ventanaReportes = new VentanaInternaReportes(usuario.getIdUsuario());
+        background.add(ventanaReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
+        ventanaReportes.setVisible(true);
+    }//GEN-LAST:event_btnReportesMouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;

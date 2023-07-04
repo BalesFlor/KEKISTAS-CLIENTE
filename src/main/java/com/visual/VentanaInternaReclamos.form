@@ -24,6 +24,15 @@
               <Component id="lblBtnConstancias3" min="-2" pref="130" max="-2" attributes="0"/>
               <EmptySpace pref="872" max="32767" attributes="0"/>
           </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="botonModificar1" min="-2" pref="130" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Component id="botonReclamar" min="-2" pref="190" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="295" max="-2" attributes="0"/>
+              <Component id="btnAccion" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+          </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -40,13 +49,7 @@
                       </Group>
                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane3" min="-2" pref="980" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="botonEliminar1" min="-2" pref="130" max="-2" attributes="0"/>
-                              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                              <Component id="botonModificar1" min="-2" pref="130" max="-2" attributes="0"/>
-                              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                              <Component id="botonReclamar" min="-2" pref="190" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="botonEliminar1" min="-2" pref="130" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
@@ -59,7 +62,13 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Component id="lblBtnConstancias3" min="-2" pref="20" max="-2" attributes="0"/>
-              <EmptySpace pref="405" max="32767" attributes="0"/>
+              <EmptySpace pref="359" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="botonReclamar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonModificar1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAccion" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
@@ -81,11 +90,7 @@
                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                   <Component id="jScrollPane3" min="-2" pref="290" max="-2" attributes="0"/>
                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="botonEliminar1" min="-2" max="-2" attributes="0"/>
-                      <Component id="botonModificar1" min="-2" max="-2" attributes="0"/>
-                      <Component id="botonReclamar" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="botonEliminar1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -234,6 +239,26 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnFiltrarReclamosMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="rsbuttongradiente.RSButtonGradiente" name="btnAccion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Registrar una acci&#xf3;n"/>
+        <Property name="colorPrimario" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e4" green="be" red="69" type="rgb"/>
+        </Property>
+        <Property name="colorPrimarioHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="fc" green="f0" red="d5" type="rgb"/>
+        </Property>
+        <Property name="colorSecundario" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="fc" green="f0" red="d5" type="rgb"/>
+        </Property>
+        <Property name="colorSecundarioHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e4" green="be" red="69" type="rgb"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAccionMouseClicked"/>
       </Events>
     </Component>
   </SubComponents>

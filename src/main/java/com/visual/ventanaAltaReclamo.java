@@ -626,7 +626,6 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
         cmbSemestre.setSelectedIndex(0);
         dateEvento.setLimpiarFecha(true);
         cmbDocente.setSelectedIndex(0);
-        spinnerTime.setValue(0);
         spinnerCreditos.setValue(0);
         cmbTipoEvento.setSelectedIndex(0);
     }

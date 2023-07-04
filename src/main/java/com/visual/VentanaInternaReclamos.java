@@ -42,6 +42,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
         comboboxUsuarioReclamo = new RSMaterialComponent.RSComboBoxMaterial();
         btnLimpiarFiltroReclamos = new rsbuttongradiente.RSButtonGradiente();
         btnFiltrarReclamos = new rsbuttongradiente.RSButtonGradiente();
+        btnAccion = new rsbuttongradiente.RSButtonGradiente();
 
         botonEliminar1.setText("Eliminar");
         botonEliminar1.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -148,6 +149,17 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
             }
         });
 
+        btnAccion.setText("Registrar una acción");
+        btnAccion.setColorPrimario(new java.awt.Color(105, 190, 228));
+        btnAccion.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
+        btnAccion.setColorSecundario(new java.awt.Color(213, 240, 252));
+        btnAccion.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
+        btnAccion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAccionMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,6 +168,14 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                 .addGap(16, 16, 16)
                 .addComponent(lblBtnConstancias3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(872, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonModificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(botonReclamar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(295, 295, 295)
+                .addComponent(btnAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -170,12 +190,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                                 .addComponent(btnLimpiarFiltroReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(botonEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(botonModificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(botonReclamar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(botonEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGap(0, 16, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -183,7 +198,12 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(lblBtnConstancias3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(405, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 359, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonReclamar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonModificar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 10, Short.MAX_VALUE)
@@ -200,10 +220,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                     .addGap(10, 10, 10)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(10, 10, 10)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(botonEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonModificar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonReclamar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 11, Short.MAX_VALUE)))
         );
 
@@ -268,6 +285,11 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
         ventanaAltaReclamo ventanaReclamo = new ventanaAltaReclamo(usuario.getIdUsuario(), this);
         ventanaReclamo.setVisible(true);
     }//GEN-LAST:event_botonReclamarMouseClicked
+
+    private void btnAccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccionMouseClicked
+        ventanaRegAccion ventanaRegAccion= new ventanaRegAccion(usuario.getIdUsuario());
+        ventanaRegAccion.setVisible(true);
+    }//GEN-LAST:event_btnAccionMouseClicked
     
     private DefaultTableModel cargarTablaReclamos() {
     
@@ -329,6 +351,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     private rsbuttongradiente.RSButtonGradiente botonEliminar1;
     private rsbuttongradiente.RSButtonGradiente botonModificar1;
     private rsbuttongradiente.RSButtonGradiente botonReclamar;
+    private rsbuttongradiente.RSButtonGradiente btnAccion;
     private rsbuttongradiente.RSButtonGradiente btnFiltrarReclamos;
     private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltroReclamos;
     private RSMaterialComponent.RSComboBoxMaterial comboboxEstadoReclamo;
