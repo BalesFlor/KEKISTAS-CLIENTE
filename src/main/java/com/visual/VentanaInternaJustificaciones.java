@@ -1,5 +1,6 @@
 package com.visual;
 
+import com.grsc.logica.ejb.AnalistaBean;
 import com.grsc.logica.ejb.EstadoPeticionBean;
 import com.grsc.logica.ejb.EstudianteBean;
 import com.grsc.logica.ejb.EventoBean;
@@ -47,6 +48,25 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
         btnLimpiarFiltroReclamos = new rsbuttongradiente.RSButtonGradiente();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaJustificaciones = new javax.swing.JTable();
+        btnAccion = new rsbuttongradiente.RSButtonGradiente();
+
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         botonEliminar.setText("Eliminar");
         botonEliminar.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -158,6 +178,12 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
         tablaJustificaciones.setSize(600, 600);
         jScrollPane3.setViewportView(tablaJustificaciones);
 
+        btnAccion.setText("Registrar una acción");
+        btnAccion.setColorPrimario(new java.awt.Color(105, 190, 228));
+        btnAccion.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
+        btnAccion.setColorSecundario(new java.awt.Color(213, 240, 252));
+        btnAccion.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,14 +202,16 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
                 .addGap(54, 54, 54))
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(botonJustificar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(266, 266, 266)
+                        .addComponent(btnAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -204,7 +232,8 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonJustificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
 
@@ -285,6 +314,27 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEliminarActionPerformed
 
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        AnalistaBean analistaBean = new AnalistaBean();
+        if(analistaBean.existeAnalista(usuario.getIdUsuario())){
+            comboboxUsuarioJustificacion.setVisible(true);
+            btnAccion.setVisible(true);
+        }else{
+            comboboxUsuarioJustificacion.setVisible(false);
+            btnAccion.setVisible(false);
+        }
+        EstudianteBean estBean = new EstudianteBean();
+        if(estBean.existeEstudiante(usuario.getIdUsuario())){
+            botonJustificar.setVisible(true);
+            botonEliminar.setVisible(true);
+            botonModificar.setVisible(true);
+        }else{
+            botonJustificar.setVisible(false);
+            botonEliminar.setVisible(false);
+            botonModificar.setVisible(false);
+        }
+    }//GEN-LAST:event_formInternalFrameActivated
+
      
     private DefaultTableModel cargarTablaJustificaciones() {
     
@@ -331,6 +381,7 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
     private rsbuttongradiente.RSButtonGradiente botonEliminar;
     private rsbuttongradiente.RSButtonGradiente botonJustificar;
     private rsbuttongradiente.RSButtonGradiente botonModificar;
+    private rsbuttongradiente.RSButtonGradiente btnAccion;
     private rsbuttongradiente.RSButtonGradiente btnFiltrarReclamos;
     private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltroReclamos;
     private RSMaterialComponent.RSComboBoxMaterial comboboxEstadoJustificacion;

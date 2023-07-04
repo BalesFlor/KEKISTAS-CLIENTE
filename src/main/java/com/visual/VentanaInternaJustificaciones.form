@@ -4,6 +4,9 @@
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="internalFrameActivated" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="formInternalFrameActivated"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -35,15 +38,17 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane3" alignment="0" min="-2" pref="940" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="botonJustificar" min="-2" pref="190" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="botonModificar" min="-2" pref="130" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="botonEliminar" min="-2" pref="130" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="266" max="-2" attributes="0"/>
+                      <Component id="btnAccion" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jScrollPane3" min="-2" pref="940" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="33" max="32767" attributes="0"/>
           </Group>
@@ -70,6 +75,7 @@
                   <Component id="botonJustificar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="botonModificar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="botonEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAccion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
           </Group>
@@ -221,5 +227,22 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="rsbuttongradiente.RSButtonGradiente" name="btnAccion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Registrar una acci&#xf3;n"/>
+        <Property name="colorPrimario" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e4" green="be" red="69" type="rgb"/>
+        </Property>
+        <Property name="colorPrimarioHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="fc" green="f0" red="d5" type="rgb"/>
+        </Property>
+        <Property name="colorSecundario" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="fc" green="f0" red="d5" type="rgb"/>
+        </Property>
+        <Property name="colorSecundarioHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e4" green="be" red="69" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

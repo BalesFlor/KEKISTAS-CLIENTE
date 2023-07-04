@@ -148,9 +148,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace pref="30" max="32767" attributes="0"/>
-                          <Component id="imgBtnReclamos1" min="-2" max="-2" attributes="0"/>
+                          <Component id="imgBtnListasMantenimiento" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblBtnReclamos1" min="-2" pref="143" max="-2" attributes="0"/>
+                          <Component id="lblBtnListasMantenimiento" min="-2" pref="143" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -159,19 +159,19 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="imgBtnReclamos1" pref="44" max="32767" attributes="0"/>
+                          <Component id="imgBtnListasMantenimiento" pref="44" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                          <Component id="lblBtnReclamos1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblBtnListasMantenimiento" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lblBtnReclamos1">
+                <Component class="javax.swing.JLabel" name="lblBtnListasMantenimiento">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI Semibold" size="14" style="0"/>
@@ -180,7 +180,7 @@
                     <Property name="text" type="java.lang.String" value="Listas Mantenimiento"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="imgBtnReclamos1">
+                <Component class="javax.swing.JLabel" name="imgBtnListasMantenimiento">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/rsz_1rsz_1reclamos-icon.png"/>

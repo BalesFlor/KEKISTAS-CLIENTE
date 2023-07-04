@@ -1,5 +1,6 @@
 package com.visual;
 
+import com.grsc.logica.ejb.AnalistaBean;
 import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.Usuarios;
 import java.awt.Color;
@@ -35,8 +36,8 @@ public class Home extends javax.swing.JFrame {
         sidepanel = new rspanelgradiente.RSPanelGradiente();
         imgUTECLogo = new javax.swing.JLabel();
         btnListasMantenimiento = new javax.swing.JPanel();
-        lblBtnReclamos1 = new javax.swing.JLabel();
-        imgBtnReclamos1 = new javax.swing.JLabel();
+        lblBtnListasMantenimiento = new javax.swing.JLabel();
+        imgBtnListasMantenimiento = new javax.swing.JLabel();
         btnUsuario = new javax.swing.JPanel();
         imgBtnUsuario = new javax.swing.JLabel();
         lblBtnUsuario = new javax.swing.JLabel();
@@ -92,11 +93,11 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        lblBtnReclamos1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        lblBtnReclamos1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBtnReclamos1.setText("Listas Mantenimiento");
+        lblBtnListasMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        lblBtnListasMantenimiento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblBtnListasMantenimiento.setText("Listas Mantenimiento");
 
-        imgBtnReclamos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_1rsz_1reclamos-icon.png"))); // NOI18N
+        imgBtnListasMantenimiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_1rsz_1reclamos-icon.png"))); // NOI18N
 
         javax.swing.GroupLayout btnListasMantenimientoLayout = new javax.swing.GroupLayout(btnListasMantenimiento);
         btnListasMantenimiento.setLayout(btnListasMantenimientoLayout);
@@ -104,20 +105,20 @@ public class Home extends javax.swing.JFrame {
             btnListasMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnListasMantenimientoLayout.createSequentialGroup()
                 .addContainerGap(30, Short.MAX_VALUE)
-                .addComponent(imgBtnReclamos1)
+                .addComponent(imgBtnListasMantenimiento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblBtnReclamos1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblBtnListasMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67))
         );
         btnListasMantenimientoLayout.setVerticalGroup(
             btnListasMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnListasMantenimientoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(imgBtnReclamos1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(imgBtnListasMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(btnListasMantenimientoLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(lblBtnReclamos1)
+                .addComponent(lblBtnListasMantenimiento)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -486,7 +487,23 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-  
+        AnalistaBean analistaBean = new AnalistaBean();
+    
+        if(analistaBean.existeAnalista(usuario.getIdUsuario())){
+            btnUsuario.setVisible(true);
+            lblBtnUsuario.setVisible(true);
+            imgBtnUsuario.setVisible(true);
+            btnListasMantenimiento.setVisible(true);
+            lblBtnListasMantenimiento.setVisible(true);
+            imgBtnListasMantenimiento.setVisible(true);
+        }else{
+            btnUsuario.setVisible(false);
+            lblBtnUsuario.setVisible(false);
+            imgBtnUsuario.setVisible(false);
+            btnListasMantenimiento.setVisible(false);
+            lblBtnListasMantenimiento.setVisible(false);
+            imgBtnListasMantenimiento.setVisible(false);
+        }
         
     }//GEN-LAST:event_formWindowActivated
 
@@ -627,8 +644,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel imgBtnConstancias;
     private javax.swing.JLabel imgBtnEvento;
     private javax.swing.JLabel imgBtnJustificaciones;
+    private javax.swing.JLabel imgBtnListasMantenimiento;
     private javax.swing.JLabel imgBtnReclamos;
-    private javax.swing.JLabel imgBtnReclamos1;
     private javax.swing.JLabel imgBtnReportes;
     private javax.swing.JLabel imgBtnUsuario;
     private javax.swing.JLabel imgBtnUsuario1;
@@ -636,8 +653,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel lblBtnConstancias1;
     private javax.swing.JLabel lblBtnEventos;
     private javax.swing.JLabel lblBtnJustificaciones;
+    private javax.swing.JLabel lblBtnListasMantenimiento;
     private javax.swing.JLabel lblBtnReclamos;
-    private javax.swing.JLabel lblBtnReclamos1;
     private javax.swing.JLabel lblBtnReportes;
     private javax.swing.JLabel lblBtnUsuario;
     private javax.swing.JLabel lblNombreUsuario;

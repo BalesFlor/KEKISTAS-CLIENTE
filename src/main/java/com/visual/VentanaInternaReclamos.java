@@ -1,5 +1,6 @@
 package com.visual;
 
+import com.grsc.logica.ejb.AnalistaBean;
 import com.grsc.logica.ejb.EstadoPeticionBean;
 import com.grsc.logica.ejb.EstudianteBean;
 import com.grsc.logica.ejb.EventoBean;
@@ -43,6 +44,24 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
         btnLimpiarFiltroReclamos = new rsbuttongradiente.RSButtonGradiente();
         btnFiltrarReclamos = new rsbuttongradiente.RSButtonGradiente();
         btnAccion = new rsbuttongradiente.RSButtonGradiente();
+
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         botonEliminar1.setText("Eliminar");
         botonEliminar1.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -290,6 +309,25 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
         ventanaRegAccion ventanaRegAccion= new ventanaRegAccion(usuario.getIdUsuario());
         ventanaRegAccion.setVisible(true);
     }//GEN-LAST:event_btnAccionMouseClicked
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        EstudianteBean estBean = new EstudianteBean();
+        if(estBean.existeEstudiante(usuario.getIdUsuario())){
+            botonReclamar.setVisible(true);
+            botonEliminar1.setVisible(true);
+             botonModificar1.setVisible(true);
+        }else{
+            botonReclamar.setVisible(false);
+            botonEliminar1.setVisible(false);
+             botonModificar1.setVisible(false);
+        }
+        AnalistaBean analistaBean = new AnalistaBean();
+        if(analistaBean.existeAnalista(usuario.getIdUsuario())){
+            btnAccion.setVisible(true);
+        }else{
+            btnAccion.setVisible(false);
+        }
+    }//GEN-LAST:event_formInternalFrameActivated
     
     private DefaultTableModel cargarTablaReclamos() {
     
