@@ -1,5 +1,5 @@
 package com.visual;
-
+/*
 import com.grsc.logica.ejb.EstudianteBean;
 import com.grsc.logica.ejb.EventoBean;
 import com.grsc.logica.ejb.JustificacionBean;
@@ -248,4 +248,4 @@ public class VentanaAltaRol extends javax.swing.JFrame {
         txtNombre.setText("Aclaraciones incluyendo enlaces adjuntos...");
         cmbEvento.setSelectedIndex(0);
     }
-}
+}*/
