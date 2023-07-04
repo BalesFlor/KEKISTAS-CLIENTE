@@ -2,19 +2,21 @@ package com.visual;
 
 import com.grsc.logica.ejb.ItrBean;
 import com.grsc.modelo.entities.Itr;
+import java.math.BigInteger;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 public class InternalFrameITRs extends javax.swing.JInternalFrame {
 
+    ItrBean itrBean = new ItrBean();
+
     public InternalFrameITRs() {
         initComponents();
     }
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
 
+    private void initComponents() {
         lblBtnConstancias4 = new javax.swing.JLabel();
         comboboxEstadoITRs = new RSMaterialComponent.RSComboBoxMaterial();
         btnFiltrar2 = new rsbuttongradiente.RSButtonGradiente();
@@ -27,51 +29,10 @@ public class InternalFrameITRs extends javax.swing.JInternalFrame {
 
         setPreferredSize(new java.awt.Dimension(1001, 100));
 
-        lblBtnConstancias4.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        lblBtnConstancias4.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18));
         lblBtnConstancias4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBtnConstancias4.setText("ITRs");
 
-        /*comboboxEstadoITRs.setForeground(new java.awt.Color(13, 120, 161));
-
-        EstadoPeticionBean estadoPeticionBean= new EstadoPeticionBean();
-
-        DefaultComboBoxModel modeloEstadoITRs=new DefaultComboBoxModel();
-
-        List<EstadoPeticion> listaEstadoReclamo=estadoPeticionBean.listarEstados();
-
-        modeloEstadoReclamo.addElement(" ESTADO RECLAMO");
-
-        for(int i = 0 ; i<listaEstadoITRs.size(); i++){
-            modeloEstadoITRs.addElement(listaEstadoITRs.get(i).getNomEstado());
-        }
-
-        comboboxEstadoITRs.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
-
-        comboboxEstadoITRs.setModel(modeloEstadoITRs);
-        */
-
-        btnFiltrar2.setText("Filtrar");
-        btnFiltrar2.setColorPrimario(new java.awt.Color(213, 240, 252));
-        btnFiltrar2.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
-        btnFiltrar2.setColorSecundario(new java.awt.Color(105, 190, 228));
-        btnFiltrar2.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
-        btnFiltrar2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnFiltrar2MouseClicked(evt);
-            }
-        });
-
-        btnLimpiarFiltro2.setText("Limpiar Filtro");
-        btnLimpiarFiltro2.setColorPrimario(new java.awt.Color(213, 240, 252));
-        btnLimpiarFiltro2.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
-        btnLimpiarFiltro2.setColorSecundario(new java.awt.Color(105, 190, 228));
-        btnLimpiarFiltro2.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
-        btnLimpiarFiltro2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLimpiarFiltro2MouseClicked(evt);
-            }
-        });
-        btnLimpiarFiltro2.setVisible(false);
 
         botonAltaITR.setText("Alta");
         botonAltaITR.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -81,6 +42,7 @@ public class InternalFrameITRs extends javax.swing.JInternalFrame {
         botonAltaITR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAltaITRActionPerformed(evt);
+                
             }
         });
 
@@ -89,6 +51,11 @@ public class InternalFrameITRs extends javax.swing.JInternalFrame {
         botonModificar2.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
         botonModificar2.setColorSecundario(new java.awt.Color(213, 240, 252));
         botonModificar2.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
+        botonModificar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificar2ActionPerformed(evt);
+            }
+        });
 
         botonEliminar2.setText("Eliminar");
         botonEliminar2.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -106,9 +73,7 @@ public class InternalFrameITRs extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(this.cargarTablaITR()
-
-        );
+        jTable1.setModel(cargarTablaITR());
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,50 +124,68 @@ public class InternalFrameITRs extends javax.swing.JInternalFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    
 
-     
-    private void btnFiltrar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrar2MouseClicked
+    private void botonAltaITRActionPerformed(java.awt.event.ActionEvent evt) {
+                VentanaAltaITR ventanaITR = new VentanaAltaITR();
+                ventanaITR.setVisible(true);        
+
+    }
+
+    private void botonEliminar2MouseClicked(java.awt.event.MouseEvent evt) {
+        int row = jTable1.getSelectedRow();
+
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un ITR para eliminar");
+        } else {
+            String cellId = jTable1.getModel().getValueAt(row, 0).toString();
+            BigInteger idITR = new BigInteger(cellId);
+
+            boolean eliminado = itrBean.eliminarITR(idITR);
+
+            if (eliminado) {
+                JOptionPane.showMessageDialog(null, "ITR eliminado correctamente");
+                actualizarTablaITR();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo eliminar el ITR");
+            }
+        }
+    }
+
+    private void botonEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnFiltrar2MouseClicked
+    }
 
-    private void btnLimpiarFiltro2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFiltro2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLimpiarFiltro2MouseClicked
+    private void botonModificar2ActionPerformed(java.awt.event.ActionEvent evt) {
+        int row = jTable1.getSelectedRow();
 
-    private void botonAltaITRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAltaITRActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonAltaITRActionPerformed
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un ITR para modificar");
+        } else {
+            String cellId = jTable1.getModel().getValueAt(row, 0).toString();
+            BigInteger idITR = new BigInteger(cellId);
 
-    private void botonEliminar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminar2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonEliminar2MouseClicked
-
-    private void botonEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminar2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonEliminar2ActionPerformed
+            // Aquí debes implementar la lógica para modificar un ITR según tus necesidades
+        }
+    }
 
     private DefaultTableModel cargarTablaITR() {
-    
-      ItrBean itrBean = new ItrBean();
-      List<Itr> listaItr = itrBean.listarItrs();
-    
-        String[] nombreColumnas = {"Itr", "Departamento"};
-    
-       Object[][] datos = new Object[listaItr.size()][2];
+        List<Itr> listaItrs = itrBean.listarItrs();
+
+        String[] nombreColumnas = {"ID", "Departamento"};
+
+        Object[][] datos = new Object[listaItrs.size()][2];
 
         int fila = 0;
 
-        for (Itr u:listaItr) {
-            datos[fila][0] = u.getNomItr();
-            datos[fila][1] = u.getIdDepartamento();
+        for (Itr itr : listaItrs) {
+            datos[fila][0] = itr.getIdItr();
+            datos[fila][1] = itr.getNomItr();
             fila++;
         }
-    
-        DefaultTableModel model = new DefaultTableModel(datos, nombreColumnas) {
 
+        DefaultTableModel model = new DefaultTableModel(datos, nombreColumnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -212,15 +195,24 @@ public class InternalFrameITRs extends javax.swing.JInternalFrame {
             public Class<?> getColumnClass(int columnIndex) {
                 return String.class;
             }
-        
         };
+
         return model;
     }
-    
-    
-  
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private void actualizarTablaITR() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        List<Itr> listaItrs = itrBean.listarItrs();
+
+        for (Itr itr : listaItrs) {
+            Object[] row = {itr.getIdItr(), itr.getNomItr()};
+            model.addRow(row);
+        }
+    }
+
+    // Variables declaration - do not modify                     
     private rsbuttongradiente.RSButtonGradiente botonAltaITR;
     private rsbuttongradiente.RSButtonGradiente botonEliminar2;
     private rsbuttongradiente.RSButtonGradiente botonModificar2;
@@ -230,8 +222,6 @@ public class InternalFrameITRs extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBtnConstancias4;
-    // End of variables declaration//GEN-END:variables
-
-
-
+    // End of variables declaration                   
 }
+
