@@ -306,8 +306,26 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonReclamarMouseClicked
 
     private void btnAccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccionMouseClicked
-        ventanaRegAccion ventanaRegAccion= new ventanaRegAccion(usuario.getIdUsuario());
-        ventanaRegAccion.setVisible(true);
+        int row = tablaReclamos.getSelectedRow();
+
+        if (row==-1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un reclamo para eliminar");
+        } else {
+            String cellTitle = tablaReclamos.getModel().getValueAt(row, 2).toString();
+            String cellUsername = tablaReclamos.getModel().getValueAt(row, 1).toString();
+            
+            ReclamoBean reclamoBean = new ReclamoBean();
+            
+            Usuarios userSelected = userBean.buscarUserByNombre(cellUsername);
+            
+            EstudianteBean estBean = new EstudianteBean();
+            Estudiante est = estBean.buscarEstudiante(userSelected.getIdUsuario());
+
+            Reclamo reclamo = reclamoBean.buscarReclamo(est, cellTitle);
+            ventanaRegAccionReclamo ventanaRegAccion= new ventanaRegAccionReclamo(usuario.getIdUsuario(), reclamo);
+            ventanaRegAccion.setVisible(true);
+        }
+        
     }//GEN-LAST:event_btnAccionMouseClicked
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated

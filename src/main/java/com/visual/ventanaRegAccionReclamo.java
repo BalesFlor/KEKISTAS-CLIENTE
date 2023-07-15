@@ -4,6 +4,7 @@ import com.grsc.logica.ejb.AccionReclamoBean;
 import com.grsc.logica.ejb.AnalistaBean;
 import com.grsc.logica.ejb.ReclamoBean;
 import com.grsc.logica.ejb.UsuarioBean;
+import com.grsc.modelo.entities.AccionReclamo;
 import com.grsc.modelo.entities.Analista;
 import com.grsc.modelo.entities.Reclamo;
 import com.grsc.modelo.entities.Usuarios;
@@ -13,18 +14,24 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-public class ventanaRegAccion extends javax.swing.JFrame {
-    Usuarios usuario;
-    UsuarioBean userBean = new UsuarioBean();
+public class ventanaRegAccionReclamo extends javax.swing.JFrame {
+    Analista analista;
+    Reclamo reclamo;
+    Boolean existe = false;
 
-    public ventanaRegAccion(BigInteger idUser) {
-        usuario = traerUserPorID(idUser);
+    public ventanaRegAccionReclamo(BigInteger idUser, Reclamo reclamo) {
+        analista = traerUserPorID(idUser);
+        this.reclamo = reclamo;
         initComponents();
     }
 
-    public Usuarios traerUserPorID(BigInteger idUser) {
-        return userBean.buscarUsuario(idUser);
+    public Analista traerUserPorID(BigInteger idUser) {
+        UsuarioBean userBean = new UsuarioBean();
+        AnalistaBean anaBean = new AnalistaBean();
+        Analista analista = anaBean.buscarAnalista(userBean.buscarUsuario(idUser).getIdUsuario());
+        return analista;
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -39,11 +46,15 @@ public class ventanaRegAccion extends javax.swing.JFrame {
         txtDetalles = new javax.swing.JTextArea();
         btnCancelar = new rsbuttongradiente.RSButtonGradiente();
         btnEnviar = new rsbuttongradiente.RSButtonGradiente();
-        cmbReclamo = new RSMaterialComponent.RSComboBoxMaterial();
+        labelRegistradoPor = new javax.swing.JLabel();
+        labelFechaHora = new javax.swing.JLabel();
         lblReportesTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
@@ -89,51 +100,44 @@ public class ventanaRegAccion extends javax.swing.JFrame {
             }
         });
 
-        cmbReclamo.setForeground(new java.awt.Color(0, 112, 192));
-        ReclamoBean recBean = new ReclamoBean();
+        labelRegistradoPor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelRegistradoPor.setText("Registrado por:");
+        labelRegistradoPor.setVisible(false);
 
-        DefaultComboBoxModel modeloReclamo=new DefaultComboBoxModel();
-
-        List<Reclamo> listaReclamos = recBean.listaTodosReclamos();
-
-        modeloReclamo.addElement("Seleccione un Reclamo*");
-
-        for(int i = 0 ; i<listaReclamos.size(); i++){
-            modeloReclamo.addElement(listaReclamos.get(i).getTitulo());
-        }
-        cmbReclamo.setModel(modeloReclamo);
-        cmbReclamo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbReclamoActionPerformed(evt);
-            }
-        });
+        labelFechaHora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelFechaHora.setText("Fecha Hora:");
+        labelFechaHora.setToolTipText("");
+        labelFechaHora.setVisible(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(265, 265, 265)
-                        .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbReclamo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelRegistradoPor, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(265, 265, 265)
+                            .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(20, 20, 20)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(69, 69, 69))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(cmbReclamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelRegistradoPor)
+                .addGap(7, 7, 7)
+                .addComponent(labelFechaHora)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -198,28 +202,38 @@ public class ventanaRegAccion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
-        AccionReclamoBean accRecBean = new AccionReclamoBean();
+        AccionReclamoBean accRecBean = new AccionReclamoBean();      
 
-        AnalistaBean anaBean = new AnalistaBean();
-        Analista analista = anaBean.buscarAnalista(usuario.getIdUsuario());
-
-        if (txtDetalles.getText().equals("") || txtDetalles.getText().isBlank() || txtDetalles.getText().equals("Detalle de acción sobre reclamo...")) {
-
-            JOptionPane.showMessageDialog(this, "Debe ingresar una descripción de su acción", "Datos incompletos!",
-                    JOptionPane.WARNING_MESSAGE);
-
+        if (existe) {
+             Boolean seModifico = false;
+                seModifico = accRecBean.modificarAccion(reclamo, analista,  txtDetalles.getText(), Calendar.getInstance().getTime());
+                if (seModifico) {
+                    JOptionPane.showMessageDialog(this, "Accion sobre Reclamo modificada con exito",
+                            "exito", JOptionPane.INFORMATION_MESSAGE);
+                    clearObject(accRecBean.buscarAccionReclamo(reclamo, analista));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hubo un error en la modificada de su Reclamo",
+                            "Error", JOptionPane.WARNING_MESSAGE);
+                }
         } else {
+            if (txtDetalles.getText().equals("") || txtDetalles.getText().isBlank() || txtDetalles.getText().equals("Detalle de acción sobre reclamo...")) {
 
-            Boolean seCreo = false;
-            seCreo = accRecBean.registrarAccion(reclamoSeleccionado(), analista, txtDetalles.getText(), Calendar.getInstance().getTime());
-           
-            if (seCreo) {
-                JOptionPane.showMessageDialog(this, "Accion sobre Reclamo enviado con exito",
-                        "exito", JOptionPane.INFORMATION_MESSAGE);
-                clearObject();
+                JOptionPane.showMessageDialog(this, "Debe ingresar una descripción de su acción", "Datos incompletos!",
+                        JOptionPane.WARNING_MESSAGE);
+
             } else {
-                JOptionPane.showMessageDialog(this, "Hubo un error en el envía de su Justificacion",
-                        "Error", JOptionPane.WARNING_MESSAGE);
+
+                Boolean seCreo = false;
+                seCreo = accRecBean.registrarAccion(reclamo, analista, txtDetalles.getText(), Calendar.getInstance().getTime());
+
+                if (seCreo) {
+                    JOptionPane.showMessageDialog(this, "Accion sobre Reclamo enviado con exito",
+                            "exito", JOptionPane.INFORMATION_MESSAGE);
+                    clearObject(accRecBean.buscarAccionReclamo(reclamo, analista));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hubo un error en el envía de su Justificacion",
+                            "Error", JOptionPane.WARNING_MESSAGE);
+                }
             }
         }
     }//GEN-LAST:event_btnEnviarMouseClicked
@@ -228,44 +242,39 @@ public class ventanaRegAccion extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowClosed
 
-    private void cmbReclamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbReclamoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbReclamoActionPerformed
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+         AccionReclamoBean accRecBean = new AccionReclamoBean();
+         AccionReclamo accRec = accRecBean.buscarAccionReclamo(reclamo, analista);
+         if(accRec.getAccionReclamoPK() != null){
+             txtDetalles.setText(accRec.getDetalle());
+             existe = true;
+             labelRegistradoPor.setText("Registrado por: "+accRec.getAnalista().getUsuarios().getNomUsuario());
+             labelRegistradoPor.setVisible(true);
+             labelFechaHora.setText("Fecha Hora: "+accRec.getFechaHora().toString());
+             labelFechaHora.setVisible(true);
+         }
+    }//GEN-LAST:event_formWindowActivated
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rsbuttongradiente.RSButtonGradiente btnCancelar;
     private rsbuttongradiente.RSButtonGradiente btnEnviar;
-    private RSMaterialComponent.RSComboBoxMaterial cmbReclamo;
     private javax.swing.JLabel iconReclamos;
     private javax.swing.JLabel iconUtec;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelFechaHora;
+    private javax.swing.JLabel labelRegistradoPor;
     private javax.swing.JLabel lblReportesTitulo;
     private rspanelgradiente.RSPanelGradiente rSPanelGradiente1;
     private rojeru_san.rspanel.RSPanelShadow rSPanelShadow1;
     private javax.swing.JTextArea txtDetalles;
     // End of variables declaration//GEN-END:variables
 
-    public Reclamo reclamoSeleccionado() {
-        ReclamoBean recBean = new ReclamoBean();
-        
-        //Se carga una lista con todas las Evento
-        List<Reclamo> listaReclamos = recBean.listaTodosReclamos();
-        Reclamo reclamo = null;
-
-        //En el siguiente for se pasa por todas las Evento de la lista
-        for (int i = 0; i < listaReclamos.size(); i++) {
-            //Si el nombre de la Evento coincide con el seleccionado del combobox se carga en la variable a retornar
-            if (listaReclamos.get(i).getTitulo().equals(cmbReclamo.getSelectedItem().toString())) {
-                reclamo = listaReclamos.get(i);
-            }
-        }
-        return reclamo;
-    }
-    
-    
-    public void clearObject() {
-        txtDetalles.setText("Detalle de acción sobre reclamo...");
+    public void clearObject(AccionReclamo accRec) {
+        labelRegistradoPor.setText("Registrado por: "+accRec.getAnalista().getUsuarios().getNomUsuario());
+        labelRegistradoPor.setVisible(true);
+        labelFechaHora.setText("Fecha Hora: "+accRec.getFechaHora().toString());
+        labelFechaHora.setVisible(true);
     }
 }

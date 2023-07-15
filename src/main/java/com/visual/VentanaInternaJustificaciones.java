@@ -183,6 +183,11 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
         btnAccion.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
         btnAccion.setColorSecundario(new java.awt.Color(213, 240, 252));
         btnAccion.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
+        btnAccion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAccionMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -334,6 +339,11 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
             botonModificar.setVisible(false);
         }
     }//GEN-LAST:event_formInternalFrameActivated
+
+    private void btnAccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccionMouseClicked
+        ventanaRegAccionJus ventanaJusAccion= new ventanaRegAccionJus(usuario.getIdUsuario());
+        ventanaJusAccion.setVisible(true);
+    }//GEN-LAST:event_btnAccionMouseClicked
 
      
     private DefaultTableModel cargarTablaJustificaciones() {

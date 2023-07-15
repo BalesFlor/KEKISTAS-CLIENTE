@@ -243,6 +243,9 @@
           <Color blue="e4" green="be" red="69" type="rgb"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAccionMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

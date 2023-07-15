@@ -677,7 +677,7 @@ public class Home extends javax.swing.JFrame {
            }else if(ventanaAbierta.equals(this.ventanasInternas[3])){
                ventanaJustificaciones.dispose();
            }else if(ventanaAbierta.equals(this.ventanasInternas[4])){
-           
+               ventanaReportes.dispose();
            }else if(ventanaAbierta.equals(this.ventanasInternas[5])){
                ventanaReclamos.dispose();
            }else if(ventanaAbierta.equals(this.ventanasInternas[6])){
