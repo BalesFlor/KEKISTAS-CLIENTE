@@ -2,16 +2,12 @@ package com.visual;
 
 import com.grsc.logica.ejb.AccionReclamoBean;
 import com.grsc.logica.ejb.AnalistaBean;
-import com.grsc.logica.ejb.ReclamoBean;
 import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.AccionReclamo;
 import com.grsc.modelo.entities.Analista;
 import com.grsc.modelo.entities.Reclamo;
-import com.grsc.modelo.entities.Usuarios;
 import java.math.BigInteger;
 import java.util.Calendar;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class ventanaRegAccionReclamo extends javax.swing.JFrame {
@@ -231,7 +227,7 @@ public class ventanaRegAccionReclamo extends javax.swing.JFrame {
                             "exito", JOptionPane.INFORMATION_MESSAGE);
                     clearObject(accRecBean.buscarAccionReclamo(reclamo, analista));
                 } else {
-                    JOptionPane.showMessageDialog(this, "Hubo un error en el envía de su Justificacion",
+                    JOptionPane.showMessageDialog(this, "Hubo un error en el envía de su Reclamo",
                             "Error", JOptionPane.WARNING_MESSAGE);
                 }
             }

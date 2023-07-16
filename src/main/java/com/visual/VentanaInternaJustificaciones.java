@@ -16,6 +16,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -249,7 +251,7 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
         int row = tablaJustificaciones.getSelectedRow();
 
         if (row==-1) {
-            JOptionPane.showMessageDialog(null, "Seleccione un reclamo para eliminar");
+            JOptionPane.showMessageDialog(null, "Seleccione una justificacion para eliminar");
         } else {
             String cellFechaHora = tablaJustificaciones.getModel().getValueAt(row, 0).toString();
             String cellUsername = tablaJustificaciones.getModel().getValueAt(row, 1).toString();
@@ -275,7 +277,7 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
             Justificacion justificacion = jusBean.buscarJustificacion(fechaHora, evento, est);
             Object[] options = {"ELIMINAR", "CANCELAR"};
             int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar justificacion de inasistencia al evento " + cellEvento +
-                    " del Estudiante "+ userSelected.getNomUsuario() + "?", "Eliminar Reclamo", JOptionPane.YES_NO_OPTION,
+                    " del Estudiante "+ userSelected.getNomUsuario() + "?", "Eliminar Justificacion", JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
             if (respuesta == JOptionPane.YES_OPTION) {
@@ -341,8 +343,32 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void btnAccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccionMouseClicked
-        ventanaRegAccionJus ventanaJusAccion= new ventanaRegAccionJus(usuario.getIdUsuario());
-        ventanaJusAccion.setVisible(true);
+         int row = tablaJustificaciones.getSelectedRow();
+
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione una justificación para registrar o modificar su acción sobre él");
+        } else {
+            String cellFechaHora = tablaJustificaciones.getModel().getValueAt(row, 0).toString();
+            String cellUsername = tablaJustificaciones.getModel().getValueAt(row, 1).toString();
+            String cellEvento = tablaJustificaciones.getModel().getValueAt(row, 2).toString();
+            JustificacionBean jusBean = new JustificacionBean();
+            Usuarios userSelected = userBean.buscarUserByNombre(cellUsername);
+            EstudianteBean estBean = new EstudianteBean();
+            Estudiante est = estBean.buscarEstudiante(userSelected.getIdUsuario());
+            Date fechaHora = null;
+            SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            try {
+                fechaHora = formateador.parse(cellFechaHora);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            EventoBean eventoBean = new EventoBean();
+            Evento evento = eventoBean.buscarEvento(cellEvento);
+            JustificacionBean justificacionBean = new JustificacionBean();
+            Justificacion justificacion = justificacionBean.buscarJustificacion(fechaHora, evento, est);
+            ventanaRegAccionJus ventanaRegAccion = new ventanaRegAccionJus(usuario.getIdUsuario(), justificacion);
+            ventanaRegAccion.setVisible(true);
+        }
     }//GEN-LAST:event_btnAccionMouseClicked
 
      

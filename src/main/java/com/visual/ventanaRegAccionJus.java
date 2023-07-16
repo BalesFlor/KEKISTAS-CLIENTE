@@ -1,9 +1,10 @@
 package com.visual;
 
-import com.grsc.logica.ejb.AccionJustificacionesBean;
+import com.grsc.logica.ejb.AccionJustificacionBean;
 import com.grsc.logica.ejb.AnalistaBean;
 import com.grsc.logica.ejb.JustificacionBean;
 import com.grsc.logica.ejb.UsuarioBean;
+import com.grsc.modelo.entities.AccionJustificacion;
 import com.grsc.modelo.entities.Analista;
 import com.grsc.modelo.entities.Justificacion;
 import com.grsc.modelo.entities.Usuarios;
@@ -14,16 +15,21 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class ventanaRegAccionJus extends javax.swing.JFrame {
-    Usuarios usuario;
-    UsuarioBean userBean = new UsuarioBean();
+    Analista analista;
+    Justificacion justificacion;
+    Boolean existe = false;
 
-    public ventanaRegAccionJus(BigInteger idUser) {
-        usuario = traerUserPorID(idUser);
+    public ventanaRegAccionJus(BigInteger idUser, Justificacion justificacion) {
+        analista = traerUserPorID(idUser);
+        this.justificacion = justificacion;
         initComponents();
     }
-
-    public Usuarios traerUserPorID(BigInteger idUser) {
-        return userBean.buscarUsuario(idUser);
+    
+    public Analista traerUserPorID(BigInteger idUser) {
+        UsuarioBean userBean = new UsuarioBean();
+        AnalistaBean anaBean = new AnalistaBean();
+        Analista analista = anaBean.buscarAnalista(userBean.buscarUsuario(idUser).getIdUsuario());
+        return analista;
     }
 
     @SuppressWarnings("unchecked")
@@ -39,11 +45,15 @@ public class ventanaRegAccionJus extends javax.swing.JFrame {
         txtDetalles = new javax.swing.JTextArea();
         btnCancelar = new rsbuttongradiente.RSButtonGradiente();
         btnEnviar = new rsbuttongradiente.RSButtonGradiente();
-        cmbJustificacion = new RSMaterialComponent.RSComboBoxMaterial();
+        labelRegistradoPor = new javax.swing.JLabel();
+        labelFechaHora = new javax.swing.JLabel();
         lblReportesTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
@@ -62,7 +72,7 @@ public class ventanaRegAccionJus extends javax.swing.JFrame {
         txtDetalles.setColumns(20);
         txtDetalles.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtDetalles.setRows(5);
-        txtDetalles.setText("Detalle de acción sobre reclamo...");
+        txtDetalles.setText("Detalle de acción sobre justificacion...");
         jScrollPane1.setViewportView(txtDetalles);
 
         btnCancelar.setText("Cancelar");
@@ -89,50 +99,43 @@ public class ventanaRegAccionJus extends javax.swing.JFrame {
             }
         });
 
-        cmbJustificacion.setForeground(new java.awt.Color(0, 112, 192));
-        JustificacionBean jusBean = new JustificacionBean();
+        labelRegistradoPor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelRegistradoPor.setText("Registrado por:");
+        labelRegistradoPor.setVisible(false);
 
-        DefaultComboBoxModel modeloJustificacion=new DefaultComboBoxModel();
-
-        List<Justificacion> listaJustificacion = jusBean.listarJustificacions();
-
-        modeloJustificacion.addElement("Seleccione una Justificación*");
-
-        for(int i = 0 ; i<listaJustificacion.size(); i++){
-            modeloJustificacion.addElement(listaJustificacion.get(i).getIdEvento().getTitulo());
-        }
-        cmbJustificacion.setModel(modeloJustificacion);
-        cmbJustificacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbJustificacionActionPerformed(evt);
-            }
-        });
+        labelFechaHora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelFechaHora.setText("Fecha Hora:");
+        labelFechaHora.setToolTipText("");
+        labelFechaHora.setVisible(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(265, 265, 265)
-                        .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbJustificacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelRegistradoPor, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(265, 265, 265)
+                            .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(17, 17, 17)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(69, 69, 69))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(cmbJustificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(labelRegistradoPor)
+                .addGap(7, 7, 7)
+                .addComponent(labelFechaHora)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,7 +147,7 @@ public class ventanaRegAccionJus extends javax.swing.JFrame {
 
         lblReportesTitulo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         lblReportesTitulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblReportesTitulo.setText("Realizar acción sobre Reclamo");
+        lblReportesTitulo.setText("Realizar acción sobre Justificación");
 
         javax.swing.GroupLayout rSPanelGradiente1Layout = new javax.swing.GroupLayout(rSPanelGradiente1);
         rSPanelGradiente1.setLayout(rSPanelGradiente1Layout);
@@ -198,74 +201,81 @@ public class ventanaRegAccionJus extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
-        AccionJustificacionesBean accRecBean = new AccionJustificacionesBean();
+        AccionJustificacionBean accJusBean = new AccionJustificacionBean();
 
-        AnalistaBean anaBean = new AnalistaBean();
-        Analista analista = anaBean.buscarAnalista(usuario.getIdUsuario());
-
-        if (txtDetalles.getText().equals("") || txtDetalles.getText().isBlank() || txtDetalles.getText().equals("Detalle de acción sobre justificacion...")) {
-
-            JOptionPane.showMessageDialog(this, "Debe ingresar una descripción de su acción", "Datos incompletos!",
-                    JOptionPane.WARNING_MESSAGE);
-
-        } else {
-
-            Boolean seCreo = false;
-            seCreo = accRecBean.registrarAccion(justificacionSeleccionado(), analista, txtDetalles.getText(), Calendar.getInstance().getTime());
-           
-            if (seCreo) {
-                JOptionPane.showMessageDialog(this, "Accion sobre Justificacion enviado con exito",
+        if (existe) {
+            Boolean seModifico = false;
+            seModifico = accJusBean.modificarAccion(justificacion, analista, txtDetalles.getText(), Calendar.getInstance().getTime());
+            if (seModifico) {
+                JOptionPane.showMessageDialog(this, "Accion sobre Justificación modificada con exito",
                         "exito", JOptionPane.INFORMATION_MESSAGE);
-                clearObject();
+                clearObject(accJusBean.buscarAccionJustificacion(justificacion, analista));
             } else {
-                JOptionPane.showMessageDialog(this, "Hubo un error en el envía de su Justificacion",
+                JOptionPane.showMessageDialog(this, "Hubo un error en la modificación de su Acción en la Justificacion",
                         "Error", JOptionPane.WARNING_MESSAGE);
             }
+        } else {
+            if (txtDetalles.getText().equals("") || txtDetalles.getText().isBlank() || txtDetalles.getText().equals("Detalle de acción sobre justificacion...")) {
+
+                JOptionPane.showMessageDialog(this, "Debe ingresar una descripción de su acción", "Datos incompletos!",
+                        JOptionPane.WARNING_MESSAGE);
+
+            } else {
+
+                Boolean seCreo = false;
+                seCreo = accJusBean.registrarAccion(justificacion, analista, txtDetalles.getText(), Calendar.getInstance().getTime());
+
+                if (seCreo) {
+                    JOptionPane.showMessageDialog(this, "Accion sobre Justificacion enviado con exito",
+                            "exito", JOptionPane.INFORMATION_MESSAGE);
+                    clearObject(accJusBean.buscarAccionJustificacion(justificacion, analista));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hubo un error en el envía de su Justificacion",
+                            "Error", JOptionPane.WARNING_MESSAGE);
+                }
+            }
         }
+
     }//GEN-LAST:event_btnEnviarMouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
 
     }//GEN-LAST:event_formWindowClosed
 
-    private void cmbJustificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbJustificacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbJustificacionActionPerformed
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        AccionJustificacionBean accJusBean = new AccionJustificacionBean();
+        AccionJustificacion accJus = accJusBean.buscarAccionJustificacion(justificacion, analista);
+         if(accJus.getAccionJustificacionPK() != null){
+             txtDetalles.setText(accJus.getDetalle());
+             existe = true;
+             labelRegistradoPor.setText("Registrado por: "+accJus.getAnalista().getUsuarios().getNomUsuario());
+             labelRegistradoPor.setVisible(true);
+             labelFechaHora.setText("Fecha Hora: "+accJus.getFechaHora().toString());
+             labelFechaHora.setVisible(true);
+         }
+    }//GEN-LAST:event_formWindowActivated
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rsbuttongradiente.RSButtonGradiente btnCancelar;
     private rsbuttongradiente.RSButtonGradiente btnEnviar;
-    private RSMaterialComponent.RSComboBoxMaterial cmbJustificacion;
     private javax.swing.JLabel iconReclamos;
     private javax.swing.JLabel iconUtec;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelFechaHora;
+    private javax.swing.JLabel labelRegistradoPor;
     private javax.swing.JLabel lblReportesTitulo;
     private rspanelgradiente.RSPanelGradiente rSPanelGradiente1;
     private rojeru_san.rspanel.RSPanelShadow rSPanelShadow1;
     private javax.swing.JTextArea txtDetalles;
     // End of variables declaration//GEN-END:variables
 
-    public Justificacion justificacionSeleccionado() {
-        JustificacionBean jusBean = new JustificacionBean();
-        
-        //Se carga una lista con todas las Evento
-        List<Justificacion> listaJustificacions = jusBean.listarJustificacions();
-        Justificacion justificacion = null;
-
-        //En el siguiente for se pasa por todas las Evento de la lista
-        for (int i = 0; i < listaJustificacions.size(); i++) {
-            //Si el nombre de la Evento coincide con el seleccionado del combobox se carga en la variable a retornar
-            if (listaJustificacions.get(i).getIdEvento().getTitulo().equals(cmbJustificacion.getSelectedItem().toString())) {
-                justificacion = listaJustificacions.get(i);
-            }
-        }
-        return justificacion;
-    }
     
-    
-    public void clearObject() {
-        txtDetalles.setText("Detalle de acción sobre justificacion...");
+    public void clearObject(AccionJustificacion accJus) {
+        labelRegistradoPor.setText("Registrado por: "+accJus.getAnalista().getUsuarios().getNomUsuario());
+        labelRegistradoPor.setVisible(true);
+        labelFechaHora.setText("Fecha Hora: "+accJus.getFechaHora().toString());
+        labelFechaHora.setVisible(true);
     }
 }
