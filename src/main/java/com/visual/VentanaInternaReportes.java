@@ -26,7 +26,7 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
     Usuarios usuario = new Usuarios();
     
     public VentanaInternaReportes(BigInteger idUser) {
-        usuario = traerUserPorID(idUser);
+        this.usuario = traerUserPorID(idUser);
         initComponents();
     }
     

@@ -264,6 +264,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
 
     private void botonEliminar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminar1MouseClicked
         Reclamo reclamo = traerRecSeleccionado("Seleccione un reclamo para eliminar");
+        
         Object[] options = {"ELIMINAR", "CANCELAR"};
         int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar el reclamo?",
                 "Eliminar Reclamo", JOptionPane.YES_NO_OPTION,
@@ -333,8 +334,12 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
 
     private void btnModificarEstadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarEstadoMouseClicked
         Reclamo reclamo = traerRecSeleccionado("Seleccione un reclamo para modificar el estado");
-        VentanaSeleccionarEstadoReclamo ventanaSelEstado = new VentanaSeleccionarEstadoReclamo(usuario.getIdUsuario(), reclamo, this);
-        ventanaSelEstado.setVisible(true);
+        if (reclamo == null){
+            JOptionPane.showMessageDialog(null, "No se puede cambiar el estado por un error");
+        } else {
+            VentanaSeleccionarEstadoReclamo ventanaSelEstado = new VentanaSeleccionarEstadoReclamo(usuario.getIdUsuario(), reclamo, this);
+            ventanaSelEstado.setVisible(true);
+        }
     }//GEN-LAST:event_btnModificarEstadoMouseClicked
     
     private DefaultTableModel cargarTablaReclamos() {

@@ -341,6 +341,7 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
     private void btnModificarEstadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarEstadoMouseClicked
         Justificacion justificacion = traerJusSeleccionada("Seleccione una justificación para modificar su estado");
         if (justificacion == null) {
+            
             JOptionPane.showMessageDialog(null, "No se puede cambiar el estado por un error");
         } else {
             VentanaSeleccionarEstadoJustificacion ventanaSelEstado = new VentanaSeleccionarEstadoJustificacion(usuario.getIdUsuario(), justificacion, this);
