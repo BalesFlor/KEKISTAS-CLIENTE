@@ -20,6 +20,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     
     UsuarioBean userBean= new UsuarioBean();
     Usuarios usuario = new Usuarios();
+    ReclamoBean reclamoBean = new ReclamoBean();
     
     public VentanaInternaReclamos(BigInteger idUser) {
         usuario = traerUserPorID(idUser);
@@ -44,6 +45,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
         btnLimpiarFiltroReclamos = new rsbuttongradiente.RSButtonGradiente();
         btnFiltrarReclamos = new rsbuttongradiente.RSButtonGradiente();
         btnAccion = new rsbuttongradiente.RSButtonGradiente();
+        btnModificarEstado = new rsbuttongradiente.RSButtonGradiente();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -179,6 +181,17 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
             }
         });
 
+        btnModificarEstado.setText("Modificar Estado");
+        btnModificarEstado.setColorPrimario(new java.awt.Color(105, 190, 228));
+        btnModificarEstado.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
+        btnModificarEstado.setColorSecundario(new java.awt.Color(213, 240, 252));
+        btnModificarEstado.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
+        btnModificarEstado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModificarEstadoMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,7 +205,9 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                 .addComponent(botonModificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(botonReclamar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(295, 295, 295)
+                .addGap(89, 89, 89)
+                .addComponent(btnModificarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,7 +236,8 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonReclamar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonModificar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -247,45 +263,30 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEliminar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminar1MouseClicked
-        int row = tablaReclamos.getSelectedRow();
-
-        if (row==-1) {
-            JOptionPane.showMessageDialog(null, "Seleccione un reclamo para eliminar");
-        } else {
-            String cellTitle = tablaReclamos.getModel().getValueAt(row, 2).toString();
-            String cellUsername = tablaReclamos.getModel().getValueAt(row, 1).toString();
-            
-            ReclamoBean reclamoBean = new ReclamoBean();
-            
-            Usuarios userSelected = userBean.buscarUserByNombre(cellUsername);
-            
-            EstudianteBean estBean = new EstudianteBean();
-            Estudiante est = estBean.buscarEstudiante(userSelected.getIdUsuario());
-            
-            Reclamo reclamo = reclamoBean.buscarReclamo(est, cellTitle);
-            Object[] options = {"ELIMINAR", "CANCELAR"};
-            int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar reclamo " + reclamo.getTitulo() +
-                    " del Estudiante "+ userSelected.getNomUsuario() + "?", "Eliminar Reclamo", JOptionPane.YES_NO_OPTION,
+        Reclamo reclamo = traerRecSeleccionado("Seleccione un reclamo para eliminar");
+        Object[] options = {"ELIMINAR", "CANCELAR"};
+        int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar el reclamo?",
+                "Eliminar Reclamo", JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
-            if (respuesta == JOptionPane.YES_OPTION) {
-                Boolean eliminado = false;
-                try {
-                    eliminado = reclamoBean.borrarReclamo(reclamo.getIdReclamo());
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "No se ha eliminado el Reclamo dado un Error");
-                }
-                if ( eliminado ) {
-                    actualizar();
-                    JOptionPane.showMessageDialog(null, "Reclamo Eliminado correctamente");
-                    tablaReclamos.clearSelection();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Reclamo Eliminado NO correctamente");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "No se ha eliminado el reclamo");
+        if (respuesta == JOptionPane.YES_OPTION) {
+            Boolean eliminado = false;
+            try {
+                eliminado = reclamoBean.borrarReclamo(reclamo.getIdReclamo());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No se ha eliminado el Reclamo dado un Error");
             }
+            if (eliminado) {
+                actualizar();
+                JOptionPane.showMessageDialog(null, "Reclamo Eliminado correctamente");
+                tablaReclamos.clearSelection();
+            } else {
+                JOptionPane.showMessageDialog(null, "Reclamo Eliminado NO correctamente");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se ha eliminado el reclamo");
         }
+
     }//GEN-LAST:event_botonEliminar1MouseClicked
 
     private void botonReclamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReclamarActionPerformed
@@ -306,26 +307,9 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonReclamarMouseClicked
 
     private void btnAccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccionMouseClicked
-        int row = tablaReclamos.getSelectedRow();
-
-        if (row==-1) {
-            JOptionPane.showMessageDialog(null, "Seleccione un reclamo para eliminar");
-        } else {
-            String cellTitle = tablaReclamos.getModel().getValueAt(row, 2).toString();
-            String cellUsername = tablaReclamos.getModel().getValueAt(row, 1).toString();
-            
-            ReclamoBean reclamoBean = new ReclamoBean();
-            
-            Usuarios userSelected = userBean.buscarUserByNombre(cellUsername);
-            
-            EstudianteBean estBean = new EstudianteBean();
-            Estudiante est = estBean.buscarEstudiante(userSelected.getIdUsuario());
-
-            Reclamo reclamo = reclamoBean.buscarReclamo(est, cellTitle);
-            ventanaRegAccionReclamo ventanaRegAccion= new ventanaRegAccionReclamo(usuario.getIdUsuario(), reclamo);
-            ventanaRegAccion.setVisible(true);
-        }
-        
+        Reclamo reclamo = traerRecSeleccionado("Seleccione un reclamo para registrar una acción");
+        ventanaRegAccionReclamo ventanaRegAccion= new ventanaRegAccionReclamo(usuario.getIdUsuario(), reclamo);
+        ventanaRegAccion.setVisible(true);        
     }//GEN-LAST:event_btnAccionMouseClicked
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
@@ -346,6 +330,12 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
             btnAccion.setVisible(false);
         }
     }//GEN-LAST:event_formInternalFrameActivated
+
+    private void btnModificarEstadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarEstadoMouseClicked
+        Reclamo reclamo = traerRecSeleccionado("Seleccione un reclamo para modificar el estado");
+        VentanaSeleccionarEstadoReclamo ventanaSelEstado = new VentanaSeleccionarEstadoReclamo(usuario.getIdUsuario(), reclamo, this);
+        ventanaSelEstado.setVisible(true);
+    }//GEN-LAST:event_btnModificarEstadoMouseClicked
     
     private DefaultTableModel cargarTablaReclamos() {
     
@@ -410,6 +400,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     private rsbuttongradiente.RSButtonGradiente btnAccion;
     private rsbuttongradiente.RSButtonGradiente btnFiltrarReclamos;
     private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltroReclamos;
+    private rsbuttongradiente.RSButtonGradiente btnModificarEstado;
     private RSMaterialComponent.RSComboBoxMaterial comboboxEstadoReclamo;
     private RSMaterialComponent.RSComboBoxMaterial comboboxUsuarioReclamo;
     private javax.swing.JScrollPane jScrollPane3;
@@ -419,5 +410,25 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
 
 public void actualizar(){
         tablaReclamos.setModel(cargarTablaReclamos());
+    }
+
+public Reclamo traerRecSeleccionado(String msg){
+        int row = tablaReclamos.getSelectedRow();
+
+        Estudiante est = null;
+        String titulo = null;
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, msg);
+        } else {
+            String cellTitle = tablaReclamos.getModel().getValueAt(row, 2).toString();
+            String cellUsername = tablaReclamos.getModel().getValueAt(row, 1).toString();
+
+            Usuarios userSelected = userBean.buscarUserByNombre(cellUsername);
+
+            EstudianteBean estBean = new EstudianteBean();
+            est = estBean.buscarEstudiante(userSelected.getIdUsuario());
+            titulo = cellTitle;
+        }
+        return reclamoBean.buscarReclamo(est, titulo);
     }
 }

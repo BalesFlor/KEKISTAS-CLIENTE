@@ -16,8 +16,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +24,7 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
 
     Usuarios usuario;
     UsuarioBean userBean= new UsuarioBean();
+    JustificacionBean jusBean = new JustificacionBean();
     
     public VentanaInternaJustificaciones(BigInteger idUser) {
         usuario = traerUserPorID(idUser);
@@ -51,6 +50,7 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaJustificaciones = new javax.swing.JTable();
         btnAccion = new rsbuttongradiente.RSButtonGradiente();
+        btnModificarEstado = new rsbuttongradiente.RSButtonGradiente();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -191,6 +191,17 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
             }
         });
 
+        btnModificarEstado.setText("Modificar Estado");
+        btnModificarEstado.setColorPrimario(new java.awt.Color(105, 190, 228));
+        btnModificarEstado.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
+        btnModificarEstado.setColorSecundario(new java.awt.Color(213, 240, 252));
+        btnModificarEstado.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
+        btnModificarEstado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModificarEstadoMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -216,7 +227,9 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
                         .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(266, 266, 266)
+                        .addGap(60, 60, 60)
+                        .addComponent(btnModificarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 33, Short.MAX_VALUE))
@@ -240,7 +253,8 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
                     .addComponent(botonJustificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
 
@@ -248,56 +262,31 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
-        int row = tablaJustificaciones.getSelectedRow();
-
-        if (row==-1) {
-            JOptionPane.showMessageDialog(null, "Seleccione una justificacion para eliminar");
-        } else {
-            String cellFechaHora = tablaJustificaciones.getModel().getValueAt(row, 0).toString();
-            String cellUsername = tablaJustificaciones.getModel().getValueAt(row, 1).toString();
-            String cellEvento = tablaJustificaciones.getModel().getValueAt(row, 2).toString();
-
-            JustificacionBean jusBean = new JustificacionBean();
-            
-            Usuarios userSelected = userBean.buscarUserByNombre(cellUsername);
-            EstudianteBean estBean = new EstudianteBean();
-            Estudiante est = estBean.buscarEstudiante(userSelected.getIdUsuario());
-            
-            Date fechaHora = null;
-            SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-            try {
-                fechaHora = formateador.parse(cellFechaHora);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            
-            EventoBean eventoBean = new EventoBean();
-            Evento evento = eventoBean.buscarEvento(cellEvento);
-            
-            Justificacion justificacion = jusBean.buscarJustificacion(fechaHora, evento, est);
-            Object[] options = {"ELIMINAR", "CANCELAR"};
-            int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar justificacion de inasistencia al evento " + cellEvento +
-                    " del Estudiante "+ userSelected.getNomUsuario() + "?", "Eliminar Justificacion", JOptionPane.YES_NO_OPTION,
+        Justificacion justificacion = traerJusSeleccionada("Seleccione una justificacion para eliminar");
+        
+        Object[] options = {"ELIMINAR", "CANCELAR"};
+        int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar justificacion de inasistencia del Estudiante?", 
+                "Eliminar Justificacion", JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
-            if (respuesta == JOptionPane.YES_OPTION) {
-                Boolean eliminado = false;
-                try {
-                    eliminado = jusBean.borrarJustificacion(justificacion.getIdJustificacion());
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "No se ha eliminado la Justificación dado un Error");
-                }
-                if ( eliminado ) {
-                    actualizar();
-                    JOptionPane.showMessageDialog(null, "Justificacion Eliminada correctamente");
-                    tablaJustificaciones.clearSelection();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Justificacion Eliminado NO correctamente");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "No se ha eliminado la Justificacion");
+        if (respuesta == JOptionPane.YES_OPTION) {
+            Boolean eliminado = false;
+            try {
+                eliminado = jusBean.borrarJustificacion(justificacion.getIdJustificacion());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No se ha eliminado la Justificación dado un Error");
             }
+            if (eliminado) {
+                actualizar();
+                JOptionPane.showMessageDialog(null, "Justificacion Eliminada correctamente");
+                tablaJustificaciones.clearSelection();
+            } else {
+                JOptionPane.showMessageDialog(null, "Justificacion Eliminado NO correctamente");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se ha eliminado la Justificacion");
         }
+
     }//GEN-LAST:event_botonEliminarMouseClicked
 
     private void botonJustificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonJustificarMouseClicked
@@ -343,33 +332,22 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void btnAccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccionMouseClicked
-         int row = tablaJustificaciones.getSelectedRow();
+        Justificacion justificacion = traerJusSeleccionada("Seleccione una justificación para registrar o modificar su acción sobre él");
+        ventanaRegAccionJus ventanaRegAccion = new ventanaRegAccionJus(usuario.getIdUsuario(), justificacion);
+        ventanaRegAccion.setVisible(true);
 
-        if (row == -1) {
-            JOptionPane.showMessageDialog(null, "Seleccione una justificación para registrar o modificar su acción sobre él");
-        } else {
-            String cellFechaHora = tablaJustificaciones.getModel().getValueAt(row, 0).toString();
-            String cellUsername = tablaJustificaciones.getModel().getValueAt(row, 1).toString();
-            String cellEvento = tablaJustificaciones.getModel().getValueAt(row, 2).toString();
-            JustificacionBean jusBean = new JustificacionBean();
-            Usuarios userSelected = userBean.buscarUserByNombre(cellUsername);
-            EstudianteBean estBean = new EstudianteBean();
-            Estudiante est = estBean.buscarEstudiante(userSelected.getIdUsuario());
-            Date fechaHora = null;
-            SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-            try {
-                fechaHora = formateador.parse(cellFechaHora);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            EventoBean eventoBean = new EventoBean();
-            Evento evento = eventoBean.buscarEvento(cellEvento);
-            JustificacionBean justificacionBean = new JustificacionBean();
-            Justificacion justificacion = justificacionBean.buscarJustificacion(fechaHora, evento, est);
-            ventanaRegAccionJus ventanaRegAccion = new ventanaRegAccionJus(usuario.getIdUsuario(), justificacion);
-            ventanaRegAccion.setVisible(true);
-        }
     }//GEN-LAST:event_btnAccionMouseClicked
+
+    private void btnModificarEstadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarEstadoMouseClicked
+        Justificacion justificacion = traerJusSeleccionada("Seleccione una justificación para modificar su estado");
+        if (justificacion == null) {
+            JOptionPane.showMessageDialog(null, "No se puede cambiar el estado por un error");
+        } else {
+            VentanaSeleccionarEstadoJustificacion ventanaSelEstado = new VentanaSeleccionarEstadoJustificacion(usuario.getIdUsuario(), justificacion, this);
+            ventanaSelEstado.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_btnModificarEstadoMouseClicked
 
      
     private DefaultTableModel cargarTablaJustificaciones() {
@@ -378,9 +356,9 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
         
         List<Justificacion> listaJustificacions = justificacionBean.listarJustificacions();
     
-        String[] nombreColumnas = {"Fecha/Hora", "Usuario", "Evento", "Info Adjunta"};
+        String[] nombreColumnas = {"Fecha/Hora", "Usuario", "Evento", "Info Adjunta", "Estado Justificación"};
     
-        Object[][] datos = new Object[listaJustificacions.size()][4];
+        Object[][] datos = new Object[listaJustificacions.size()][5];
 
         int fila = 0;
 
@@ -390,6 +368,7 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
             datos[fila][1] = userBean.buscarUsuario(u.getIdUsuario().getIdUsuario()).getNomUsuario();
             datos[fila][2] = u.getIdEvento().getTitulo();
             datos[fila][3] = u.getDetalle();
+            datos[fila][4] = u.getIdEstadoPeticion().getNomEstado();
             
             fila++;
 
@@ -420,6 +399,7 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
     private rsbuttongradiente.RSButtonGradiente btnAccion;
     private rsbuttongradiente.RSButtonGradiente btnFiltrarReclamos;
     private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltroReclamos;
+    private rsbuttongradiente.RSButtonGradiente btnModificarEstado;
     private RSMaterialComponent.RSComboBoxMaterial comboboxEstadoJustificacion;
     private RSMaterialComponent.RSComboBoxMaterial comboboxUsuarioJustificacion;
     private javax.swing.JScrollPane jScrollPane3;
@@ -429,5 +409,37 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
 
 public void actualizar(){
         tablaJustificaciones.setModel(cargarTablaJustificaciones());
+    }
+
+private Justificacion traerJusSeleccionada(String msg) {
+        int row = tablaJustificaciones.getSelectedRow();
+        
+        Date fechaHora = null;
+        Estudiante est = null;
+        Evento evento = new Evento();        
+        
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, msg);
+        } else {
+            String cellFechaHora = tablaJustificaciones.getModel().getValueAt(row, 0).toString();
+            String cellUsername = tablaJustificaciones.getModel().getValueAt(row, 1).toString();
+            String cellEvento = tablaJustificaciones.getModel().getValueAt(row, 2).toString();
+
+            Usuarios userSelected = userBean.buscarUserByNombre(cellUsername);
+            EstudianteBean estBean = new EstudianteBean();
+            est = estBean.buscarEstudiante(userSelected.getIdUsuario());
+
+            SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            try {
+                fechaHora = formateador.parse(cellFechaHora);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            EventoBean eventoBean = new EventoBean();        
+            evento = eventoBean.buscarEvento(cellEvento);
+        }   
+        return jusBean.buscarJustificacion(fechaHora, evento, est);
+       
     }
 }
