@@ -21,6 +21,7 @@ public class VentanaSeleccionarEstadoReclamo extends javax.swing.JFrame {
     private VentanaInternaReclamos ventanaInternaReclamos;
     Analista analista;
     Reclamo reclamo;
+    ReclamoBean recBean = new ReclamoBean();
    
     public VentanaSeleccionarEstadoReclamo(BigInteger idUser, Reclamo reclamo, VentanaInternaReclamos ventanaInternaRec) {
         analista = traerUserPorID(idUser);
@@ -32,8 +33,7 @@ public class VentanaSeleccionarEstadoReclamo extends javax.swing.JFrame {
     public Analista traerUserPorID(BigInteger idUser) {
         UsuarioBean userBean = new UsuarioBean();
         AnalistaBean anaBean = new AnalistaBean();
-        Analista analista = anaBean.buscarAnalista(userBean.buscarUsuario(idUser).getIdUsuario());
-        return analista;
+        return anaBean.buscarAnalista(userBean.buscarUsuario(idUser).getIdUsuario());
     }
 
     @SuppressWarnings("unchecked")
@@ -123,21 +123,23 @@ public class VentanaSeleccionarEstadoReclamo extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(labelRegistradoPor, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(54, 54, 54)
-                            .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(labelFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelRegistradoPor, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,8 +215,6 @@ public class VentanaSeleccionarEstadoReclamo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
-        ReclamoBean recBean = new ReclamoBean();
-
         if (cmbEstado.getSelectedItem().equals(reclamo.getIdEstadoPeticion().getNomEstado())) {
             
             JOptionPane.showMessageDialog(this, "Debe seleccionar un estado diferente al actual para modificar la Reclamos",
@@ -235,12 +235,12 @@ public class VentanaSeleccionarEstadoReclamo extends javax.swing.JFrame {
             }
 
             if (seModifico) {
-                JOptionPane.showMessageDialog(this, "Estado de Justificación modificado con exito",
-                        "exito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Estado de Reclamo modificado con exito",
+                        "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 ventanaInternaReclamos.actualizar();
                 clearObject(recBean.buscarReclamoPorId(reclamo.getIdReclamo()));  
             } else {
-                JOptionPane.showMessageDialog(this, "Hubo un error en la modificación del estado en la Reclamos",
+                JOptionPane.showMessageDialog(this, "Hubo un error en la modificación del estado del Reclamo",
                         "Error", JOptionPane.WARNING_MESSAGE);
             }
         }

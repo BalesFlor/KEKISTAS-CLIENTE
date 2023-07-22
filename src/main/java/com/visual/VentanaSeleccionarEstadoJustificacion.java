@@ -228,18 +228,17 @@ public class VentanaSeleccionarEstadoJustificacion extends javax.swing.JFrame {
                 seModifico = recBean.modificarEstado(justificacion, estado, date);
                 this.justificacion.setIdEstadoPeticion(estado);
                 this.justificacion.setFechaHora(date);
-                
             } catch (Exception ex) {
                 Logger.getLogger(VentanaSeleccionarEstadoJustificacion.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             if (seModifico) {
                 JOptionPane.showMessageDialog(this, "Estado de Justificación modificado con exito",
-                        "exito", JOptionPane.INFORMATION_MESSAGE);
+                        "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 ventanaInternaJustificacion.actualizar();
                 clearObject(recBean.buscarJustificacionPorId(justificacion.getIdJustificacion()));  
             } else {
-                JOptionPane.showMessageDialog(this, "Hubo un error en la modificación del estado en la Justificacion",
+                JOptionPane.showMessageDialog(this, "Hubo un error en la modificación del estado en la Justificación",
                         "Error", JOptionPane.WARNING_MESSAGE);
             }
         }
