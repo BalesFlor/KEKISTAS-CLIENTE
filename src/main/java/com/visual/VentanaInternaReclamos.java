@@ -202,6 +202,8 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                 .addContainerGap(872, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonModificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(botonReclamar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,9 +224,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnFiltrarReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnLimpiarFiltroReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(0, 16, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -237,7 +237,8 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                     .addComponent(botonReclamar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonModificar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnModificarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -254,9 +255,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                                 .addComponent(comboboxUsuarioReclamo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGap(10, 10, 10)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(10, 10, 10)
-                    .addComponent(botonEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 11, Short.MAX_VALUE)))
+                    .addGap(0, 61, Short.MAX_VALUE)))
         );
 
         pack();
@@ -327,8 +326,10 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
         AnalistaBean analistaBean = new AnalistaBean();
         if(analistaBean.existeAnalista(usuario.getIdUsuario())){
             btnAccion.setVisible(true);
+            btnModificarEstado.setVisible(true);
         }else{
             btnAccion.setVisible(false);
+            btnModificarEstado.setVisible(false);
         }
     }//GEN-LAST:event_formInternalFrameActivated
 
@@ -343,8 +344,6 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnModificarEstadoMouseClicked
     
     private DefaultTableModel cargarTablaReclamos() {
-    
-        ReclamoBean reclamoBean = new ReclamoBean();
         EventoBean eventoBean = new EventoBean();
                 
         List<Reclamo> listaReclamos = reclamoBean.listaTodosReclamos();
@@ -363,21 +362,11 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
             datos[fila][2] = u.getTitulo();
             datos[fila][3] = u.getDetalle();
             datos[fila][4] = u.getIdEstadoPeticion().getNomEstado();
-            
-            if(u.getIdEvento()!=null){
-                 datos[fila][5] = eventoBean.buscarEventoPorId(u.getIdEvento().getIdEvento()).getTitulo();
-                 datos[fila][6] = u.getFecha().toString();
-                 datos[fila][7] = u.getSemestre();
-                 datos[fila][8] = u.getCreditos();
-            }else{
-                datos[fila][5] = "No tiene";
-                 datos[fila][6] = "-";
-                 datos[fila][7] = "-";
-                 datos[fila][8] = "-";
-            }
-            
+            datos[fila][5] = (u.getIdEvento() != null) ? eventoBean.buscarEventoPorId(u.getIdEvento().getIdEvento()).getTitulo() : "No tiene";
+            datos[fila][6] = (u.getFecha() != null) ? u.getFecha().toString() : "-";
+            datos[fila][7] = (u.getSemestre() != null) ? u.getSemestre() : "-";
+            datos[fila][8] = (u.getCreditos() != null) ? u.getCreditos() : "-";
             fila++;
-
         }
     
         DefaultTableModel model = new DefaultTableModel(datos, nombreColumnas) {

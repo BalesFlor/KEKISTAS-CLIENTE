@@ -315,9 +315,11 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
         if(analistaBean.existeAnalista(usuario.getIdUsuario())){
             comboboxUsuarioJustificacion.setVisible(true);
             btnAccion.setVisible(true);
+            btnModificarEstado.setVisible(true);
         }else{
             comboboxUsuarioJustificacion.setVisible(false);
             btnAccion.setVisible(false);
+            btnModificarEstado.setVisible(false);
         }
         EstudianteBean estBean = new EstudianteBean();
         if(estBean.existeEstudiante(usuario.getIdUsuario())){
