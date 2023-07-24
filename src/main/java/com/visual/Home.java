@@ -508,12 +508,9 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void lblNombreUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNombreUsuarioMouseClicked
-        dispose();
-        /*
-        VentanaModificarUsuario VentanaModUsuario= new VentanaModificarUsuario();
-        
+        VentanaModificarUsuario VentanaModUsuario= new VentanaModificarUsuario(usuario.getIdUsuario());
+
         VentanaModUsuario.setVisible(true);
-        */
     }//GEN-LAST:event_lblNombreUsuarioMouseClicked
 
     private void lblNombreUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNombreUsuarioMouseEntered
@@ -603,7 +600,7 @@ public class Home extends javax.swing.JFrame {
     private void btnUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuarioMouseClicked
         cerrarVentanas(ventanaAbierta);
         this.ventanaAbierta = ventanasInternas[0];
-        ventanaUsers = new VentanaInternaUsuarios();
+        ventanaUsers = new VentanaInternaUsuarios(usuario.getIdUsuario());
         background.add(ventanaUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
         ventanaUsers.setVisible(true);
     }//GEN-LAST:event_btnUsuarioMouseClicked

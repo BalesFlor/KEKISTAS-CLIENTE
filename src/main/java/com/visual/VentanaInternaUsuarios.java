@@ -21,13 +21,15 @@ import javax.swing.table.TableRowSorter;
 
 public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
 
+    Usuarios analista = new Usuarios();
+    UsuarioBean userBean = new UsuarioBean();
     
-    public VentanaInternaUsuarios() {
+    
+    public VentanaInternaUsuarios(BigInteger idAnalista) {
+        analista = userBean.buscarUsuario(idAnalista);
         initComponents();
     }
-
-    UsuarioBean userBean= new UsuarioBean();
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -35,7 +37,7 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
         lblBtnConstancias2 = new javax.swing.JLabel();
         comboboxEstado = new RSMaterialComponent.RSComboBoxMaterial();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaUsuarios = new javax.swing.JTable();
         botonEliminar = new rsbuttongradiente.RSButtonGradiente();
         botonModificar = new rsbuttongradiente.RSButtonGradiente();
         botonSolicitudesConstancias = new rsbuttongradiente.RSButtonGradiente();
@@ -70,12 +72,12 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
 
         comboboxEstado.setModel(modeloEstados);
 
-        jTable1.setModel(cargarTablaUsuarios(
+        tablaUsuarios.setModel(cargarTablaUsuarios(
         ));
-        jTable1.setAutoscrolls(true);
-        jTable1.setRowSelectionAllowed(true);
-        jTable1.setSize(600, 600);
-        jScrollPane2.setViewportView(jTable1);
+        tablaUsuarios.setAutoscrolls(true);
+        tablaUsuarios.setRowSelectionAllowed(true);
+        tablaUsuarios.setSize(600, 600);
+        jScrollPane2.setViewportView(tablaUsuarios);
 
         botonEliminar.setText("Eliminar");
         botonEliminar.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -93,6 +95,11 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
         botonModificar.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
         botonModificar.setColorSecundario(new java.awt.Color(213, 240, 252));
         botonModificar.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
+        botonModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonModificarMouseClicked(evt);
+            }
+        });
 
         botonSolicitudesConstancias.setText("Solicitudes de Constancias");
         botonSolicitudesConstancias.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -317,12 +324,12 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
 
     
     private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
-        int row = jTable1.getSelectedRow();
+        int row = tablaUsuarios.getSelectedRow();
 
         if (row==-1) {
             JOptionPane.showMessageDialog(null, "Seleccione un usuario para eliminar");
         } else {
-            String cell = jTable1.getModel().getValueAt(row, 2).toString();
+            String cell = tablaUsuarios.getModel().getValueAt(row, 2).toString();
             Usuarios usuarioExterno = userBean.buscarUsuarioPorDocumento(cell);
             Object[] options = {"ELIMINAR", "CANCELAR"};
             int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar usuario " + usuarioExterno.getNomUsuario()
@@ -338,9 +345,9 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
                 }
                 BigInteger estadoEliminado = BigInteger.valueOf(3L);
                 if (userBean.obtenerEstado(usuarioExterno.getIdUsuario()).getIdEstado().equals(estadoEliminado)) {
-                    jTable1.setModel(cargarTablaUsuarios());
+                    tablaUsuarios.setModel(cargarTablaUsuarios());
                     JOptionPane.showMessageDialog(null, "Usuario Eliminado correctamente");
-                    jTable1.clearSelection();
+                    tablaUsuarios.clearSelection();
                 } else {
                     JOptionPane.showMessageDialog(null, "Usuario Eliminado NO correctamente");
                 }
@@ -374,9 +381,22 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
         this.btnLimpiarFiltro.setVisible(true);
     }//GEN-LAST:event_btnFiltrarMouseClicked
 
+    private void botonModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificarMouseClicked
+     
+        int row = tablaUsuarios.getSelectedRow();
+        if(row == -1){
+            JOptionPane.showMessageDialog(null, "Seleccione un usuario para modificar");
+        }else{
+            Usuarios usuario = userBean.buscarUsuarioPorDocumento(this.tablaUsuarios.getModel().getValueAt(row,2).toString());
+            VentanaModificarAnalista modificar = new VentanaModificarAnalista(usuario.getIdUsuario(), analista.getIdUsuario(), this);
+            modificar.setVisible(true);  
+        }
+        
+    }//GEN-LAST:event_botonModificarMouseClicked
+
     private void accionLimpiarFiltro() {
 
-        this.jTable1.setRowSorter(null);
+        this.tablaUsuarios.setRowSorter(null);
         this.comboboxEstado.setSelectedIndex(0);
         this.comboboxGeneracion.setSelectedIndex(0);
         this.comboboxItr.setSelectedIndex(0);
@@ -385,10 +405,10 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
 
     private void accionFiltrar() {
 
-        TableRowSorter<TableModel> filtro1 = new TableRowSorter<>(this.jTable1.getModel());
-        TableRowSorter<TableModel> filtro2 = new TableRowSorter<>(this.jTable1.getModel());
-        TableRowSorter<TableModel> filtro3 = new TableRowSorter<>(this.jTable1.getModel());
-        TableRowSorter<TableModel> filtro4 = new TableRowSorter<>(this.jTable1.getModel());
+        TableRowSorter<TableModel> filtro1 = new TableRowSorter<>(this.tablaUsuarios.getModel());
+        TableRowSorter<TableModel> filtro2 = new TableRowSorter<>(this.tablaUsuarios.getModel());
+        TableRowSorter<TableModel> filtro3 = new TableRowSorter<>(this.tablaUsuarios.getModel());
+        TableRowSorter<TableModel> filtro4 = new TableRowSorter<>(this.tablaUsuarios.getModel());
 
         Roles rol = tipoUserSeleccionado();
         EstadoUsuario estado = estadoSeleccionado();
@@ -401,7 +421,7 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
 
             filtro1.setRowFilter(RowFilter.regexFilter(estadoString, 0));
 
-            jTable1.setRowSorter(filtro1);
+            tablaUsuarios.setRowSorter(filtro1);
         }
         if (rol != null) {
 
@@ -409,7 +429,7 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
 
             filtro2.setRowFilter(RowFilter.regexFilter(rolString, 1));
 
-            jTable1.setRowSorter(filtro2);
+            tablaUsuarios.setRowSorter(filtro2);
 
         }
         if (itr != null) {
@@ -418,7 +438,7 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
 
             filtro3.setRowFilter(RowFilter.regexFilter(itrString, 4));
 
-            jTable1.setRowSorter(filtro3);
+            tablaUsuarios.setRowSorter(filtro3);
 
         }
 
@@ -428,7 +448,7 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
 
             filtro4.setRowFilter(RowFilter.regexFilter(genAnio, 5));
 
-            jTable1.setRowSorter(filtro4);
+            tablaUsuarios.setRowSorter(filtro4);
         }
     }
 
@@ -534,7 +554,10 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
     private RSMaterialComponent.RSComboBoxMaterial comboboxItr;
     private RSMaterialComponent.RSComboBoxMaterial comboboxTipoUser1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBtnConstancias2;
+    private javax.swing.JTable tablaUsuarios;
     // End of variables declaration//GEN-END:variables
+public void actualizar(){
+        this.tablaUsuarios.setModel(cargarTablaUsuarios());
+    }
 }
