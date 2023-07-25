@@ -1,5 +1,6 @@
 package com.visual;
 
+import com.correo.EnvioDeCorreo;
 import com.grsc.logica.ejb.AnalistaBean;
 import com.grsc.logica.ejb.EstadoPeticionBean;
 import com.grsc.logica.ejb.ReclamoBean;
@@ -7,6 +8,7 @@ import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.Analista;
 import com.grsc.modelo.entities.EstadoPeticion;
 import com.grsc.modelo.entities.Reclamo;
+import com.grsc.modelo.entities.Usuarios;
 import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
@@ -239,6 +241,14 @@ public class VentanaSeleccionarEstadoReclamo extends javax.swing.JFrame {
                         "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 ventanaInternaReclamos.actualizar();
                 clearObject(recBean.buscarReclamoPorId(reclamo.getIdReclamo()));  
+                
+                UsuarioBean userBean = new UsuarioBean();
+                EnvioDeCorreo enviarCorreo = new EnvioDeCorreo();
+                Usuarios user = userBean.buscarUsuario(reclamo.getIdUsuario().getIdUsuario()); 
+                enviarCorreo.transfer_to_email(user.getMailInstitucional(), "Estimado/a "+ user.getNombre1()+" "+ user.getApellido1() +", \n"
+                        + "Le informamos que se ha modificado el estado de su reclamo llamado: " + reclamo.getTitulo() + " a "+estado.getNomEstado(),
+                        "Cambio de Estado en su reclamo");
+                           
             } else {
                 JOptionPane.showMessageDialog(this, "Hubo un error en la modificación del estado del Reclamo",
                         "Error", JOptionPane.WARNING_MESSAGE);

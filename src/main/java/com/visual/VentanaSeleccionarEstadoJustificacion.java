@@ -1,5 +1,6 @@
 package com.visual;
 
+import com.correo.EnvioDeCorreo;
 import com.grsc.logica.ejb.AnalistaBean;
 import com.grsc.logica.ejb.EstadoPeticionBean;
 import com.grsc.logica.ejb.JustificacionBean;
@@ -7,6 +8,7 @@ import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.Analista;
 import com.grsc.modelo.entities.EstadoPeticion;
 import com.grsc.modelo.entities.Justificacion;
+import com.grsc.modelo.entities.Usuarios;
 import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,8 +22,8 @@ public class VentanaSeleccionarEstadoJustificacion extends javax.swing.JFrame {
 
     private VentanaInternaJustificaciones ventanaInternaJustificacion;
     Analista analista;
-    Justificacion justificacion;
-    JustificacionBean recBean = new JustificacionBean();
+    Justificacion justificacion = null;
+    JustificacionBean jusBean = new JustificacionBean();
     
     public VentanaSeleccionarEstadoJustificacion(BigInteger idUser, Justificacion justificacion, VentanaInternaJustificaciones ventanaInternaRec) {
         analista = traerUserPorID(idUser);
@@ -225,7 +227,7 @@ public class VentanaSeleccionarEstadoJustificacion extends javax.swing.JFrame {
 
             try {
                 Date date = Calendar.getInstance().getTime();
-                seModifico = recBean.modificarEstado(justificacion, estado, date);
+                seModifico = jusBean.modificarEstado(justificacion, estado, date);
                 this.justificacion.setIdEstadoPeticion(estado);
                 this.justificacion.setFechaHora(date);
             } catch (Exception ex) {
@@ -236,7 +238,14 @@ public class VentanaSeleccionarEstadoJustificacion extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Estado de Justificación modificado con exito",
                         "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 ventanaInternaJustificacion.actualizar();
-                clearObject(recBean.buscarJustificacionPorId(justificacion.getIdJustificacion()));  
+                clearObject(jusBean.buscarJustificacionPorId(justificacion.getIdJustificacion()));
+                
+                UsuarioBean userBean = new UsuarioBean();
+                EnvioDeCorreo enviarCorreo = new EnvioDeCorreo();
+                Usuarios user = userBean.buscarUsuario(justificacion.getIdUsuario().getIdUsuario());
+                enviarCorreo.transfer_to_email(user.getMailInstitucional(),  "Estimado/a "+ user.getNombre1()+" "+ user.getApellido1() +", \n"
+                        + "Le informamos que se ha modificado el estado de su justificación relacionada al evento: " + justificacion.getIdEvento().getTitulo() + " a "+estado.getNomEstado(),
+                        "Cambio de Estado en su reclamo");             
             } else {
                 JOptionPane.showMessageDialog(this, "Hubo un error en la modificación del estado en la Justificación",
                         "Error", JOptionPane.WARNING_MESSAGE);
@@ -245,7 +254,7 @@ public class VentanaSeleccionarEstadoJustificacion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnviarMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        cmbEstado.setSelectedItem(this.justificacion.getIdEstadoPeticion().getNomEstado());
+        cmbEstado.setSelectedItem(justificacion.getIdEstadoPeticion().getNomEstado());
     }//GEN-LAST:event_formWindowActivated
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

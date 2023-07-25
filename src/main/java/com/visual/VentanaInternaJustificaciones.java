@@ -22,8 +22,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
 
-    Usuarios usuario;
     UsuarioBean userBean= new UsuarioBean();
+    Usuarios usuario = new Usuarios();
     JustificacionBean jusBean = new JustificacionBean();
     
     public VentanaInternaJustificaciones(BigInteger idUser) {
@@ -311,16 +311,6 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonEliminarActionPerformed
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
-        AnalistaBean analistaBean = new AnalistaBean();
-        if(analistaBean.existeAnalista(usuario.getIdUsuario())){
-            comboboxUsuarioJustificacion.setVisible(true);
-            btnAccion.setVisible(true);
-            btnModificarEstado.setVisible(true);
-        }else{
-            comboboxUsuarioJustificacion.setVisible(false);
-            btnAccion.setVisible(false);
-            btnModificarEstado.setVisible(false);
-        }
         EstudianteBean estBean = new EstudianteBean();
         if(estBean.existeEstudiante(usuario.getIdUsuario())){
             botonJustificar.setVisible(true);
@@ -330,6 +320,16 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
             botonJustificar.setVisible(false);
             botonEliminar.setVisible(false);
             botonModificar.setVisible(false);
+        }
+        AnalistaBean analistaBean = new AnalistaBean();
+        if(analistaBean.existeAnalista(usuario.getIdUsuario())){
+            comboboxUsuarioJustificacion.setVisible(true);
+            btnAccion.setVisible(true);
+            btnModificarEstado.setVisible(true);
+        }else{
+            comboboxUsuarioJustificacion.setVisible(false);
+            btnAccion.setVisible(false);
+            btnModificarEstado.setVisible(false);
         }
     }//GEN-LAST:event_formInternalFrameActivated
 
@@ -342,6 +342,7 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
 
     private void btnModificarEstadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarEstadoMouseClicked
         Justificacion justificacion = traerJusSeleccionada("Seleccione una justificación para modificar su estado");
+ 
         if (justificacion == null) {
             
             JOptionPane.showMessageDialog(null, "No se puede cambiar el estado por un error");
@@ -417,32 +418,16 @@ public void actualizar(){
 private Justificacion traerJusSeleccionada(String msg) {
         int row = tablaJustificaciones.getSelectedRow();
         
-        Date fechaHora = null;
-        Estudiante est = null;
-        Evento evento = new Evento();        
+        String detalle = null;       
         
         if (row == -1) {
             JOptionPane.showMessageDialog(null, msg);
         } else {
-            String cellFechaHora = tablaJustificaciones.getModel().getValueAt(row, 0).toString();
-            String cellUsername = tablaJustificaciones.getModel().getValueAt(row, 1).toString();
-            String cellEvento = tablaJustificaciones.getModel().getValueAt(row, 2).toString();
-
-            Usuarios userSelected = userBean.buscarUserByNombre(cellUsername);
-            EstudianteBean estBean = new EstudianteBean();
-            est = estBean.buscarEstudiante(userSelected.getIdUsuario());
-
-            SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-            try {
-                fechaHora = formateador.parse(cellFechaHora);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            EventoBean eventoBean = new EventoBean();        
-            evento = eventoBean.buscarEvento(cellEvento);
+            String cellDetalle = tablaJustificaciones.getModel().getValueAt(row, 3).toString();
+            
+            detalle = cellDetalle;
         }   
-        return jusBean.buscarJustificacion(fechaHora, evento, est);
+        return jusBean.buscarJustificacion(detalle);
        
     }
 }

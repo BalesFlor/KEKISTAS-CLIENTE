@@ -409,8 +409,8 @@ public void actualizar(){
 public Reclamo traerRecSeleccionado(String msg){
         int row = tablaReclamos.getSelectedRow();
 
-        Estudiante est = null;
-        String titulo = null;
+        Estudiante est = new Estudiante();
+        String titulo = "";
         if (row == -1) {
             JOptionPane.showMessageDialog(null, msg);
         } else {
