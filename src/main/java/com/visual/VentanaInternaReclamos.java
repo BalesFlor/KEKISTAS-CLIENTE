@@ -15,6 +15,9 @@ import com.grsc.modelo.entities.EstadoPeticion;
 import com.grsc.modelo.entities.Estudiante;
 import java.math.BigInteger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     
@@ -294,13 +297,50 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonReclamarActionPerformed
 
     private void btnLimpiarFiltroReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFiltroReclamosMouseClicked
-        // TODO add your handling code here:
+        accionLimpiarFiltro();
     }//GEN-LAST:event_btnLimpiarFiltroReclamosMouseClicked
 
     private void btnFiltrarReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarReclamosMouseClicked
-        // TODO add your handling code here:
+        accionFiltrar();
     }//GEN-LAST:event_btnFiltrarReclamosMouseClicked
 
+    private void accionLimpiarFiltro() {
+
+        this.tablaReclamos.setRowSorter(null);
+        this.comboboxEstadoReclamo.setSelectedIndex(0);
+        this.comboboxUsuarioReclamo.setSelectedIndex(0);
+    }
+
+    
+    private void accionFiltrar() {
+
+        TableRowSorter<TableModel> filtro1 = new TableRowSorter<>(this.tablaReclamos.getModel());
+        TableRowSorter<TableModel> filtro2 = new TableRowSorter<>(this.tablaReclamos.getModel());
+
+        Usuarios user = userSeleccionado();
+        EstadoPeticion estado = estadoSeleccionado();
+        
+        if (estado != null) {
+
+            String estadoString = estado.getNomEstado();
+
+            filtro1.setRowFilter(RowFilter.regexFilter(estadoString, 4));
+
+            tablaReclamos.setRowSorter(filtro1);
+        }
+        if (user != null) {
+
+            String rolString = user.getNomUsuario();
+
+            filtro2.setRowFilter(RowFilter.regexFilter(rolString, 1));
+
+            tablaReclamos.setRowSorter(filtro2);
+
+        }
+        
+    }
+
+    
     private void botonReclamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonReclamarMouseClicked
         ventanaAltaReclamo ventanaReclamo = new ventanaAltaReclamo(usuario.getIdUsuario(), this);
         ventanaReclamo.setVisible(true);
@@ -424,5 +464,41 @@ public Reclamo traerRecSeleccionado(String msg){
             titulo = cellTitle;
         }
         return reclamoBean.buscarReclamo(est, titulo);
+    }
+
+    public EstadoPeticion estadoSeleccionado() {
+        EstadoPeticionBean estadoBean = new EstadoPeticionBean();
+
+        List<EstadoPeticion> listaEstados = estadoBean.listarEstados();
+        EstadoPeticion estadoPeticion = null;
+
+        //En el siguiente for se pasa por todas las localidades de la lista
+        for (int i = 0; i < listaEstados.size(); i++) {
+            //Si el nombre de la localidad coincide con el seleccionado del combobox se carga en la variable a retornar
+            if (listaEstados.get(i).getNomEstado().equals(this.comboboxEstadoReclamo.getSelectedItem().toString())) {
+                estadoPeticion = listaEstados.get(i);
+            }
+
+        }
+
+        return estadoPeticion;
+    }
+
+    public Usuarios userSeleccionado() {
+        UsuarioBean userBean = new UsuarioBean();
+
+        List<Usuarios> listaUsuarios =userBean.listarUsuarios();
+        Usuarios usuario = null;
+
+        //En el siguiente for se pasa por todas las localidades de la lista
+        for (int i = 0; i < listaUsuarios.size(); i++) {
+            //Si el nombre de la localidad coincide con el seleccionado del combobox se carga en la variable a retornar
+            if (listaUsuarios.get(i).getNomUsuario().equals(this.comboboxEstadoReclamo.getSelectedItem().toString())) {
+                usuario = listaUsuarios.get(i);
+            }
+
+        }
+
+        return usuario;
     }
 }

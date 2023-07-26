@@ -1,11 +1,13 @@
 package com.visual;
 
+import com.correo.EnvioDeCorreo;
 import com.grsc.logica.ejb.AccionReclamoBean;
 import com.grsc.logica.ejb.AnalistaBean;
 import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.AccionReclamo;
 import com.grsc.modelo.entities.Analista;
 import com.grsc.modelo.entities.Reclamo;
+import com.grsc.modelo.entities.Usuarios;
 import java.math.BigInteger;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
@@ -198,19 +200,36 @@ public class ventanaRegAccionReclamo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
-        AccionReclamoBean accRecBean = new AccionReclamoBean();      
+        AccionReclamoBean accRecBean = new AccionReclamoBean();
 
         if (existe) {
-             Boolean seModifico = false;
-                seModifico = accRecBean.modificarAccion(reclamo, analista,  txtDetalles.getText(), Calendar.getInstance().getTime());
+            Boolean seModifico = false;
+            Object[] options = {"REGISTRAR ACCIÓN", "CANCELAR"};
+            int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de las acciones realizadas?",
+                    "Confirme antes de seguir...", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+
+            if (respuesta == JOptionPane.YES_OPTION) {
+                seModifico = accRecBean.modificarAccion(reclamo, analista, txtDetalles.getText(), Calendar.getInstance().getTime());
                 if (seModifico) {
                     JOptionPane.showMessageDialog(this, "Accion sobre Reclamo modificada con exito",
                             "exito", JOptionPane.INFORMATION_MESSAGE);
-                    clearObject(accRecBean.buscarAccionReclamo(reclamo, analista));
+                    AccionReclamo accRec = accRecBean.buscarAccionReclamo(reclamo, analista);
+                    clearObject(accRec);
+                    UsuarioBean userBean = new UsuarioBean();
+                    EnvioDeCorreo enviarCorreo = new EnvioDeCorreo();
+                    Usuarios user = userBean.buscarUsuario(reclamo.getIdUsuario().getIdUsuario());
+                    enviarCorreo.transfer_to_email(user.getMailInstitucional(), "Estimado/a " + user.getNombre1() + " " + user.getApellido1() + ", \n"
+                            + "Le informamos que se ha registrado una acción sobre de su reclamo llamado: " + reclamo.getTitulo() + "\n resultado: " + accRec.getDetalle(),
+                            "Registro de acción en su Reclamo");
                 } else {
                     JOptionPane.showMessageDialog(this, "Hubo un error en la modificada de su Reclamo",
                             "Error", JOptionPane.WARNING_MESSAGE);
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Acción no realizada");
+            }
+
         } else {
             if (txtDetalles.getText().equals("") || txtDetalles.getText().isBlank() || txtDetalles.getText().equals("Detalle de acción sobre reclamo...")) {
 
@@ -218,18 +237,27 @@ public class ventanaRegAccionReclamo extends javax.swing.JFrame {
                         JOptionPane.WARNING_MESSAGE);
 
             } else {
+                Object[] options = {"REGISTRAR ACCIÓN", "CANCELAR"};
+                int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de las acciones realizadas?",
+                        "Confirme antes de seguir...", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
-                Boolean seCreo = false;
-                seCreo = accRecBean.registrarAccion(reclamo, analista, txtDetalles.getText(), Calendar.getInstance().getTime());
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    Boolean seCreo = false;
+                    seCreo = accRecBean.registrarAccion(reclamo, analista, txtDetalles.getText(), Calendar.getInstance().getTime());
 
-                if (seCreo) {
-                    JOptionPane.showMessageDialog(this, "Accion sobre Reclamo enviado con exito",
-                            "exito", JOptionPane.INFORMATION_MESSAGE);
-                    clearObject(accRecBean.buscarAccionReclamo(reclamo, analista));
+                    if (seCreo) {
+                        JOptionPane.showMessageDialog(this, "Accion sobre Reclamo enviado con exito",
+                                "exito", JOptionPane.INFORMATION_MESSAGE);
+                        clearObject(accRecBean.buscarAccionReclamo(reclamo, analista));
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Hubo un error en el envía de su Reclamo",
+                                "Error", JOptionPane.WARNING_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Hubo un error en el envía de su Reclamo",
-                            "Error", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Acción no realizada");
                 }
+
             }
         }
     }//GEN-LAST:event_btnEnviarMouseClicked

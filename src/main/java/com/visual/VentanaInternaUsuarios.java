@@ -40,8 +40,6 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
         tablaUsuarios = new javax.swing.JTable();
         botonEliminar = new rsbuttongradiente.RSButtonGradiente();
         botonModificar = new rsbuttongradiente.RSButtonGradiente();
-        botonSolicitudesConstancias = new rsbuttongradiente.RSButtonGradiente();
-        botonReclamos = new rsbuttongradiente.RSButtonGradiente();
         comboboxTipoUser1 = new RSMaterialComponent.RSComboBoxMaterial();
         comboboxItr = new RSMaterialComponent.RSComboBoxMaterial();
         comboboxGeneracion = new RSMaterialComponent.RSComboBoxMaterial();
@@ -100,23 +98,6 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
                 botonModificarMouseClicked(evt);
             }
         });
-
-        botonSolicitudesConstancias.setText("Solicitudes de Constancias");
-        botonSolicitudesConstancias.setColorPrimario(new java.awt.Color(105, 190, 228));
-        botonSolicitudesConstancias.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
-        botonSolicitudesConstancias.setColorSecundario(new java.awt.Color(213, 240, 252));
-        botonSolicitudesConstancias.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
-        botonSolicitudesConstancias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSolicitudesConstanciasActionPerformed(evt);
-            }
-        });
-
-        botonReclamos.setText("Reclamos");
-        botonReclamos.setColorPrimario(new java.awt.Color(105, 190, 228));
-        botonReclamos.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
-        botonReclamos.setColorSecundario(new java.awt.Color(213, 240, 252));
-        botonReclamos.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
 
         comboboxTipoUser1.setForeground(new java.awt.Color(13, 120, 161));
 
@@ -206,7 +187,10 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1044, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(175, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 17, Short.MAX_VALUE)
@@ -228,20 +212,18 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
                                     .addComponent(comboboxGeneracion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(60, 60, 60)
                                     .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(20, 20, 20)
-                                    .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(20, 20, 20)
-                                    .addComponent(botonSolicitudesConstancias, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(20, 20, 20)
-                                    .addComponent(botonReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGap(0, 17, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(181, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(149, 149, 149))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 11, Short.MAX_VALUE)
@@ -255,14 +237,10 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
                         .addComponent(comboboxItr, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(comboboxGeneracion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(10, 10, 10)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(10, 10, 10)
+                    .addGap(320, 320, 320)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonSolicitudesConstancias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(0, 11, Short.MAX_VALUE)))
         );
 
@@ -356,10 +334,6 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_botonEliminarMouseClicked
-
-    private void botonSolicitudesConstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSolicitudesConstanciasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonSolicitudesConstanciasActionPerformed
 
     private void comboboxTipoUser1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboboxTipoUser1ItemStateChanged
         BigInteger bi= BigInteger.valueOf(3L);
@@ -545,8 +519,6 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rsbuttongradiente.RSButtonGradiente botonEliminar;
     private rsbuttongradiente.RSButtonGradiente botonModificar;
-    private rsbuttongradiente.RSButtonGradiente botonReclamos;
-    private rsbuttongradiente.RSButtonGradiente botonSolicitudesConstancias;
     private rsbuttongradiente.RSButtonGradiente btnFiltrar;
     private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltro;
     private RSMaterialComponent.RSComboBoxMaterial comboboxEstado;

@@ -223,6 +223,7 @@ public class VentanaSeleccionarEstadoReclamo extends javax.swing.JFrame {
                     "Error", JOptionPane.WARNING_MESSAGE);
             
         } else {
+            
             Boolean seModifico = false;
             EstadoPeticionBean estadoBean = new EstadoPeticionBean();
             EstadoPeticion estado = estadoBean.buscarPorNom(cmbEstado.getSelectedItem().toString());

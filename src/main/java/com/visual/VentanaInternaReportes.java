@@ -1,5 +1,6 @@
 package com.visual;
 
+import com.grsc.logica.ejb.EstudianteBean;
 import com.grsc.logica.ejb.EventoBean;
 import com.grsc.logica.ejb.GeneracionBean;
 import com.grsc.logica.ejb.ItrBean;
@@ -13,10 +14,12 @@ import javax.swing.DefaultComboBoxModel;
 import com.grsc.modelo.entities.Usuarios;
 import com.grsc.modelo.entities.Generacion;
 import com.grsc.modelo.entities.Itr;
+import com.pdf.GenerarPDF;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -24,6 +27,7 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
     
     UsuarioBean userBean= new UsuarioBean();
     Usuarios usuario = new Usuarios();
+    String filtrosSeleccionados = "Los filtros seleccionados fueron:";
     
     public VentanaInternaReportes(BigInteger idUser) {
         this.usuario = traerUserPorID(idUser);
@@ -47,6 +51,25 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
         cmbMes = new RSMaterialComponent.RSComboBoxMaterial();
         cmbTipo = new RSMaterialComponent.RSComboBoxMaterial();
         btnPDF = new rsbuttongradiente.RSButtonGradiente();
+        resultado = new javax.swing.JLabel();
+
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         tablaReclamos.setModel(cargarTablaReclamos(
         ));
@@ -75,6 +98,11 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
         }
 
         cmbITR.setModel(modeloItr);
+        cmbITR.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbITRItemStateChanged(evt);
+            }
+        });
 
         btnLimpiarFiltroReclamos.setText("Limpiar Filtro");
         btnLimpiarFiltroReclamos.setColorPrimario(new java.awt.Color(213, 240, 252));
@@ -115,6 +143,11 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
         }
 
         cmbGeneracion.setModel(modeloGen);
+        cmbGeneracion.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbGeneracionItemStateChanged(evt);
+            }
+        });
 
         cmbMes.setForeground(new java.awt.Color(13, 120, 161));
         cmbMes.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
@@ -133,6 +166,11 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
         }
 
         cmbMes.setModel(modeloMeses);
+        cmbMes.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbMesItemStateChanged(evt);
+            }
+        });
 
         cmbTipo.setForeground(new java.awt.Color(13, 120, 161));
         cmbTipo.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
@@ -149,6 +187,11 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
     }
 
     cmbTipo.setModel(modeloTipo);
+    cmbTipo.addItemListener(new java.awt.event.ItemListener() {
+        public void itemStateChanged(java.awt.event.ItemEvent evt) {
+            cmbTipoItemStateChanged(evt);
+        }
+    });
 
     btnPDF.setText("Descargar como PDF");
     btnPDF.setColorPrimario(new java.awt.Color(213, 240, 252));
@@ -161,6 +204,8 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
             btnPDFMouseClicked(evt);
         }
     });
+
+    resultado.setText("Resultado: ");
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -182,8 +227,10 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
                     .addComponent(cmbGeneracion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addContainerGap(176, Short.MAX_VALUE))
+                    .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(119, 119, 119)
+                    .addComponent(resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap(136, Short.MAX_VALUE))
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -206,7 +253,9 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
                 .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(cmbGeneracion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 311, Short.MAX_VALUE)
-            .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(resultado))
             .addGap(8, 8, 8))
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -228,6 +277,7 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
 
     private void btnFiltrarReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarReclamosMouseClicked
         accionFiltrar();
+        resultado.setText("Se han encontrado "+tablaReclamos.getRowCount()+" Reclamos con los filtros seleccionados");
         this.btnLimpiarFiltroReclamos.setVisible(true);
     }//GEN-LAST:event_btnFiltrarReclamosMouseClicked
 
@@ -238,6 +288,7 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
         this.cmbITR.setSelectedIndex(0);
         this.cmbMes.setSelectedIndex(0);
         this.cmbTipo.setSelectedIndex(0);
+        resultado.setText(" ");
     }
 
     private void accionFiltrar() {
@@ -287,8 +338,114 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
 
     
     private void btnPDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPDFMouseClicked
-        // TODO add your handling code here:
+        List<Object> celdasUsers = convertirTableModelALista(tablaReclamos, 0);
+
+        List<String> listaNombresUsers = new ArrayList<>();
+
+        for (Object obj : celdasUsers) {
+            listaNombresUsers.add(obj.toString());
+        }
+
+        List<Usuarios> listaUsers = new ArrayList<>();
+        for (String s : listaNombresUsers) {
+            Usuarios user = userBean.buscarUserByNombre(s);
+            listaUsers.add(user);
+        }
+        
+        if (listaUsers == null) {
+            JOptionPane.showMessageDialog(null, "No hay valores para generar PDF!");
+
+        } else {
+
+            List<Object> celdasTitulos = convertirTableModelALista(tablaReclamos, 1);
+
+            List<String> listaTitulos = new ArrayList<>();
+
+            for (Object obj : celdasTitulos) {
+                listaTitulos.add(obj.toString());
+            }
+
+            List<Reclamo> listaReclamos =new ArrayList<>();
+            ReclamoBean recBean = new ReclamoBean();
+            EstudianteBean estBean = new EstudianteBean();
+
+            for (int i = 0; i < listaUsers.size(); i++) {
+                listaReclamos.add(recBean.buscarReclamo(estBean.buscarEstudiante(listaUsers.get(i).getIdUsuario()), listaTitulos.get(i)));
+            }
+            JOptionPane.showMessageDialog(null, listaReclamos.toString(),
+                    "Se está generando el PDF", JOptionPane.INFORMATION_MESSAGE);
+            
+            if (resultado.getText().isBlank()) {
+                GenerarPDF crearPDF = new GenerarPDF();
+                crearPDF.generar("Reporte de Reclamos", "No se ha seleccionado ningún filtro", listaReclamos, "/UTEC Logo.png");
+            } else {
+                GenerarPDF crearPDF = new GenerarPDF();
+                crearPDF.generar("Reporte de Reclamos", resultado.getText() + " " + filtrosSeleccionados, listaReclamos, "/UTEC Logo.png");
+            }
+        }
+        
     }//GEN-LAST:event_btnPDFMouseClicked
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        resultado.setText(" ");
+    }//GEN-LAST:event_formInternalFrameActivated
+
+    private void cmbITRItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbITRItemStateChanged
+        if(cmbITR.getSelectedIndex()!=0){
+            filtrosSeleccionados = filtrosSeleccionados + "" + "ITR: "+ cmbITR.getSelectedItem().toString() +"\n";
+        }
+    }//GEN-LAST:event_cmbITRItemStateChanged
+
+    private void cmbMesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMesItemStateChanged
+        if(cmbMes.getSelectedIndex()!=0){
+            filtrosSeleccionados = filtrosSeleccionados + "" + "MES: "+ cmbMes.getSelectedItem().toString() +"\n";
+        }
+    }//GEN-LAST:event_cmbMesItemStateChanged
+
+    private void cmbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoItemStateChanged
+        if(cmbTipo.getSelectedIndex()!=0){
+            filtrosSeleccionados = filtrosSeleccionados + "" + "Tipo Evento: "+ cmbTipo.getSelectedItem().toString() +"\n";
+        }
+    }//GEN-LAST:event_cmbTipoItemStateChanged
+
+    private void cmbGeneracionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGeneracionItemStateChanged
+        if(cmbGeneracion.getSelectedIndex()!=0){
+            filtrosSeleccionados = filtrosSeleccionados + "" + "Generación: "+ cmbGeneracion.getSelectedItem().toString() +"\n";
+        }
+    }//GEN-LAST:event_cmbGeneracionItemStateChanged
+
+
+    public List<Object> convertirTableModelALista(javax.swing.JTable table, int x) {
+        List<Object> primerosValores = new ArrayList<>();
+
+        TableModel tableModel = table.getModel();
+        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(tableModel);
+        table.setRowSorter(rowSorter);
+
+        // Obtener los filtros actualmente aplicados
+        RowFilter<? super TableModel, ? super Integer> currentFilter = rowSorter.getRowFilter();
+
+        // Si hay filtros aplicados, desactivarlos temporalmente para obtener solo las filas visibles
+        if (currentFilter != null) {
+            rowSorter.setRowFilter(null);
+        }
+
+        // Recorrer todas las filas y obtener el valor de la primera celda de la primera columna de cada fila
+        int rowCount = table.getRowCount();
+        int columnCount = table.getColumnCount();
+
+        for (int i = 0; i < rowCount; i++) {
+            Object primerValor = table.getValueAt(i, x); // Obtener el valor de la primera celda (columna 0)
+            primerosValores.add(primerValor);
+        }
+
+        // Restaurar el filtro original si estaba activo
+        if (currentFilter != null) {
+            rowSorter.setRowFilter(currentFilter);
+        }
+
+        return primerosValores;
+    }
     
     private DefaultTableModel cargarTablaReclamos() {
     
@@ -304,7 +461,6 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
         int fila = 0;
 
         for (Reclamo u:listaReclamos) {
-
             
             datos[fila][0] = userBean.buscarUsuario(u.getIdUsuario().getIdUsuario()).getNomUsuario();
             datos[fila][1] = u.getTitulo();
@@ -365,6 +521,7 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
     private RSMaterialComponent.RSComboBoxMaterial cmbTipo;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblReportes;
+    private javax.swing.JLabel resultado;
     private javax.swing.JTable tablaReclamos;
     // End of variables declaration//GEN-END:variables
 

@@ -1,8 +1,8 @@
 package com.visual;
 
+import com.correo.EnvioDeCorreo;
 import com.grsc.logica.ejb.AccionJustificacionBean;
 import com.grsc.logica.ejb.AnalistaBean;
-import com.grsc.logica.ejb.JustificacionBean;
 import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.AccionJustificacion;
 import com.grsc.modelo.entities.Analista;
@@ -10,8 +10,6 @@ import com.grsc.modelo.entities.Justificacion;
 import com.grsc.modelo.entities.Usuarios;
 import java.math.BigInteger;
 import java.util.Calendar;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class ventanaRegAccionJus extends javax.swing.JFrame {
@@ -202,37 +200,53 @@ public class ventanaRegAccionJus extends javax.swing.JFrame {
 
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
         AccionJustificacionBean accJusBean = new AccionJustificacionBean();
+        if (txtDetalles.getText().equals("") || txtDetalles.getText().isBlank() || txtDetalles.getText().equals("Detalle de acción sobre justificacion...")) {
 
-        if (existe) {
-            Boolean seModifico = false;
-            seModifico = accJusBean.modificarAccion(justificacion, analista, txtDetalles.getText(), Calendar.getInstance().getTime());
-            if (seModifico) {
-                JOptionPane.showMessageDialog(this, "Accion sobre Justificación modificada con exito",
-                        "exito", JOptionPane.INFORMATION_MESSAGE);
-                clearObject(accJusBean.buscarAccionJustificacion(justificacion, analista));
-            } else {
-                JOptionPane.showMessageDialog(this, "Hubo un error en la modificación de su Acción en la Justificacion",
-                        "Error", JOptionPane.WARNING_MESSAGE);
-            }
+            JOptionPane.showMessageDialog(this, "Debe ingresar una descripción de su acción", "Datos incompletos!",
+                    JOptionPane.WARNING_MESSAGE);
+
         } else {
-            if (txtDetalles.getText().equals("") || txtDetalles.getText().isBlank() || txtDetalles.getText().equals("Detalle de acción sobre justificacion...")) {
+            Object[] options = {"REGISTRAR ACCIÓN", "CANCELAR"};
+            int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de las acciones realizadas?",
+                    "Confirme antes de seguir...", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
-                JOptionPane.showMessageDialog(this, "Debe ingresar una descripción de su acción", "Datos incompletos!",
-                        JOptionPane.WARNING_MESSAGE);
-
-            } else {
-
-                Boolean seCreo = false;
-                seCreo = accJusBean.registrarAccion(justificacion, analista, txtDetalles.getText(), Calendar.getInstance().getTime());
-
-                if (seCreo) {
-                    JOptionPane.showMessageDialog(this, "Accion sobre Justificacion enviado con exito",
-                            "exito", JOptionPane.INFORMATION_MESSAGE);
-                    clearObject(accJusBean.buscarAccionJustificacion(justificacion, analista));
+            if (respuesta == JOptionPane.YES_OPTION) {
+                if (existe) {
+                    Boolean seModifico = false;
+                    seModifico = accJusBean.modificarAccion(justificacion, analista, txtDetalles.getText(), Calendar.getInstance().getTime());
+                    if (seModifico) {
+                        JOptionPane.showMessageDialog(this, "Accion sobre Justificación modificada con exito",
+                                "exito", JOptionPane.INFORMATION_MESSAGE);
+                        clearObject(accJusBean.buscarAccionJustificacion(justificacion, analista));
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Hubo un error en la modificación de su Acción en la Justificacion",
+                                "Error", JOptionPane.WARNING_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Hubo un error en el envía de su Justificacion",
-                            "Error", JOptionPane.WARNING_MESSAGE);
+
+                    Boolean seCreo = false;
+                    seCreo = accJusBean.registrarAccion(justificacion, analista, txtDetalles.getText(), Calendar.getInstance().getTime());
+
+                    if (seCreo) {
+                        JOptionPane.showMessageDialog(this, "Accion sobre Justificacion enviado con exito",
+                                "exito", JOptionPane.INFORMATION_MESSAGE);
+                        AccionJustificacion accJus = accJusBean.buscarAccionJustificacion(justificacion, analista);
+                        clearObject(accJus);
+                        UsuarioBean userBean = new UsuarioBean();
+                        EnvioDeCorreo enviarCorreo = new EnvioDeCorreo();
+                        Usuarios user = userBean.buscarUsuario(justificacion.getIdUsuario().getIdUsuario());
+                        enviarCorreo.transfer_to_email(user.getMailInstitucional(), "Estimado/a " + user.getNombre1() + " " + user.getApellido1() + ", \n"
+                                + "Le informamos que se ha registrado una acción sobre su justificación relacionada al evento: " + justificacion.getIdEvento().getTitulo() + "\n resultado: " + accJus.getDetalle(),
+                                "Registro de acción en su Justificación");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Hubo un error en el envía de su Justificacion",
+                                "Error", JOptionPane.WARNING_MESSAGE);
+                    }
+
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Acción no realizada");
             }
         }
 

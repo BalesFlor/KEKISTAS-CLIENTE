@@ -18,7 +18,10 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
 
@@ -299,13 +302,50 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonJustificarActionPerformed
 
     private void btnLimpiarFiltroReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFiltroReclamosMouseClicked
-        // TODO add your handling code here:
+        accionLimpiarFiltro();
     }//GEN-LAST:event_btnLimpiarFiltroReclamosMouseClicked
 
     private void btnFiltrarReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarReclamosMouseClicked
-        // TODO add your handling code here:
+        accionFiltrar();
     }//GEN-LAST:event_btnFiltrarReclamosMouseClicked
 
+    private void accionLimpiarFiltro() {
+
+        this.tablaJustificaciones.setRowSorter(null);
+        this.comboboxEstadoJustificacion.setSelectedIndex(0);
+        this.comboboxUsuarioJustificacion.setSelectedIndex(0);
+    }
+
+    
+    private void accionFiltrar() {
+
+        TableRowSorter<TableModel> filtro1 = new TableRowSorter<>(this.tablaJustificaciones.getModel());
+        TableRowSorter<TableModel> filtro2 = new TableRowSorter<>(this.tablaJustificaciones.getModel());
+
+        Usuarios user = userSeleccionado();
+        EstadoPeticion estado = estadoSeleccionado();
+        
+        if (estado != null) {
+
+            String estadoString = estado.getNomEstado();
+
+            filtro1.setRowFilter(RowFilter.regexFilter(estadoString, 4));
+
+            tablaJustificaciones.setRowSorter(filtro1);
+        }
+        if (user != null) {
+
+            String rolString = user.getNomUsuario();
+
+            filtro2.setRowFilter(RowFilter.regexFilter(rolString, 1));
+
+            tablaJustificaciones.setRowSorter(filtro2);
+
+        }
+        
+    }
+
+    
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEliminarActionPerformed
@@ -429,5 +469,41 @@ private Justificacion traerJusSeleccionada(String msg) {
         }   
         return jusBean.buscarJustificacion(detalle);
        
+    } 
+public EstadoPeticion estadoSeleccionado() {
+        EstadoPeticionBean estadoBean = new EstadoPeticionBean();
+
+        List<EstadoPeticion> listaEstados = estadoBean.listarEstados();
+        EstadoPeticion estadoPeticion = null;
+
+        //En el siguiente for se pasa por todas las localidades de la lista
+        for (int i = 0; i < listaEstados.size(); i++) {
+            //Si el nombre de la localidad coincide con el seleccionado del combobox se carga en la variable a retornar
+            if (listaEstados.get(i).getNomEstado().equals(this.comboboxEstadoJustificacion.getSelectedItem().toString())) {
+                estadoPeticion = listaEstados.get(i);
+            }
+
+        }
+
+        return estadoPeticion;
+    }
+
+    public Usuarios userSeleccionado() {
+        UsuarioBean userBean = new UsuarioBean();
+
+        List<Usuarios> listaUsuarios =userBean.listarUsuarios();
+        Usuarios usuario = null;
+
+        //En el siguiente for se pasa por todas las localidades de la lista
+        for (int i = 0; i < listaUsuarios.size(); i++) {
+            //Si el nombre de la localidad coincide con el seleccionado del combobox se carga en la variable a retornar
+            if (listaUsuarios.get(i).getNomUsuario().equals(this.comboboxUsuarioJustificacion.getSelectedItem().toString())) {
+                usuario = listaUsuarios.get(i);
+            }
+
+        }
+
+        return usuario;
     }
 }
+

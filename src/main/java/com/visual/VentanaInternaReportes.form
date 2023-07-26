@@ -4,6 +4,9 @@
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="internalFrameActivated" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="formInternalFrameActivated"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -38,9 +41,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnPDF" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                      <Component id="resultado" min="-2" pref="557" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="176" max="32767" attributes="0"/>
+              <EmptySpace pref="136" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
@@ -70,7 +75,10 @@
                   <Component id="cmbGeneracion" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="311" max="32767" attributes="0"/>
-              <Component id="btnPDF" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnPDF" min="-2" max="-2" attributes="0"/>
+                  <Component id="resultado" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -124,6 +132,9 @@
       </Properties>
     </Component>
     <Component class="RSMaterialComponent.RSComboBoxMaterial" name="cmbITR">
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbITRItemStateChanged"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cmbITR.setForeground(new java.awt.Color(13, 120, 161));&#xa;cmbITR.setFont(new java.awt.Font(&quot;Segoe UI Semilight&quot;, 0, 15));&#xa;&#xa;ItrBean itrBean= new ItrBean();&#xa;&#xa;        DefaultComboBoxModel modeloItr=new DefaultComboBoxModel();&#xa;&#xa;        List&lt;Itr&gt; listaItr=itrBean.listarItrs();&#xa;&#xa;        modeloItr.addElement(&quot;ITR&quot;);&#xa;&#xa;        for(int i = 0 ; i&lt;listaItr.size(); i++){&#xa;            modeloItr.addElement(listaItr.get(i).getNomItr());&#xa;        }&#xa;&#xa;cmbITR.setModel(modeloItr);"/>
       </AuxValues>
@@ -172,16 +183,25 @@
       </Events>
     </Component>
     <Component class="RSMaterialComponent.RSComboBoxMaterial" name="cmbGeneracion">
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbGeneracionItemStateChanged"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cmbGeneracion.setForeground(new java.awt.Color(13, 120, 161));&#xa;cmbGeneracion.setFont(new java.awt.Font(&quot;Segoe UI Semilight&quot;, 0, 15));&#xa;&#xa;GeneracionBean genBean= new GeneracionBean();&#xa;&#xa;DefaultComboBoxModel modeloGen=new DefaultComboBoxModel();&#xa;&#xa;        List&lt;Generacion&gt; listaGeneracion=genBean.listarGeneracion();&#xa;&#xa;        modeloGen.addElement(&quot; GENERACI&#xd3;N&quot;);&#xa;&#xa;        for(int i = 0 ; i&lt;listaGeneracion.size(); i++){&#xa;            modeloGen.addElement(listaGeneracion.get(i).getAnio());&#xa;        }&#xa;&#xa;cmbGeneracion.setModel(modeloGen);"/>
       </AuxValues>
     </Component>
     <Component class="RSMaterialComponent.RSComboBoxMaterial" name="cmbMes">
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbMesItemStateChanged"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cmbMes.setForeground(new java.awt.Color(13, 120, 161));&#xa;cmbMes.setFont(new java.awt.Font(&quot;Segoe UI Semilight&quot;, 0, 15));&#xa;&#xa;DefaultComboBoxModel modeloMeses = new DefaultComboBoxModel();&#xa;&#xa;       List&lt;String&gt; listaMeses = new ArrayList&lt;&gt;(Arrays.asList(&#xa;                &quot;enero&quot;, &quot;febrero&quot;, &quot;marzo&quot;, &quot;abril&quot;, &quot;mayo&quot;, &quot;junio&quot;,&#xa;                &quot;julio&quot;, &quot;agosto&quot;, &quot;septiembre&quot;, &quot;octubre&quot;, &quot;noviembre&quot;, &quot;diciembre&quot;&#xa;        ));&#xa;&#xa;        modeloMeses.addElement(&quot;Mes&quot;);&#xa;&#xa;        for(int i = 0 ; i&lt;listaMeses.size(); i++){&#xa;            modeloMeses.addElement(listaMeses.get(i));&#xa;        }&#xa;&#xa;cmbMes.setModel(modeloMeses);"/>
       </AuxValues>
     </Component>
     <Component class="RSMaterialComponent.RSComboBoxMaterial" name="cmbTipo">
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbTipoItemStateChanged"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cmbTipo.setForeground(new java.awt.Color(13, 120, 161));&#xa;cmbTipo.setFont(new java.awt.Font(&quot;Segoe UI Semilight&quot;, 0, 15));&#xa;&#xa;DefaultComboBoxModel modeloTipo = new DefaultComboBoxModel();&#xa;&#xa;       List&lt;String&gt; listaTipo = new ArrayList&lt;&gt;(Arrays.asList(&#xa;                &quot;VME&quot;, &quot;Optativas&quot;, &quot;APE&quot;, &quot;Otros&quot;));&#xa;&#xa;        modeloTipo.addElement(&quot;Tipo Evento&quot;);&#xa;&#xa;        for(int i = 0 ; i&lt;listaTipo.size(); i++){&#xa;            modeloTipo.addElement(listaTipo.get(i));&#xa;        }&#xa;&#xa;cmbTipo.setModel(modeloTipo);"/>
       </AuxValues>
@@ -208,6 +228,11 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="btnLimpiarFiltroReclamos.setVisible(false);"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="resultado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Resultado: "/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

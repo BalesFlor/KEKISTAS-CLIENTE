@@ -351,8 +351,6 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
 
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
         ReclamoBean reclamoBean = new ReclamoBean();
-        //validador validador = new validador();
-        
         EstudianteBean estBean = new EstudianteBean();
         Estudiante est = estBean.buscarEstudiante(usuario.getIdUsuario());
             if(txtTitulo.getText().equals("") || txtDescripcion.getText().equals("") ||
