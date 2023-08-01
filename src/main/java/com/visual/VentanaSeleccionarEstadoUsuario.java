@@ -2,12 +2,11 @@ package com.visual;
 
 import com.correo.EnvioDeCorreo;
 import com.grsc.logica.ejb.AnalistaBean;
-import com.grsc.logica.ejb.EstadoPeticionBean;
-import com.grsc.logica.ejb.JustificacionBean;
+import com.grsc.logica.ejb.EstadoUsuarioBean;
 import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.Analista;
 import com.grsc.modelo.entities.EstadoPeticion;
-import com.grsc.modelo.entities.Justificacion;
+import com.grsc.modelo.entities.EstadoUsuario;
 import com.grsc.modelo.entities.Usuarios;
 import java.math.BigInteger;
 import java.util.Calendar;
@@ -18,17 +17,17 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-public class VentanaSeleccionarEstadoJustificacion extends javax.swing.JFrame {
+public class VentanaSeleccionarEstadoUsuario extends javax.swing.JFrame {
 
-    private VentanaInternaJustificaciones ventanaInternaJustificacion;
+    private VentanaInternaUsuarios ventanaInternaUsuarios;
     Analista analista;
-    Justificacion justificacion = null;
-    JustificacionBean jusBean = new JustificacionBean();
+    Usuarios usuario = null;
+    UsuarioBean userBean = new UsuarioBean();
     
-    public VentanaSeleccionarEstadoJustificacion(BigInteger idUser, Justificacion justificacion, VentanaInternaJustificaciones ventanaInternaRec) {
+    public VentanaSeleccionarEstadoUsuario(BigInteger idUser, Usuarios usuario, VentanaInternaUsuarios ventanaInternaRec) {
         analista = traerUserPorID(idUser);
-        this.justificacion = justificacion;
-        this.ventanaInternaJustificacion = ventanaInternaRec;
+        this.usuario = usuario;
+        this.ventanaInternaUsuarios = ventanaInternaRec;
         initComponents();
     }
     
@@ -55,7 +54,6 @@ public class VentanaSeleccionarEstadoJustificacion extends javax.swing.JFrame {
         lblReportesTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -69,7 +67,7 @@ public class VentanaSeleccionarEstadoJustificacion extends javax.swing.JFrame {
 
         iconUtec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utec_logo_chikito.png"))); // NOI18N
 
-        iconReclamos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_rsz_justificacion-icon2.png"))); // NOI18N
+        iconReclamos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_rsz_1rsz_1user_icon.png"))); // NOI18N
 
         jPanel1.setPreferredSize(new java.awt.Dimension(817, 400));
 
@@ -108,14 +106,14 @@ public class VentanaSeleccionarEstadoJustificacion extends javax.swing.JFrame {
 
         cmbEstado.setForeground(new java.awt.Color(13, 120, 161));
 
-        EstadoPeticionBean estadoPeticionBean= new EstadoPeticionBean();
+        EstadoUsuarioBean estadoUsuarioBean= new EstadoUsuarioBean();
 
         DefaultComboBoxModel modeloEstado =new DefaultComboBoxModel();
 
-        List<EstadoPeticion> listaEstado=estadoPeticionBean.listarEstados();
+        List<EstadoUsuario> listaEstado=estadoUsuarioBean.listarEstadosUsuario();
 
         for(int i = 0 ; i<listaEstado.size(); i++){
-            modeloEstado.addElement(listaEstado.get(i).getNomEstado());
+            modeloEstado.addElement(listaEstado.get(i).getEstadoUsuario());
         }
 
         cmbEstado.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
@@ -208,46 +206,58 @@ public class VentanaSeleccionarEstadoJustificacion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
-        if (cmbEstado.getSelectedItem().equals(justificacion.getIdEstadoPeticion().getNomEstado())) {
+        if (cmbEstado.getSelectedItem().equals(usuario.getIdEstadoUsuario().getEstadoUsuario())) {
             
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un estado diferente al actual para modificar la Justificacion",
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un estado diferente al actual para modificar la Usuarios",
                     "Error", JOptionPane.WARNING_MESSAGE);
             
         } else {
             Boolean seModifico = false;
-            EstadoPeticionBean estadoBean = new EstadoPeticionBean();
-            EstadoPeticion estado = estadoBean.buscarPorNom(cmbEstado.getSelectedItem().toString());
+            EstadoUsuarioBean estadoBean = new EstadoUsuarioBean();
+            EstadoUsuario estado = estadoBean.buscarPorNom(cmbEstado.getSelectedItem().toString());
 
             try {
-                Date date = Calendar.getInstance().getTime();
-                seModifico = jusBean.modificarEstado(justificacion, estado, date);
-                this.justificacion.setIdEstadoPeticion(estado);
-                this.justificacion.setFechaHora(date);
+                seModifico = userBean.modificarEstado(usuario, estado);
+                this.usuario.setIdEstadoUsuario(estado);
             } catch (Exception ex) {
-                Logger.getLogger(VentanaSeleccionarEstadoJustificacion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(VentanaSeleccionarEstadoUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             if (seModifico) {
-                JOptionPane.showMessageDialog(this, "Estado de Justificación modificado con exito",
+                JOptionPane.showMessageDialog(this, "Estado de Usuario modificado con exito",
                         "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                ventanaInternaJustificacion.actualizar();
-                clearObject(jusBean.buscarJustificacionPorId(justificacion.getIdJustificacion()));
-                
+                ventanaInternaUsuarios.actualizar();
+                clearObject(userBean.buscarUsuario(usuario.getIdUsuario()));
                 UsuarioBean userBean = new UsuarioBean();
                 EnvioDeCorreo enviarCorreo = new EnvioDeCorreo();
-                Usuarios user = userBean.buscarUsuario(justificacion.getIdUsuario().getIdUsuario());
-                enviarCorreo.transfer_to_email(user.getMailInstitucional(),  "Estimado/a "+ user.getNombre1()+" "+ user.getApellido1() +", \n"
-                        + "Le informamos que se ha modificado el estado de su justificación relacionada al evento: " + justificacion.getIdEvento().getTitulo() + " a "+estado.getNomEstado(),
-                        "Cambio de Estado en su justificación");             
+                Usuarios user = userBean.buscarUsuario(usuario.getIdUsuario());
+                
+                 if (estado.getEstadoUsuario().equals("VALIDADO")) {
+                    enviarCorreo.transfer_to_email(user.getMailInstitucional(), "Estimado/a " + user.getNombre1() + " " + user.getApellido1() + ", \n"
+                            + "Le informamos que un analista ha aprobado su solicitud de registro en la aplicación de Gestión de Reclamos y Solicitudes de Constancias",
+                            "Su solicitud de registro ha sido aprobada");
+                    
+                 }else if(estado.getEstadoUsuario().equals("NO VALIDADO")){
+                    enviarCorreo.transfer_to_email(user.getMailInstitucional(), "Estimado/a " + user.getNombre1() + " " + user.getApellido1() + ", \n"
+                            + "Le informamos que un analista ha denegado su solicitud de registro en la aplicación de Gestión de Reclamos y Solicitudes de Constancias",
+                            "Su solicitud de registro ha sido rechazada");
+                    
+                 }else{
+                    enviarCorreo.transfer_to_email(user.getMailInstitucional(), "Estimado/a " + user.getNombre1() + " " + user.getApellido1() + ", \n"
+                            + "Le informamos se ha eliminado su usuario en la aplicación de Gestión de Reclamos y Solicitudes de Constancias",
+                            "Su solicitud de registro ha sido aprobada");
+                    
+                 }
+                           
             } else {
-                JOptionPane.showMessageDialog(this, "Hubo un error en la modificación del estado en la Justificación",
+                JOptionPane.showMessageDialog(this, "Hubo un error en la modificación del estado del usuario",
                         "Error", JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnEnviarMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        cmbEstado.setSelectedItem(justificacion.getIdEstadoPeticion().getNomEstado());
+        cmbEstado.setSelectedItem(usuario.getIdEstadoUsuario().getEstadoUsuario());
     }//GEN-LAST:event_formWindowActivated
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -264,12 +274,10 @@ public class VentanaSeleccionarEstadoJustificacion extends javax.swing.JFrame {
     private rojeru_san.rspanel.RSPanelShadow rSPanelShadow1;
     // End of variables declaration//GEN-END:variables
 
-     public void clearObject(Justificacion rec) {
+     public void clearObject(Usuarios rec) {
         labelRegistradoPor.setText("Registrado por: "+analista.getUsuarios().getNomUsuario());
         labelRegistradoPor.setVisible(true);
-        labelFechaHora.setText("Fecha Hora: "+rec.getFechaHora().toString());
-        labelFechaHora.setVisible(true);
-        cmbEstado.setSelectedItem(rec.getIdEstadoPeticion().getNomEstado());
+        cmbEstado.setSelectedItem(rec.getIdEstadoUsuario().getEstadoUsuario());
     }
      
 }

@@ -45,12 +45,15 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
         comboboxGeneracion = new RSMaterialComponent.RSComboBoxMaterial();
         btnLimpiarFiltro = new rsbuttongradiente.RSButtonGradiente();
         btnFiltrar = new rsbuttongradiente.RSButtonGradiente();
+        rSButtonGradiente1 = new rsbuttongradiente.RSButtonGradiente();
 
-        setPreferredSize(new java.awt.Dimension(1340, 666));
+        setPreferredSize(new java.awt.Dimension(1340, 200));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblBtnConstancias2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         lblBtnConstancias2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBtnConstancias2.setText("Filtros");
+        getContentPane().add(lblBtnConstancias2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 20));
 
         comboboxEstado.setForeground(new java.awt.Color(13, 120, 161));
 
@@ -69,6 +72,7 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
         comboboxEstado.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
 
         comboboxEstado.setModel(modeloEstados);
+        getContentPane().add(comboboxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 56, 190, 30));
 
         tablaUsuarios.setModel(cargarTablaUsuarios(
         ));
@@ -76,6 +80,8 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
         tablaUsuarios.setRowSelectionAllowed(true);
         tablaUsuarios.setSize(600, 600);
         jScrollPane2.setViewportView(tablaUsuarios);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 92, 1000, 300));
 
         botonEliminar.setText("Eliminar");
         botonEliminar.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -87,6 +93,7 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
                 botonEliminarMouseClicked(evt);
             }
         });
+        getContentPane().add(botonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 410, 130, -1));
 
         botonModificar.setText("Modificar");
         botonModificar.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -98,6 +105,7 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
                 botonModificarMouseClicked(evt);
             }
         });
+        getContentPane().add(botonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 410, 130, -1));
 
         comboboxTipoUser1.setForeground(new java.awt.Color(13, 120, 161));
 
@@ -121,6 +129,7 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
                 comboboxTipoUser1ItemStateChanged(evt);
             }
         });
+        getContentPane().add(comboboxTipoUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 56, 190, 30));
 
         comboboxItr.setForeground(new java.awt.Color(13, 120, 161));
 
@@ -139,6 +148,7 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
         comboboxItr.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
 
         comboboxItr.setModel(modeloItrs);
+        getContentPane().add(comboboxItr, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 56, 190, 30));
 
         comboboxGeneracion.setForeground(new java.awt.Color(13, 120, 161));
 
@@ -159,6 +169,7 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
         comboboxGeneracion.setModel(modeloGen);
 
         comboboxGeneracion.setVisible(false);
+        getContentPane().add(comboboxGeneracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(644, 56, 190, 30));
 
         btnLimpiarFiltro.setText("Limpiar Filtro");
         btnLimpiarFiltro.setColorPrimario(new java.awt.Color(213, 240, 252));
@@ -171,6 +182,7 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
             }
         });
         btnLimpiarFiltro.setVisible(false);
+        getContentPane().add(btnLimpiarFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(912, 56, 120, 30));
 
         btnFiltrar.setText("Filtrar");
         btnFiltrar.setColorPrimario(new java.awt.Color(213, 240, 252));
@@ -182,67 +194,19 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
                 btnFiltrarMouseClicked(evt);
             }
         });
+        getContentPane().add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(912, 12, 120, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(175, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(153, 153, 153))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 17, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblBtnConstancias2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(760, 760, 760)
-                            .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(comboboxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(20, 20, 20)
-                                    .addComponent(comboboxTipoUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(20, 20, 20)
-                                    .addComponent(comboboxItr, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(20, 20, 20)
-                                    .addComponent(comboboxGeneracion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(60, 60, 60)
-                                    .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(20, 20, 20)
-                                    .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGap(0, 17, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(181, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(149, 149, 149))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 11, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblBtnConstancias2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(10, 10, 10)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(comboboxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(comboboxTipoUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(comboboxItr, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(comboboxGeneracion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnLimpiarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(320, 320, 320)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 11, Short.MAX_VALUE)))
-        );
+        rSButtonGradiente1.setText("Modificar Estado");
+        rSButtonGradiente1.setColorPrimario(new java.awt.Color(105, 190, 228));
+        rSButtonGradiente1.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
+        rSButtonGradiente1.setColorSecundario(new java.awt.Color(213, 240, 252));
+        rSButtonGradiente1.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
+        rSButtonGradiente1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rSButtonGradiente1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(rSButtonGradiente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 410, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -337,7 +301,9 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
 
     private void comboboxTipoUser1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboboxTipoUser1ItemStateChanged
         BigInteger bi= BigInteger.valueOf(3L);
-        if (tipoUserSeleccionado().getIdRol().equals(bi)) {
+        if(tipoUserSeleccionado()==null){
+            this.comboboxGeneracion.setVisible(false);
+        }else if (tipoUserSeleccionado().getIdRol().equals(bi)) {
             this.comboboxGeneracion.setVisible(true);
         }else{
             this.comboboxGeneracion.setVisible(false);
@@ -367,6 +333,17 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_botonModificarMouseClicked
+
+    private void rSButtonGradiente1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSButtonGradiente1MouseClicked
+        Usuarios user = traerUserSeleccionada("Seleccione un usuario para modificar su estado");
+        if (user == null) {
+            JOptionPane.showMessageDialog(null, "No se puede cambiar el estado por un error");
+        } else {
+            VentanaSeleccionarEstadoUsuario ventanaSelEstado = new VentanaSeleccionarEstadoUsuario(analista.getIdUsuario(), user, this);
+            ventanaSelEstado.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_rSButtonGradiente1MouseClicked
 
     private void accionLimpiarFiltro() {
 
@@ -527,9 +504,26 @@ public class VentanaInternaUsuarios extends javax.swing.JInternalFrame {
     private RSMaterialComponent.RSComboBoxMaterial comboboxTipoUser1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBtnConstancias2;
+    private rsbuttongradiente.RSButtonGradiente rSButtonGradiente1;
     private javax.swing.JTable tablaUsuarios;
     // End of variables declaration//GEN-END:variables
 public void actualizar(){
         this.tablaUsuarios.setModel(cargarTablaUsuarios());
     }
+
+private Usuarios traerUserSeleccionada(String msg) {
+        int row = tablaUsuarios.getSelectedRow();
+        
+        String nombre = null;       
+        
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, msg);
+        } else {
+            String cellName= tablaUsuarios.getModel().getValueAt(row, 3).toString();
+            
+            nombre = cellName;
+        }   
+        return userBean.buscarUserByNombre(nombre);
+       
+    } 
 }

@@ -19,71 +19,8 @@
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
   </AuxValues>
 
-  <Layout>
-    <DimensionLayout dim="0">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-              <Component id="lblBtnConstancias3" min="-2" pref="133" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="comboboxUsuarioJustificacion" min="-2" pref="190" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="comboboxEstadoJustificacion" min="-2" pref="190" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnLimpiarFiltroReclamos" min="-2" pref="120" max="-2" attributes="0"/>
-                  <Component id="btnFiltrarReclamos" min="-2" pref="120" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="botonJustificar" min="-2" pref="190" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="botonModificar" min="-2" pref="130" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="botonEliminar" min="-2" pref="130" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                      <Component id="btnModificarEstado" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnAccion" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jScrollPane3" min="-2" pref="940" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="0" pref="33" max="32767" attributes="0"/>
-          </Group>
-      </Group>
-    </DimensionLayout>
-    <DimensionLayout dim="1">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="btnLimpiarFiltroReclamos" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="lblBtnConstancias3" min="-2" pref="20" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="comboboxUsuarioJustificacion" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="comboboxEstadoJustificacion" min="-2" pref="30" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnFiltrarReclamos" min="-2" pref="30" max="-2" attributes="0"/>
-              <EmptySpace pref="7" max="32767" attributes="0"/>
-              <Component id="jScrollPane3" min="-2" pref="299" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="botonJustificar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="botonModificar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="botonEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAccion" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnModificarEstado" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-          </Group>
-      </Group>
-    </DimensionLayout>
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+    <Property name="useNullLayout" type="boolean" value="false"/>
   </Layout>
   <SubComponents>
     <Component class="rsbuttongradiente.RSButtonGradiente" name="botonEliminar">
@@ -106,6 +43,11 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botonEliminarMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEliminarActionPerformed"/>
       </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="363" y="402" width="130" height="-1"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="rsbuttongradiente.RSButtonGradiente" name="botonModificar">
       <Properties>
@@ -123,6 +65,11 @@
           <Color blue="e4" green="be" red="69" type="rgb"/>
         </Property>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="221" y="402" width="130" height="-1"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="rsbuttongradiente.RSButtonGradiente" name="botonJustificar">
       <Properties>
@@ -144,6 +91,11 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botonJustificarMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonJustificarActionPerformed"/>
       </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="19" y="402" width="190" height="-1"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="lblBtnConstancias3">
       <Properties>
@@ -153,16 +105,31 @@
         <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="text" type="java.lang.String" value="Justificaciones"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="17" y="22" width="133" height="20"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="RSMaterialComponent.RSComboBoxMaterial" name="comboboxEstadoJustificacion">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="comboboxEstadoJustificacion.setForeground(new java.awt.Color(13, 120, 161));&#xa;&#xa;EstadoPeticionBean estadoPeticionBean= new EstadoPeticionBean();&#xa;&#xa;DefaultComboBoxModel modeloEstadoJus=new DefaultComboBoxModel();&#xa;&#xa;        List&lt;EstadoPeticion&gt; listaEstadoJus=estadoPeticionBean.listarEstados();&#xa;&#xa;        modeloEstadoJus.addElement(&quot; ESTADO JUSTIFICACION&quot;);&#xa;&#xa;        for(int i = 0 ; i&lt;listaEstadoJus.size(); i++){&#xa;            modeloEstadoJus.addElement(listaEstadoJus.get(i).getNomEstado());&#xa;        }&#xa;&#xa;comboboxEstadoJustificacion.setFont(new java.awt.Font(&quot;Segoe UI Semilight&quot;, 0, 15));&#xa;&#xa;comboboxEstadoJustificacion.setModel(modeloEstadoJus);"/>
       </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="616" y="12" width="190" height="30"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="RSMaterialComponent.RSComboBoxMaterial" name="comboboxUsuarioJustificacion">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="comboboxUsuarioJustificacion.setForeground(new java.awt.Color(13, 120, 161));&#xa;&#xa;UsuarioBean userBean= new UsuarioBean();&#xa;&#xa;DefaultComboBoxModel modeloUsuarioJus=new DefaultComboBoxModel();&#xa;&#xa;        List&lt;Usuarios&gt; listaUsuarioJus= userBean.listarUsuarios();&#xa;&#xa;        modeloUsuarioJus.addElement(&quot; USUARIOS&quot;);&#xa;&#xa;        for(int i = 0 ; i&lt;listaUsuarioJus.size(); i++){&#xa;            modeloUsuarioJus.addElement(listaUsuarioJus.get(i).getNomUsuario());&#xa;        }&#xa;&#xa;comboboxUsuarioJustificacion.setFont(new java.awt.Font(&quot;Segoe UI Semilight&quot;, 0, 15));&#xa;&#xa;comboboxUsuarioJustificacion.setModel(modeloUsuarioJus);&#xa;&#xa;comboboxUsuarioJustificacion.setVisible(false);"/>
       </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="414" y="12" width="190" height="30"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="rsbuttongradiente.RSButtonGradiente" name="btnFiltrarReclamos">
       <Properties>
@@ -183,6 +150,11 @@
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnFiltrarReclamosMouseClicked"/>
       </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="818" y="48" width="120" height="30"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="rsbuttongradiente.RSButtonGradiente" name="btnLimpiarFiltroReclamos">
       <Properties>
@@ -206,11 +178,21 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="btnLimpiarFiltroReclamos.setVisible(false);"/>
       </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="818" y="12" width="120" height="30"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="19" y="85" width="940" height="299"/>
+        </Constraint>
+      </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
@@ -249,6 +231,11 @@
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAccionMouseClicked"/>
       </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="759" y="402" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="rsbuttongradiente.RSButtonGradiente" name="btnModificarEstado">
       <Properties>
@@ -269,6 +256,11 @@
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnModificarEstadoMouseClicked"/>
       </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="553" y="402" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
     </Component>
   </SubComponents>
 </Form>

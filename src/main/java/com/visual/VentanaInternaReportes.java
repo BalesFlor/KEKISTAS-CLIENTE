@@ -70,6 +70,7 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaReclamos.setModel(cargarTablaReclamos(
         ));
@@ -78,9 +79,12 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
         tablaReclamos.setSize(600, 600);
         jScrollPane3.setViewportView(tablaReclamos);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 90, 980, 290));
+
         lblReportes.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         lblReportes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblReportes.setText("Reportes");
+        getContentPane().add(lblReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 16, 130, 20));
 
         cmbITR.setForeground(new java.awt.Color(13, 120, 161));
         cmbITR.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
@@ -103,6 +107,7 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
                 cmbITRItemStateChanged(evt);
             }
         });
+        getContentPane().add(cmbITR, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 52, 190, 30));
 
         btnLimpiarFiltroReclamos.setText("Limpiar Filtro");
         btnLimpiarFiltroReclamos.setColorPrimario(new java.awt.Color(213, 240, 252));
@@ -115,6 +120,7 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
                 btnLimpiarFiltroReclamosMouseClicked(evt);
             }
         });
+        getContentPane().add(btnLimpiarFiltroReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(867, 50, 120, 30));
 
         btnFiltrarReclamos.setText("Filtrar");
         btnFiltrarReclamos.setColorPrimario(new java.awt.Color(213, 240, 252));
@@ -126,6 +132,7 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
                 btnFiltrarReclamosMouseClicked(evt);
             }
         });
+        getContentPane().add(btnFiltrarReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(867, 10, 120, 30));
 
         cmbGeneracion.setForeground(new java.awt.Color(13, 120, 161));
         cmbGeneracion.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
@@ -148,6 +155,7 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
                 cmbGeneracionItemStateChanged(evt);
             }
         });
+        getContentPane().add(cmbGeneracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(652, 52, 190, 30));
 
         cmbMes.setForeground(new java.awt.Color(13, 120, 161));
         cmbMes.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
@@ -171,6 +179,7 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
                 cmbMesItemStateChanged(evt);
             }
         });
+        getContentPane().add(cmbMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 52, 190, 30));
 
         cmbTipo.setForeground(new java.awt.Color(13, 120, 161));
         cmbTipo.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
@@ -192,6 +201,7 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
             cmbTipoItemStateChanged(evt);
         }
     });
+    getContentPane().add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 52, 190, 30));
 
     btnPDF.setText("Descargar como PDF");
     btnPDF.setColorPrimario(new java.awt.Color(213, 240, 252));
@@ -204,69 +214,10 @@ public class VentanaInternaReportes extends javax.swing.JInternalFrame {
             btnPDFMouseClicked(evt);
         }
     });
+    getContentPane().add(btnPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 393, -1, -1));
 
     resultado.setText("Resultado: ");
-
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(16, 16, 16)
-                    .addComponent(lblReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(40, 40, 40)
-                    .addComponent(cmbITR, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
-                    .addComponent(cmbGeneracion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(119, 119, 119)
-                    .addComponent(resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addContainerGap(136, Short.MAX_VALUE))
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnFiltrarReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnLimpiarFiltroReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 31, Short.MAX_VALUE)))
-    );
-    layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-            .addGap(16, 16, 16)
-            .addComponent(lblReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(16, 16, 16)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(cmbITR, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(cmbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(cmbGeneracion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 311, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(resultado))
-            .addGap(8, 8, 8))
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 10, Short.MAX_VALUE)
-                .addComponent(btnFiltrarReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(btnLimpiarFiltroReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 61, Short.MAX_VALUE)))
-    );
+    getContentPane().add(resultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 393, 557, -1));
 
     pack();
     }// </editor-fold>//GEN-END:initComponents

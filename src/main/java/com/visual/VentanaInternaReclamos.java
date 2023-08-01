@@ -67,6 +67,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         botonEliminar1.setText("Eliminar");
         botonEliminar1.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -78,12 +79,14 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                 botonEliminar1MouseClicked(evt);
             }
         });
+        getContentPane().add(botonEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 395, 130, -1));
 
         botonModificar1.setText("Modificar");
         botonModificar1.setColorPrimario(new java.awt.Color(105, 190, 228));
         botonModificar1.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
         botonModificar1.setColorSecundario(new java.awt.Color(213, 240, 252));
         botonModificar1.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
+        getContentPane().add(botonModificar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 395, 130, -1));
 
         botonReclamar.setText("Hacer un Reclamo");
         botonReclamar.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -100,6 +103,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                 botonReclamarActionPerformed(evt);
             }
         });
+        getContentPane().add(botonReclamar, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 395, 190, -1));
 
         tablaReclamos.setModel(cargarTablaReclamos(
         ));
@@ -108,9 +112,12 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
         tablaReclamos.setSize(600, 600);
         jScrollPane3.setViewportView(tablaReclamos);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 90, 980, 290));
+
         lblBtnConstancias3.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         lblBtnConstancias3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBtnConstancias3.setText("Reclamos");
+        getContentPane().add(lblBtnConstancias3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 16, 130, 20));
 
         comboboxEstadoReclamo.setForeground(new java.awt.Color(13, 120, 161));
 
@@ -129,6 +136,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
         comboboxEstadoReclamo.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
 
         comboboxEstadoReclamo.setModel(modeloEstadoReclamo);
+        getContentPane().add(comboboxEstadoReclamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 30, 190, 30));
 
         comboboxUsuarioReclamo.setForeground(new java.awt.Color(13, 120, 161));
 
@@ -149,6 +157,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
         comboboxUsuarioReclamo.setModel(modeloUsuarioReclamo);
 
         comboboxUsuarioReclamo.setVisible(false);
+        getContentPane().add(comboboxUsuarioReclamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(644, 30, 190, 30));
 
         btnLimpiarFiltroReclamos.setText("Limpiar Filtro");
         btnLimpiarFiltroReclamos.setColorPrimario(new java.awt.Color(213, 240, 252));
@@ -161,6 +170,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                 btnLimpiarFiltroReclamosMouseClicked(evt);
             }
         });
+        getContentPane().add(btnLimpiarFiltroReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(874, 50, 120, 30));
 
         btnFiltrarReclamos.setText("Filtrar");
         btnFiltrarReclamos.setColorPrimario(new java.awt.Color(213, 240, 252));
@@ -172,6 +182,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                 btnFiltrarReclamosMouseClicked(evt);
             }
         });
+        getContentPane().add(btnFiltrarReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(874, 10, 120, 30));
 
         btnAccion.setText("Registrar una acción");
         btnAccion.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -183,6 +194,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                 btnAccionMouseClicked(evt);
             }
         });
+        getContentPane().add(btnAccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(793, 395, -1, -1));
 
         btnModificarEstado.setText("Modificar Estado");
         btnModificarEstado.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -194,72 +206,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                 btnModificarEstadoMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(lblBtnConstancias3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(872, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botonModificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(botonReclamar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89)
-                .addComponent(btnModificarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(comboboxEstadoReclamo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(comboboxUsuarioReclamo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(40, 40, 40)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnFiltrarReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnLimpiarFiltroReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 16, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(lblBtnConstancias3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 359, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonReclamar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonModificar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 10, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnFiltrarReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(10, 10, 10)
-                            .addComponent(btnLimpiarFiltroReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(comboboxEstadoReclamo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(comboboxUsuarioReclamo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGap(10, 10, 10)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 61, Short.MAX_VALUE)))
-        );
+        getContentPane().add(btnModificarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(587, 395, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
