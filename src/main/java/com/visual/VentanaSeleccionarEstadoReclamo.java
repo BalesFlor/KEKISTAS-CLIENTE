@@ -240,7 +240,7 @@ public class VentanaSeleccionarEstadoReclamo extends javax.swing.JFrame {
                 Usuarios user = userBean.buscarUsuario(reclamo.getIdUsuario().getIdUsuario()); 
                 enviarCorreo.transfer_to_email(user.getMailInstitucional(), "Estimado/a "+ user.getNombre1()+" "+ user.getApellido1() +", \n"
                         + "Le informamos que se ha modificado el estado de su reclamo llamado: " + reclamo.getTitulo() + " a "+estado.getNomEstado(),
-                        "Cambio de Estado en su reclamo");
+                        "UTECRegistra - Cambio de Estado en su reclamo");
                            
             } else {
                 JOptionPane.showMessageDialog(this, "Hubo un error en la modificación del estado del Reclamo",

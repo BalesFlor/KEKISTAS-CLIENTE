@@ -79,14 +79,19 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                 botonEliminar1MouseClicked(evt);
             }
         });
-        getContentPane().add(botonEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 395, 130, -1));
+        getContentPane().add(botonEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 130, -1));
 
         botonModificar1.setText("Modificar");
         botonModificar1.setColorPrimario(new java.awt.Color(105, 190, 228));
         botonModificar1.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
         botonModificar1.setColorSecundario(new java.awt.Color(213, 240, 252));
         botonModificar1.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
-        getContentPane().add(botonModificar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 395, 130, -1));
+        botonModificar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonModificar1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(botonModificar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, 130, 40));
 
         botonReclamar.setText("Hacer un Reclamo");
         botonReclamar.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -103,7 +108,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                 botonReclamarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonReclamar, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 395, 190, -1));
+        getContentPane().add(botonReclamar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 400, 190, -1));
 
         tablaReclamos.setModel(cargarTablaReclamos(
         ));
@@ -136,7 +141,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
         comboboxEstadoReclamo.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15));
 
         comboboxEstadoReclamo.setModel(modeloEstadoReclamo);
-        getContentPane().add(comboboxEstadoReclamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 30, 190, 30));
+        getContentPane().add(comboboxEstadoReclamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 190, 30));
 
         comboboxUsuarioReclamo.setForeground(new java.awt.Color(13, 120, 161));
 
@@ -157,7 +162,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
         comboboxUsuarioReclamo.setModel(modeloUsuarioReclamo);
 
         comboboxUsuarioReclamo.setVisible(false);
-        getContentPane().add(comboboxUsuarioReclamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(644, 30, 190, 30));
+        getContentPane().add(comboboxUsuarioReclamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 190, 30));
 
         btnLimpiarFiltroReclamos.setText("Limpiar Filtro");
         btnLimpiarFiltroReclamos.setColorPrimario(new java.awt.Color(213, 240, 252));
@@ -194,7 +199,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                 btnAccionMouseClicked(evt);
             }
         });
-        getContentPane().add(btnAccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(793, 395, -1, -1));
+        getContentPane().add(btnAccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 400, -1, -1));
 
         btnModificarEstado.setText("Modificar Estado");
         btnModificarEstado.setColorPrimario(new java.awt.Color(105, 190, 228));
@@ -206,7 +211,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
                 btnModificarEstadoMouseClicked(evt);
             }
         });
-        getContentPane().add(btnModificarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(587, 395, -1, -1));
+        getContentPane().add(btnModificarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 400, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -245,10 +250,12 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
 
     private void btnLimpiarFiltroReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFiltroReclamosMouseClicked
         accionLimpiarFiltro();
+        this.btnLimpiarFiltroReclamos.setVisible(false);
     }//GEN-LAST:event_btnLimpiarFiltroReclamosMouseClicked
 
     private void btnFiltrarReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarReclamosMouseClicked
         accionFiltrar();
+        this.btnLimpiarFiltroReclamos.setVisible(true);
     }//GEN-LAST:event_btnFiltrarReclamosMouseClicked
 
     private void accionLimpiarFiltro() {
@@ -308,7 +315,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
         }else{
             botonReclamar.setVisible(false);
             botonEliminar1.setVisible(false);
-             botonModificar1.setVisible(false);
+            botonModificar1.setVisible(false);
         }
         AnalistaBean analistaBean = new AnalistaBean();
         if(analistaBean.existeAnalista(usuario.getIdUsuario())){
@@ -329,32 +336,65 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
             ventanaSelEstado.setVisible(true);
         }
     }//GEN-LAST:event_btnModificarEstadoMouseClicked
+
+    private void botonModificar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificar1MouseClicked
+        
+        Reclamo reclamo = traerRecSeleccionado("Seleccione un reclamo para modificar");
+        
+       ventanaModificarReclamo ventanaModificar = new ventanaModificarReclamo(usuario.getIdUsuario(),reclamo, this);
+       ventanaModificar.setVisible(true);
+    }//GEN-LAST:event_botonModificar1MouseClicked
     
     private DefaultTableModel cargarTablaReclamos() {
         EventoBean eventoBean = new EventoBean();
                 
-        List<Reclamo> listaReclamos = reclamoBean.listaTodosReclamos();
+        List<Reclamo> listaReclamos = null;
     
         String[] nombreColumnas = {"Fecha/Hora", "Usuario", "Titulo", "Detalle", "Estado", "Evento Relacionado", "Fecha Evento", "Semestre", "Créditos"};
     
-        Object[][] datos = new Object[listaReclamos.size()][9];
+        Object[][] datos = null;
 
         int fila = 0;
 
-        for (Reclamo u:listaReclamos) {
+        EstudianteBean estBean = new EstudianteBean();
+        if (estBean.existeEstudiante(usuario.getIdUsuario())) {
+            Estudiante est = estBean.buscarEstudiante(usuario.getIdUsuario());
+            listaReclamos = reclamoBean.listaReclamosByUser(est);
+            datos = new Object[listaReclamos.size()][9];
+            for (Reclamo u : listaReclamos) {
 
-            
-            datos[fila][0] = u.getFechaHora().toString();
-            datos[fila][1] = userBean.buscarUsuario(u.getIdUsuario().getIdUsuario()).getNomUsuario();
-            datos[fila][2] = u.getTitulo();
-            datos[fila][3] = u.getDetalle();
-            datos[fila][4] = u.getIdEstadoPeticion().getNomEstado();
-            datos[fila][5] = (u.getIdEvento() != null) ? eventoBean.buscarEventoPorId(u.getIdEvento().getIdEvento()).getTitulo() : "No tiene";
-            datos[fila][6] = (u.getFecha() != null) ? u.getFecha().toString() : "-";
-            datos[fila][7] = (u.getSemestre() != null) ? u.getSemestre() : "-";
-            datos[fila][8] = (u.getCreditos() != null) ? u.getCreditos() : "-";
-            fila++;
+                datos[fila][0] = u.getFechaHora().toString();
+                datos[fila][1] = userBean.buscarUsuario(u.getIdUsuario().getIdUsuario()).getNomUsuario();
+                datos[fila][2] = u.getTitulo();
+                datos[fila][3] = u.getDetalle();
+                datos[fila][4] = u.getIdEstadoPeticion().getNomEstado();
+                datos[fila][5] = (u.getIdEvento() != null) ? eventoBean.buscarEventoPorId(u.getIdEvento().getIdEvento()).getTitulo() : "No tiene";
+                datos[fila][6] = (u.getFecha() != null) ? u.getFecha().toString() : "-";
+                datos[fila][7] = (u.getSemestre() != null) ? u.getSemestre() : "-";
+                datos[fila][8] = (u.getCreditos() != null) ? u.getCreditos() : "-";
+                fila++;
+            }
         }
+        AnalistaBean analistaBean = new AnalistaBean();
+        if (analistaBean.existeAnalista(usuario.getIdUsuario())) {
+            listaReclamos = reclamoBean.listaTodosReclamos();
+            datos = new Object[listaReclamos.size()][9];
+            for (Reclamo u : listaReclamos) {
+
+                datos[fila][0] = u.getFechaHora().toString();
+                datos[fila][1] = userBean.buscarUsuario(u.getIdUsuario().getIdUsuario()).getNomUsuario();
+                datos[fila][2] = u.getTitulo();
+                datos[fila][3] = u.getDetalle();
+                datos[fila][4] = u.getIdEstadoPeticion().getNomEstado();
+                datos[fila][5] = (u.getIdEvento() != null) ? eventoBean.buscarEventoPorId(u.getIdEvento().getIdEvento()).getTitulo() : "No tiene";
+                datos[fila][6] = (u.getFecha() != null) ? u.getFecha().toString() : "-";
+                datos[fila][7] = (u.getSemestre() != null) ? u.getSemestre() : "-";
+                datos[fila][8] = (u.getCreditos() != null) ? u.getCreditos() : "-";
+                fila++;
+            }
+        }
+        
+        
     
         DefaultTableModel model = new DefaultTableModel(datos, nombreColumnas) {
 

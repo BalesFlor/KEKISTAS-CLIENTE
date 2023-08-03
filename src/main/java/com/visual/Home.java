@@ -61,6 +61,7 @@ public class Home extends javax.swing.JFrame {
         lblRuta = new javax.swing.JLabel();
         lblNombreUsuario = new javax.swing.JLabel();
         imgBtnUsuario1 = new javax.swing.JLabel();
+        lblCerrarSesion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -463,10 +464,25 @@ public class Home extends javax.swing.JFrame {
                 lblNombreUsuarioMouseExited(evt);
             }
         });
-        background.add(lblNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 4, 142, 40));
+        background.add(lblNombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 4, 142, 20));
 
         imgBtnUsuario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_2user-icon.png"))); // NOI18N
-        background.add(imgBtnUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 10, 30, 30));
+        background.add(imgBtnUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 0, 30, 30));
+
+        lblCerrarSesion.setForeground(new java.awt.Color(26, 73, 94));
+        lblCerrarSesion.setText("Cerrar sesión");
+        lblCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCerrarSesionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblCerrarSesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblCerrarSesionMouseExited(evt);
+            }
+        });
+        background.add(lblCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 30, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -628,6 +644,22 @@ public class Home extends javax.swing.JFrame {
         background.add(ventanaReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
         ventanaReportes.setVisible(true);
     }//GEN-LAST:event_btnReportesMouseClicked
+
+    private void lblCerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseEntered
+       lblCerrarSesion.setForeground(new Color(0,0,51));
+       lblCerrarSesion.setText("<HTML><u>"+ "Cerrar sesión" +"</u></HTML>");
+    }//GEN-LAST:event_lblCerrarSesionMouseEntered
+
+    private void lblCerrarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseExited
+        lblCerrarSesion.setForeground(new Color(13,120,161));
+        lblCerrarSesion.setText("Cerrar sesión");
+    }//GEN-LAST:event_lblCerrarSesionMouseExited
+
+    private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
+        this.dispose();
+        VentanaIniciarSesion ventanaIniciarSesion = new VentanaIniciarSesion();
+        ventanaIniciarSesion.setVisible(true);
+    }//GEN-LAST:event_lblCerrarSesionMouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
@@ -654,6 +686,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel lblBtnReclamos;
     private javax.swing.JLabel lblBtnReportes;
     private javax.swing.JLabel lblBtnUsuario;
+    private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblNombreUsuario;
     private javax.swing.JLabel lblRuta;
     private javax.swing.JLabel lblTitle;

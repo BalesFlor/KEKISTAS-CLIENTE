@@ -51,6 +51,7 @@ public class VentanaInicial extends javax.swing.JFrame {
         progressBar = new rojerusan.componentes.RSProgressBarSinText();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -99,13 +100,18 @@ public class VentanaInicial extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 51, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("de Reclamos y Solicitudes de Constancias");
-        rSPanelGradiente1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 530, 50));
+        rSPanelGradiente1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 530, 30));
 
         jLabel2.setFont(fuenteImport.fuente("Roboto-Bold.ttf",0,20));
         jLabel2.setForeground(new java.awt.Color(0, 51, 102));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Aplicación de Gestión");
-        rSPanelGradiente1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 530, 50));
+        rSPanelGradiente1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 530, 30));
+
+        jLabel3.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 51, 102));
+        jLabel3.setText("UTECRegistra");
+        rSPanelGradiente1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,6 +158,7 @@ public class VentanaInicial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private rojerusan.componentes.RSProgressBarSinText progressBar;
     private rojeru_san.rslabel.RSLabelImage rSLabelImage1;
     private rspanelcircleborder.RSPanelCircleBorder rSPanelCircleBorder1;

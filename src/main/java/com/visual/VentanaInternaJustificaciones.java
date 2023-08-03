@@ -3,18 +3,12 @@ package com.visual;
 import com.grsc.logica.ejb.AnalistaBean;
 import com.grsc.logica.ejb.EstadoPeticionBean;
 import com.grsc.logica.ejb.EstudianteBean;
-import com.grsc.logica.ejb.EventoBean;
 import com.grsc.logica.ejb.JustificacionBean;
 import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.EstadoPeticion;
-import com.grsc.modelo.entities.Estudiante;
-import com.grsc.modelo.entities.Evento;
 import com.grsc.modelo.entities.Justificacion;
 import com.grsc.modelo.entities.Usuarios;
 import java.math.BigInteger;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -48,8 +42,8 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
         lblBtnConstancias3 = new javax.swing.JLabel();
         comboboxEstadoJustificacion = new RSMaterialComponent.RSComboBoxMaterial();
         comboboxUsuarioJustificacion = new RSMaterialComponent.RSComboBoxMaterial();
-        btnFiltrarReclamos = new rsbuttongradiente.RSButtonGradiente();
-        btnLimpiarFiltroReclamos = new rsbuttongradiente.RSButtonGradiente();
+        btnFiltrar = new rsbuttongradiente.RSButtonGradiente();
+        btnLimpiarFiltro = new rsbuttongradiente.RSButtonGradiente();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaJustificaciones = new javax.swing.JTable();
         btnAccion = new rsbuttongradiente.RSButtonGradiente();
@@ -160,30 +154,30 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
         comboboxUsuarioJustificacion.setVisible(false);
         getContentPane().add(comboboxUsuarioJustificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 12, 190, 30));
 
-        btnFiltrarReclamos.setText("Filtrar");
-        btnFiltrarReclamos.setColorPrimario(new java.awt.Color(213, 240, 252));
-        btnFiltrarReclamos.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
-        btnFiltrarReclamos.setColorSecundario(new java.awt.Color(105, 190, 228));
-        btnFiltrarReclamos.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
-        btnFiltrarReclamos.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnFiltrar.setText("Filtrar");
+        btnFiltrar.setColorPrimario(new java.awt.Color(213, 240, 252));
+        btnFiltrar.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
+        btnFiltrar.setColorSecundario(new java.awt.Color(105, 190, 228));
+        btnFiltrar.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
+        btnFiltrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnFiltrarReclamosMouseClicked(evt);
+                btnFiltrarMouseClicked(evt);
             }
         });
-        getContentPane().add(btnFiltrarReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(818, 48, 120, 30));
+        getContentPane().add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, 120, 30));
 
-        btnLimpiarFiltroReclamos.setText("Limpiar Filtro");
-        btnLimpiarFiltroReclamos.setColorPrimario(new java.awt.Color(213, 240, 252));
-        btnLimpiarFiltroReclamos.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
-        btnLimpiarFiltroReclamos.setColorSecundario(new java.awt.Color(105, 190, 228));
-        btnLimpiarFiltroReclamos.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
-        btnLimpiarFiltroReclamos.setVisible(false);
-        btnLimpiarFiltroReclamos.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLimpiarFiltro.setText("Limpiar Filtro");
+        btnLimpiarFiltro.setColorPrimario(new java.awt.Color(213, 240, 252));
+        btnLimpiarFiltro.setColorPrimarioHover(new java.awt.Color(105, 190, 228));
+        btnLimpiarFiltro.setColorSecundario(new java.awt.Color(105, 190, 228));
+        btnLimpiarFiltro.setColorSecundarioHover(new java.awt.Color(213, 240, 252));
+        btnLimpiarFiltro.setVisible(false);
+        btnLimpiarFiltro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLimpiarFiltroReclamosMouseClicked(evt);
+                btnLimpiarFiltroMouseClicked(evt);
             }
         });
-        getContentPane().add(btnLimpiarFiltroReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(818, 12, 120, 30));
+        getContentPane().add(btnLimpiarFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 50, 120, 30));
 
         tablaJustificaciones.setModel(cargarTablaJustificaciones(
         ));
@@ -258,16 +252,17 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonJustificarActionPerformed
 
-    private void btnLimpiarFiltroReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFiltroReclamosMouseClicked
+    private void btnLimpiarFiltroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFiltroMouseClicked
         accionLimpiarFiltro();
-    }//GEN-LAST:event_btnLimpiarFiltroReclamosMouseClicked
+        btnLimpiarFiltro.setVisible(false);
+    }//GEN-LAST:event_btnLimpiarFiltroMouseClicked
 
-    private void btnFiltrarReclamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarReclamosMouseClicked
+    private void btnFiltrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarMouseClicked
         accionFiltrar();
-    }//GEN-LAST:event_btnFiltrarReclamosMouseClicked
+        btnLimpiarFiltro.setVisible(true);
+    }//GEN-LAST:event_btnFiltrarMouseClicked
 
     private void accionLimpiarFiltro() {
-
         this.tablaJustificaciones.setRowSorter(null);
         this.comboboxEstadoJustificacion.setSelectedIndex(0);
         this.comboboxUsuarioJustificacion.setSelectedIndex(0);
@@ -398,8 +393,8 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
     private rsbuttongradiente.RSButtonGradiente botonJustificar;
     private rsbuttongradiente.RSButtonGradiente botonModificar;
     private rsbuttongradiente.RSButtonGradiente btnAccion;
-    private rsbuttongradiente.RSButtonGradiente btnFiltrarReclamos;
-    private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltroReclamos;
+    private rsbuttongradiente.RSButtonGradiente btnFiltrar;
+    private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltro;
     private rsbuttongradiente.RSButtonGradiente btnModificarEstado;
     private RSMaterialComponent.RSComboBoxMaterial comboboxEstadoJustificacion;
     private RSMaterialComponent.RSComboBoxMaterial comboboxUsuarioJustificacion;

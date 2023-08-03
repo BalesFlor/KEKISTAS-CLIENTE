@@ -238,7 +238,7 @@ public class VentanaSeleccionarEstadoJustificacion extends javax.swing.JFrame {
                 Usuarios user = userBean.buscarUsuario(justificacion.getIdUsuario().getIdUsuario());
                 enviarCorreo.transfer_to_email(user.getMailInstitucional(),  "Estimado/a "+ user.getNombre1()+" "+ user.getApellido1() +", \n"
                         + "Le informamos que se ha modificado el estado de su justificación relacionada al evento: " + justificacion.getIdEvento().getTitulo() + " a "+estado.getNomEstado(),
-                        "Cambio de Estado en su justificación");             
+                        "UTECRegistra - Cambio de Estado en su justificación");             
             } else {
                 JOptionPane.showMessageDialog(this, "Hubo un error en la modificación del estado en la Justificación",
                         "Error", JOptionPane.WARNING_MESSAGE);

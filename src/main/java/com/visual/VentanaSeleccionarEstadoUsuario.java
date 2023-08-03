@@ -5,12 +5,9 @@ import com.grsc.logica.ejb.AnalistaBean;
 import com.grsc.logica.ejb.EstadoUsuarioBean;
 import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.Analista;
-import com.grsc.modelo.entities.EstadoPeticion;
 import com.grsc.modelo.entities.EstadoUsuario;
 import com.grsc.modelo.entities.Usuarios;
 import java.math.BigInteger;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -234,17 +231,17 @@ public class VentanaSeleccionarEstadoUsuario extends javax.swing.JFrame {
                 
                  if (estado.getEstadoUsuario().equals("VALIDADO")) {
                     enviarCorreo.transfer_to_email(user.getMailInstitucional(), "Estimado/a " + user.getNombre1() + " " + user.getApellido1() + ", \n"
-                            + "Le informamos que un analista ha aprobado su solicitud de registro en la aplicación de Gestión de Reclamos y Solicitudes de Constancias",
+                            + "Le informamos que un analista ha aprobado su solicitud de registro en la aplicación UTECRegistra",
                             "Su solicitud de registro ha sido aprobada");
                     
                  }else if(estado.getEstadoUsuario().equals("NO VALIDADO")){
                     enviarCorreo.transfer_to_email(user.getMailInstitucional(), "Estimado/a " + user.getNombre1() + " " + user.getApellido1() + ", \n"
-                            + "Le informamos que un analista ha denegado su solicitud de registro en la aplicación de Gestión de Reclamos y Solicitudes de Constancias",
+                            + "Le informamos que un analista ha denegado su solicitud de registro en la aplicación UTECRegistra",
                             "Su solicitud de registro ha sido rechazada");
                     
                  }else{
                     enviarCorreo.transfer_to_email(user.getMailInstitucional(), "Estimado/a " + user.getNombre1() + " " + user.getApellido1() + ", \n"
-                            + "Le informamos se ha eliminado su usuario en la aplicación de Gestión de Reclamos y Solicitudes de Constancias",
+                            + "Le informamos se ha eliminado su usuario en la aplicación UTECRegistra",
                             "Su solicitud de registro ha sido aprobada");
                     
                  }

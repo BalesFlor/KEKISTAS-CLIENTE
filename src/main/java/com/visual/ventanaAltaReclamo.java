@@ -130,6 +130,8 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
             contador++;
         }
         cmbSemestre.setModel(modeloSemestre);
+        cmbSemestre.setEnabled(false);
+        cmbSemestre.setEditable(false);
 
         dateEvento.setPlaceholder("Fecha Evento");
         dateEvento.setEnabled(false);
@@ -148,6 +150,10 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
                 +listaDocentes.get(i).getUsuarios().getApellido1());
         }
         cmbDocente.setModel(modeloDocente);
+        cmbDocente.setEnabled(false);
+        cmbDocente.setEditable(false);
+
+        spinnerCreditos.setEnabled(false);
 
         lblCreditos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblCreditos.setForeground(new java.awt.Color(13, 120, 161));
@@ -358,19 +364,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Recuerde que poner el nombre del Evento correspondiente a su reclamo",
                         "Datos incompletos!",JOptionPane.WARNING_MESSAGE);
                     }else{
-                        if(dateEvento.getFechaSeleccionada().equals("")){
-                            JOptionPane.showMessageDialog(this, "Recuerde que seleccionar la fecha correspondiente al evento correspondiente a su reclamo",
-                            "Datos incompletos!",JOptionPane.WARNING_MESSAGE);
-                        }else{
-                            if(cmbSemestre.getSelectedItem().equals("Seleccione un Semestre*")){
-                                JOptionPane.showMessageDialog(this, "Recuerde que seleccionar el semestre correspondiente al evento correspondiente a su reclamo",
-                                "Datos incompletos!",JOptionPane.WARNING_MESSAGE);
-                            }else{
-                                if(cmbDocente.getSelectedIndex()==0){
-                                    JOptionPane.showMessageDialog(this, "Recuerde que seleccionar el semestre correspondiente al evento correspondiente a su reclamo",
-                                    "Datos incompletos!",JOptionPane.WARNING_MESSAGE);
-                                }else{
-                                    
+                        
                                     try {
                                         seCreo = reclamoBean.altaReclamo(txtTitulo.getText(), txtDescripcion.getText(),
                                                 eventoSeleccionado(), semestreSeleccionado(),
@@ -388,9 +382,6 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
                                 "Error",JOptionPane.WARNING_MESSAGE);
                                     }
                                 }
-                            }
-                        }
-                    }
                 
                } else {
                 //En caso de que seleccione un evento como OTRO no se mostrarán y por lo tanto no será necesario que complete los demás datos
@@ -447,7 +438,7 @@ public class ventanaAltaReclamo extends javax.swing.JFrame {
 
             String dateStr = new SimpleDateFormat("yyyy-MM-dd").format(evento.getFechaHoraInicio());
             dateEvento.setTextoFecha(dateStr);
-
+            this.cmbDocente.setSelectedItem(evento.getTutor().getUsuarios().getNombre1()+" "+evento.getTutor().getUsuarios().getApellido1());
             Date fechaHoraInicio = evento.getFechaHoraInicio();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(fechaHoraInicio);

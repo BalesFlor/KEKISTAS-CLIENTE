@@ -1,21 +1,15 @@
 package com.visual;
 
 import com.grsc.logica.ejb.AreaBean;
-import com.grsc.logica.ejb.AnalistaBean;
 import com.grsc.logica.ejb.ItrBean;
 import com.grsc.logica.ejb.RoleBean;
 import com.grsc.logica.ejb.DepartamentoBean;
-import com.grsc.logica.ejb.DocenteBean;
-import com.grsc.logica.ejb.EstudianteBean;
-import com.grsc.logica.ejb.GeneracionBean;
 import com.grsc.logica.ejb.LocalidadBean;
 import com.grsc.logica.ejb.TipoTutorBean;
 import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.logica.validador.validador;
 import com.grsc.modelo.entities.Area;
 import com.grsc.modelo.entities.Departamento;
-import com.grsc.modelo.entities.EstadoUsuario;
-import com.grsc.modelo.entities.Generacion;
 import com.grsc.modelo.entities.Itr;
 import com.grsc.modelo.entities.Localidad;
 import com.grsc.modelo.entities.Roles;
@@ -26,14 +20,9 @@ import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.math.BigInteger;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
