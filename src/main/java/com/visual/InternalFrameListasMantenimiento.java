@@ -81,9 +81,9 @@ public class InternalFrameListasMantenimiento extends javax.swing.JInternalFrame
     }//GEN-LAST:event_btnListaITRsMouseClicked
 
     private void btnListaTiposUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListaTiposUsuariosMouseClicked
-        InternalFrameTiposUsuarios ventanaTiposUsuarios = new InternalFrameTiposUsuarios();
+       /* InternalFrameTiposUsuarios ventanaTiposUsuarios = new InternalFrameTiposUsuarios();
         background.add(ventanaTiposUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
-        ventanaTiposUsuarios.setVisible(true);
+        ventanaTiposUsuarios.setVisible(true);*/
     }//GEN-LAST:event_btnListaTiposUsuariosMouseClicked
 
 

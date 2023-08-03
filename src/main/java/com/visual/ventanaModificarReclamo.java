@@ -52,7 +52,11 @@ public class ventanaModificarReclamo extends javax.swing.JFrame {
             cmbEvento.setVisible(true);
 
             this.cmbTipoEvento.setSelectedItem(reclamo.getIdEvento().getTipoEvento().getNombreTipoEvento());
-            this.cmbSemestre.setSelectedItem(reclamo.getSemestre().toString());
+            
+            if(reclamo.getSemestre() != null){
+                this.cmbSemestre.setSelectedItem(reclamo.getSemestre().toString());
+            }
+            
             String dateStr = new SimpleDateFormat("yyyy-MM-dd").format(reclamo.getIdEvento().getFechaHoraInicio());
             dateEvento.setTextoFecha(dateStr);
             if(reclamo.getIdEvento().getTutor()!=null){
