@@ -6,6 +6,7 @@ import com.grsc.logica.ejb.EstudianteBean;
 import com.grsc.logica.ejb.JustificacionBean;
 import com.grsc.logica.ejb.UsuarioBean;
 import com.grsc.modelo.entities.EstadoPeticion;
+import com.grsc.modelo.entities.Estudiante;
 import com.grsc.modelo.entities.Justificacion;
 import com.grsc.modelo.entities.Usuarios;
 import java.math.BigInteger;
@@ -90,6 +91,11 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
         botonModificar.setColorPrimarioHover(new java.awt.Color(213, 240, 252));
         botonModificar.setColorSecundario(new java.awt.Color(213, 240, 252));
         botonModificar.setColorSecundarioHover(new java.awt.Color(105, 190, 228));
+        botonModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonModificarMouseClicked(evt);
+            }
+        });
         getContentPane().add(botonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 402, 130, -1));
 
         botonJustificar.setText("Realizar Justificación");
@@ -345,29 +351,59 @@ public class VentanaInternaJustificaciones extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnModificarEstadoMouseClicked
 
+    private void botonModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificarMouseClicked
+        Justificacion reclamo = traerJusSeleccionada("Seleccione un justificación para modificar");
+        ventanaModificarJustificacion ventanaModificar = new ventanaModificarJustificacion(usuario.getIdUsuario(), reclamo, this);
+        ventanaModificar.setVisible(true);
+    }//GEN-LAST:event_botonModificarMouseClicked
+
      
     private DefaultTableModel cargarTablaJustificaciones() {
     
        JustificacionBean justificacionBean = new JustificacionBean();
         
-        List<Justificacion> listaJustificacions = justificacionBean.listarJustificacions();
+        List<Justificacion> listaJustificacions = null;
     
         String[] nombreColumnas = {"Fecha/Hora", "Usuario", "Evento", "Info Adjunta", "Estado Justificación"};
     
-        Object[][] datos = new Object[listaJustificacions.size()][5];
+        Object[][] datos = null;
 
         int fila = 0;
 
-        for (Justificacion u:listaJustificacions) {
+        EstudianteBean estBean = new EstudianteBean();
+        if (estBean.existeEstudiante(usuario.getIdUsuario())) {
+            Estudiante est = estBean.buscarEstudiante(usuario.getIdUsuario());
+            listaJustificacions = justificacionBean.listaJustificacionsByUser(est);
+            datos = new Object[listaJustificacions.size()][5];
+         
+            for (Justificacion u : listaJustificacions) {
 
-            datos[fila][0] = u.getFechaHora().toString();            
-            datos[fila][1] = userBean.buscarUsuario(u.getIdUsuario().getIdUsuario()).getNomUsuario();
-            datos[fila][2] = u.getIdEvento().getTitulo();
-            datos[fila][3] = u.getDetalle();
-            datos[fila][4] = u.getIdEstadoPeticion().getNomEstado();
-            
-            fila++;
+                datos[fila][0] = u.getFechaHora().toString();
+                datos[fila][1] = userBean.buscarUsuario(u.getIdUsuario().getIdUsuario()).getNomUsuario();
+                datos[fila][2] = u.getIdEvento().getTitulo();
+                datos[fila][3] = u.getDetalle();
+                datos[fila][4] = u.getIdEstadoPeticion().getNomEstado();
 
+                fila++;
+
+            }
+        }
+        AnalistaBean analistaBean = new AnalistaBean();
+        if (analistaBean.existeAnalista(usuario.getIdUsuario())) {
+            listaJustificacions = justificacionBean.listarJustificacions();
+            datos = new Object[listaJustificacions.size()][5];
+        
+            for (Justificacion u : listaJustificacions) {
+
+                datos[fila][0] = u.getFechaHora().toString();
+                datos[fila][1] = userBean.buscarUsuario(u.getIdUsuario().getIdUsuario()).getNomUsuario();
+                datos[fila][2] = u.getIdEvento().getTitulo();
+                datos[fila][3] = u.getDetalle();
+                datos[fila][4] = u.getIdEstadoPeticion().getNomEstado();
+
+                fila++;
+
+            }
         }
     
         DefaultTableModel model = new DefaultTableModel(datos, nombreColumnas) {

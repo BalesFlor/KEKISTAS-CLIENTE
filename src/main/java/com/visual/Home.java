@@ -35,9 +35,6 @@ public class Home extends javax.swing.JFrame {
         background = new javax.swing.JPanel();
         sidepanel = new rspanelgradiente.RSPanelGradiente();
         imgUTECLogo = new javax.swing.JLabel();
-        btnListasMantenimiento = new javax.swing.JPanel();
-        lblBtnListasMantenimiento = new javax.swing.JLabel();
-        imgBtnListasMantenimiento = new javax.swing.JLabel();
         btnUsuario = new javax.swing.JPanel();
         imgBtnUsuario = new javax.swing.JLabel();
         lblBtnUsuario = new javax.swing.JLabel();
@@ -56,6 +53,9 @@ public class Home extends javax.swing.JFrame {
         btnReportes = new javax.swing.JPanel();
         imgBtnReportes = new javax.swing.JLabel();
         lblBtnReportes = new javax.swing.JLabel();
+        btnListasMantenimiento = new javax.swing.JPanel();
+        lblBtnListasMantenimiento = new javax.swing.JLabel();
+        imgBtnListasMantenimiento = new javax.swing.JLabel();
         titlepanel = new rspanelgradiente.RSPanelGradiente();
         lblTitle = new javax.swing.JLabel();
         lblRuta = new javax.swing.JLabel();
@@ -79,49 +79,6 @@ public class Home extends javax.swing.JFrame {
         sidepanel.setGradiente(rspanelgradiente.RSPanelGradiente.Gradiente.ESQUINA_3);
 
         imgUTECLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_1utec_logo.png"))); // NOI18N
-
-        btnListasMantenimiento.setBackground(new java.awt.Color(105, 190, 228));
-        btnListasMantenimiento.setForeground(new java.awt.Color(105, 190, 228));
-        btnListasMantenimiento.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnListasMantenimientoMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnListasMantenimientoMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnListasMantenimientoMouseExited(evt);
-            }
-        });
-
-        lblBtnListasMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        lblBtnListasMantenimiento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblBtnListasMantenimiento.setText("Listas Mantenimiento");
-
-        imgBtnListasMantenimiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_1rsz_1reclamos-icon.png"))); // NOI18N
-
-        javax.swing.GroupLayout btnListasMantenimientoLayout = new javax.swing.GroupLayout(btnListasMantenimiento);
-        btnListasMantenimiento.setLayout(btnListasMantenimientoLayout);
-        btnListasMantenimientoLayout.setHorizontalGroup(
-            btnListasMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnListasMantenimientoLayout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .addComponent(imgBtnListasMantenimiento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblBtnListasMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67))
-        );
-        btnListasMantenimientoLayout.setVerticalGroup(
-            btnListasMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnListasMantenimientoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(imgBtnListasMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(btnListasMantenimientoLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(lblBtnListasMantenimiento)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         btnUsuario.setBackground(new java.awt.Color(105, 190, 228));
         btnUsuario.setForeground(new java.awt.Color(105, 190, 228));
@@ -271,9 +228,9 @@ public class Home extends javax.swing.JFrame {
         btnReclamosLayout.setHorizontalGroup(
             btnReclamosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnReclamosLayout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addComponent(imgBtnReclamos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblBtnReclamos)
                 .addGap(156, 156, 156))
         );
@@ -357,22 +314,65 @@ public class Home extends javax.swing.JFrame {
         btnReportesLayout.setHorizontalGroup(
             btnReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnReportesLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(13, 13, 13)
                 .addComponent(imgBtnReportes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblBtnReportes)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         btnReportesLayout.setVerticalGroup(
             btnReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnReportesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(imgBtnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(imgBtnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnReportesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblBtnReportes)
-                .addGap(14, 14, 14))
+                .addGap(21, 21, 21))
+        );
+
+        btnListasMantenimiento.setBackground(new java.awt.Color(105, 190, 228));
+        btnListasMantenimiento.setForeground(new java.awt.Color(105, 190, 228));
+        btnListasMantenimiento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnListasMantenimientoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnListasMantenimientoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnListasMantenimientoMouseExited(evt);
+            }
+        });
+
+        lblBtnListasMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        lblBtnListasMantenimiento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblBtnListasMantenimiento.setText("Listas Mantenimiento");
+
+        imgBtnListasMantenimiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_1rsz_1reclamos-icon.png"))); // NOI18N
+
+        javax.swing.GroupLayout btnListasMantenimientoLayout = new javax.swing.GroupLayout(btnListasMantenimiento);
+        btnListasMantenimiento.setLayout(btnListasMantenimientoLayout);
+        btnListasMantenimientoLayout.setHorizontalGroup(
+            btnListasMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnListasMantenimientoLayout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(imgBtnListasMantenimiento)
+                .addGap(18, 18, 18)
+                .addComponent(lblBtnListasMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
+        );
+        btnListasMantenimientoLayout.setVerticalGroup(
+            btnListasMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnListasMantenimientoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(imgBtnListasMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(btnListasMantenimientoLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(lblBtnListasMantenimiento)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout sidepanelLayout = new javax.swing.GroupLayout(sidepanel);
@@ -385,13 +385,13 @@ public class Home extends javax.swing.JFrame {
             .addGroup(sidepanelLayout.createSequentialGroup()
                 .addGroup(sidepanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnListasMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(sidepanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(imgUTECLogo)
+                    .addComponent(btnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(sidepanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(sidepanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imgUTECLogo)
+                            .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnListasMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         sidepanelLayout.setVerticalGroup(
@@ -407,12 +407,12 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnJustificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReclamos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(2, 2, 2)
+                .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnListasMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
 
         background.add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 270, 660));
@@ -512,6 +512,9 @@ public class Home extends javax.swing.JFrame {
             btnListasMantenimiento.setVisible(true);
             lblBtnListasMantenimiento.setVisible(true);
             imgBtnListasMantenimiento.setVisible(true);
+            lblBtnReportes.setVisible(true);
+            btnReportes.setVisible(true);
+            imgBtnReportes.setVisible(true);
         }else{
             btnUsuario.setVisible(false);
             lblBtnUsuario.setVisible(false);
@@ -519,6 +522,9 @@ public class Home extends javax.swing.JFrame {
             btnListasMantenimiento.setVisible(false);
             lblBtnListasMantenimiento.setVisible(false);
             imgBtnListasMantenimiento.setVisible(false);
+            lblBtnReportes.setVisible(false);
+            btnReportes.setVisible(false);
+            imgBtnReportes.setVisible(false);
         }
         
     }//GEN-LAST:event_formWindowActivated

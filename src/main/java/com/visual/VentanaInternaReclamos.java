@@ -338,9 +338,7 @@ public class VentanaInternaReclamos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnModificarEstadoMouseClicked
 
     private void botonModificar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificar1MouseClicked
-        
-        Reclamo reclamo = traerRecSeleccionado("Seleccione un reclamo para modificar");
-        
+       Reclamo reclamo = traerRecSeleccionado("Seleccione un reclamo para modificar");
        ventanaModificarReclamo ventanaModificar = new ventanaModificarReclamo(usuario.getIdUsuario(),reclamo, this);
        ventanaModificar.setVisible(true);
     }//GEN-LAST:event_botonModificar1MouseClicked

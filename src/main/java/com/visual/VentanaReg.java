@@ -1184,7 +1184,6 @@ public class VentanaReg extends javax.swing.JFrame {
             }
         }
 
-        System.out.println(depto.getNomDepartamento());
         return depto;
     }
 
@@ -1206,8 +1205,6 @@ public class VentanaReg extends javax.swing.JFrame {
                 local = listaLocals.get(i);
             }
         }
-
-        System.out.println(local.getNomLocalidad());
 
         return local;
     }
@@ -1253,8 +1250,6 @@ public class VentanaReg extends javax.swing.JFrame {
             }
         }
 
-        System.out.println(tipoTutor.getNomTipoTutor());
-
         return tipoTutor;
     }
 
@@ -1276,8 +1271,6 @@ public class VentanaReg extends javax.swing.JFrame {
                 area = listaArea.get(i);
             }
         }
-
-        System.out.println(area.getNomArea());
 
         return area;
     }

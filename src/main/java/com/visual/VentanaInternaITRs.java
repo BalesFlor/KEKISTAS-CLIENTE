@@ -1,9 +1,15 @@
 package com.visual;
+import com.grsc.logica.ejb.DepartamentoBean;
 import com.grsc.logica.ejb.EstadoItrBean;
 import com.grsc.logica.ejb.ItrBean;
+import com.grsc.modelo.entities.Departamento;
 import com.grsc.modelo.entities.EstadoItr;
 import com.grsc.modelo.entities.Itr;
+import java.math.BigInteger;
+import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -14,7 +20,7 @@ import javax.swing.table.TableRowSorter;
 public class VentanaInternaITRs extends javax.swing.JInternalFrame {
 
     ItrBean itrBean = new ItrBean();
-    
+    Itr itrSeleccionado = null;
     public VentanaInternaITRs() {
         initComponents();
     }
@@ -32,7 +38,8 @@ public class VentanaInternaITRs extends javax.swing.JInternalFrame {
         btnAgregar = new rsbuttongradiente.RSButtonGradiente();
         btnModificar = new rsbuttongradiente.RSButtonGradiente();
         btnEliminar = new rsbuttongradiente.RSButtonGradiente();
-        rSTextField1 = new rojeru_san.rsfield.RSTextField();
+        txtNomItr = new rojeru_san.rsfield.RSTextField();
+        cmbbDeptos = new RSMaterialComponent.RSComboBoxMaterial();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -104,7 +111,7 @@ public class VentanaInternaITRs extends javax.swing.JInternalFrame {
                 btnAgregarMouseClicked(evt);
             }
         });
-        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 370, 130, -1));
+        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 360, 130, -1));
 
         btnModificar.setText("Modificar");
         btnModificar.setColorPrimario(new java.awt.Color(213, 240, 252));
@@ -116,7 +123,7 @@ public class VentanaInternaITRs extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(661, 137, 130, -1));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 360, 130, -1));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.setColorPrimario(new java.awt.Color(213, 240, 252));
@@ -128,10 +135,26 @@ public class VentanaInternaITRs extends javax.swing.JInternalFrame {
                 btnEliminarMouseClicked(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(661, 203, 130, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 130, -1));
 
-        rSTextField1.setPlaceholder("Nombre de nuevo ITR...");
-        getContentPane().add(rSTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 623, -1));
+        txtNomItr.setPlaceholder("Nombre nuevo ITR...");
+        getContentPane().add(txtNomItr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 410, -1));
+
+        cmbbDeptos.setForeground(new java.awt.Color(13, 120, 161));
+        DepartamentoBean deptoBean= new DepartamentoBean();
+
+        DefaultComboBoxModel modeloDeptos=new DefaultComboBoxModel();
+
+        List<Departamento> listaDeptos=deptoBean.listarDepartamento();
+
+        modeloDeptos.addElement("Seleccione un Departamento*");
+
+        for(int i = 0 ; i<listaDeptos.size(); i++){
+            modeloDeptos.addElement(listaDeptos.get(i).getNomDepartamento());
+        }
+        cmbbDeptos.setModel(modeloDeptos);
+        cmbbDeptos.setColorMaterial(new java.awt.Color(0, 173, 239));
+        getContentPane().add(cmbbDeptos, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 360, 200, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -179,15 +202,75 @@ public class VentanaInternaITRs extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFiltrarMouseClicked
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
+        traerItrSeleccionado("Seleccione un itr para modificar");
+
+        Object[] options = {"Modificar", "CANCELAR"};
+        int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de modificar el itr?",
+                "Modificar Itr", JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+            
+            if (this.txtNomItr.getText().equals("") && this.cmbbDeptos.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(this, "Recuerde que seleccionar un departamento o "
+                        + "darle un nombre nuevo al ITR para modificarlo!", "Datos incompletos!",
+                        JOptionPane.WARNING_MESSAGE);
+            } else {
+                if(this.txtNomItr.getText()!=null){
+                    this.itrSeleccionado.setNomItr(txtNomItr.getText());
+                }
+                if(this.cmbbDeptos.getSelectedIndex()!=0){
+                    this.itrSeleccionado.setIdDepartamento(deptoSeleccionado());
+                }
+                Boolean modificado = false;
+                try {
+                    modificado = itrBean.modificarITR(this.itrSeleccionado);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "No se ha modificado el Itr dado un Error");
+                }
+                if (modificado) {
+                    actualizar();
+                    JOptionPane.showMessageDialog(null, "Itr Eliminado correctamente");
+                    tablaItrs.clearSelection();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Itr Eliminado NO correctamente");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se ha modificado el itr");
+        }            
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
-        // TODO add your handling code here:
+        ItrBean itrBean = new ItrBean();
+        if (this.txtNomItr.getText().equals("") || this.cmbbDeptos.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Recuerde que seleccionar un departamento y "
+                    + "darle un nombre al ITR", "Datos incompletos!",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            Boolean seCreo = null;
+            EstadoItrBean estadoBean = new EstadoItrBean();
+            EstadoItr estadoItr = estadoBean.buscar(BigInteger.ONE);
+            try {
+                seCreo = itrBean.altaITR(title, deptoSeleccionado(), estadoItr);
+            } catch (ParseException ex) {
+                Logger.getLogger(ventanaAltaReclamo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (seCreo) {
+                JOptionPane.showMessageDialog(this, "Reclamo enviado con exito",
+                        "exito", JOptionPane.INFORMATION_MESSAGE);
+                clearObject();
+                tablaItrs.setModel(cargarTablaItrs());
+            } else {
+                JOptionPane.showMessageDialog(this, "Hubo un error en el envía de su itr",
+                        "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        Itr itr = traerItrSeleccionado("Seleccione un itr para eliminar");
+        traerItrSeleccionado("Seleccione un itr para eliminar");
         
         Object[] options = {"ELIMINAR", "CANCELAR"};
         int respuesta = JOptionPane.showOptionDialog(null, "¿Estás seguro de eliminar el itr?",
@@ -197,7 +280,7 @@ public class VentanaInternaITRs extends javax.swing.JInternalFrame {
         if (respuesta == JOptionPane.YES_OPTION) {
             Boolean eliminado = false;
             try {
-                eliminado = itrBean.borrarItr(itr.getIdItr());
+                eliminado = itrBean.eliminarITR(this.itrSeleccionado.getIdItr());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "No se ha eliminado el Itr dado un Error");
             }
@@ -209,7 +292,7 @@ public class VentanaInternaITRs extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Itr Eliminado NO correctamente");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "No se ha eliminado el reclamo");
+            JOptionPane.showMessageDialog(null, "No se ha eliminado el itr");
         }
 
     }//GEN-LAST:event_btnEliminarMouseClicked
@@ -222,10 +305,11 @@ public class VentanaInternaITRs extends javax.swing.JInternalFrame {
     private rsbuttongradiente.RSButtonGradiente btnLimpiarFiltro;
     private rsbuttongradiente.RSButtonGradiente btnModificar;
     private RSMaterialComponent.RSComboBoxMaterial cmbEstadoItrs;
+    private RSMaterialComponent.RSComboBoxMaterial cmbbDeptos;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblBtnConstancias3;
-    private rojeru_san.rsfield.RSTextField rSTextField1;
     private javax.swing.JTable tablaItrs;
+    private rojeru_san.rsfield.RSTextField txtNomItr;
     // End of variables declaration//GEN-END:variables
 
     private void accionLimpiarFiltro() {
@@ -273,19 +357,42 @@ public class VentanaInternaITRs extends javax.swing.JInternalFrame {
         return estadoItrs;
     }
  
-    public Itr traerItrSeleccionado(String msg){
-            int row = tablaItrs.getSelectedRow();
+    public void  traerItrSeleccionado(String msg) {
+        int row = tablaItrs.getSelectedRow();
 
-            Itr itr = null;
-            if (row == -1) {
-                JOptionPane.showMessageDialog(null, msg);
-            } else {
-                String nomItr = tablaItrs.getModel().getValueAt(row, 0).toString();
-                
-                itr = itrBean.buscarItr(nomItr);
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, msg);
+        } else {
+            String nomItr = tablaItrs.getModel().getValueAt(row, 0).toString();
 
-            }
-            return itr;
+            this.itrSeleccionado = itrBean.buscarItr(nomItr);
+
         }
+    }
 
+        public Departamento deptoSeleccionado() {
+        /* Este método es para encontrar el depto que ha sido seleccionado del comboBox de departamentos, ya que 
+        el combobox tiene cargados solo los nombres asique lo tenemos que buscar por el nombre al objeto*/
+       
+        //Invocamos al bean de Depto
+        DepartamentoBean deptoBean = new DepartamentoBean();
+        
+        //Se carga una lista con todos los Deptos
+        List<Departamento> listaDepto = deptoBean.listarDepartamento();
+        Departamento depto = null;
+
+        //En el siguiente for se pasa por todos los Deptos de la lista
+        for (int i = 0; i < listaDepto.size(); i++) {
+            //Si el nombre del depto coincide con el seleccionado del combobox se carga en la variable a retornar
+            if (listaDepto.get(i).getNomDepartamento().equals(cmbbDeptos.getSelectedItem().toString())) {
+                depto = listaDepto.get(i);
+            }
+        }
+        return depto;
+    }
+        
+    public void clearObject() {
+        txtNomItr.setText("");
+        cmbbDeptos.setSelectedIndex(0);
+    }
 }

@@ -78,6 +78,8 @@ public class InternalFrameListasMantenimiento extends javax.swing.JInternalFrame
         VentanaInternaITRs ventanaITRs = new VentanaInternaITRs();
         background.add(ventanaITRs, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 170, 1060, 490));
         ventanaITRs.setVisible(true);
+        this.btnListaITRs.setVisible(false);
+        this.btnListaTiposUsuarios.setVisible(false);
     }//GEN-LAST:event_btnListaITRsMouseClicked
 
     private void btnListaTiposUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnListaTiposUsuariosMouseClicked
